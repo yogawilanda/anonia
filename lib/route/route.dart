@@ -18,7 +18,7 @@ Route<dynamic>? getRoute(RouteSettings settings) {
     // case registerPage:
     //   return MaterialPageRoute(builder: (context) => registerPage());
     case homeScreenPage:
-      return MaterialPageRoute(builder: (context) => Homescreen());
+      return MaterialPageRoute(builder: (context) => const Homescreen());
 
     case registerPage:
       return MaterialPageRoute(builder: (context) => const RegisterPage());

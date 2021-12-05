@@ -5,7 +5,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:anonia/route/route.dart';
+//import 'package:anonia/route/route.dart';
 import 'route/route.dart' as route;
 import 'person_data.dart';
 
@@ -44,7 +44,7 @@ class ChatMessage extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.only(right: 16.0),
-              child: CircleAvatar(
+              child: const CircleAvatar(
                 backgroundImage: AssetImage('assets/hotelmacau.png'),
                 // backgroundImage: AssetImage('assets/hotelmacau.png'),
                 // ),
@@ -117,7 +117,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
         title: const Text('Anonia'),
 
         //TODO: Make the Circled avatar not overfilling the appbar
-        leading: CircleAvatar(
+        leading: const CircleAvatar(
           backgroundImage: AssetImage(
             'assets/hotelmacau.png',
             //fit: BoxFit.cover,
