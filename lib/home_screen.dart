@@ -32,10 +32,10 @@ class HomescreenState extends State<Homescreen> {
     //in html those command will work as equal as a responsive website//
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {},
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.menu),
+        //   onPressed: () {},
+        // ),
         title: const Text('HomeScreen'),
         actions: <Widget>[
           IconButton(
@@ -47,7 +47,7 @@ class HomescreenState extends State<Homescreen> {
           const Padding(
             padding: EdgeInsets.all(15.0),
           ),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
+          //IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
           const Padding(
             padding: EdgeInsets.all(15.0),
           ),
@@ -110,6 +110,35 @@ class HomescreenState extends State<Homescreen> {
         },
         child: const Icon(Icons.message),
         backgroundColor: Colors.blue,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text('Drawer Header'),
+            ),
+            ListTile(
+              title: const Text('Item 1'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text('Settings'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+                Navigator.pushNamed(context, settingsScreen);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

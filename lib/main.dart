@@ -1,6 +1,8 @@
 import 'package:anonia/route/route.dart';
 import 'package:flutter/material.dart';
 import 'route/route.dart' as route;
+
+import 'package:anonia/settings_page.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_core/firebase_core.dart';
 

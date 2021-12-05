@@ -1,3 +1,6 @@
+// ignore: duplicate_ignore, duplicate_ignore
+// ignore_for_file: file_names
+// ignore: file_names
 // // // import 'package:anonia/home_screen.dart';
 // // // import 'package:flutter/material.dart';
 // // // import 'home_screen.dart';
