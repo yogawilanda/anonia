@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license
 // that can be found in the LICENSE file.
 
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 //import 'package:anonia/route/route.dart';
@@ -193,19 +193,12 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
             ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 4.0),
-              child: Theme.of(context).platform == TargetPlatform.iOS
-                  ? CupertinoButton(
-                      child: const Text('Send'),
-                      onPressed: _isComposing
-                          ? () => _handleSubmitted(_textController.text)
-                          : null,
-                    )
-                  : IconButton(
-                      icon: const Icon(Icons.send),
-                      onPressed: _isComposing
-                          ? () => _handleSubmitted(_textController.text)
-                          : null,
-                    ),
+              child: IconButton(
+                icon: const Icon(Icons.send),
+                onPressed: _isComposing
+                    ? () => _handleSubmitted(_textController.text)
+                    : null,
+              ),
             ),
           ],
         ),

@@ -1,6 +1,8 @@
+import 'package:anonia/person_data.dart';
 import 'package:flutter/material.dart';
 import 'route/route.dart';
 import 'show_dialog.dart';
+import 'person_data.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({Key? key}) : super(key: key);
@@ -41,17 +43,18 @@ class HomescreenState extends State<Homescreen> {
           IconButton(
               onPressed: () {
                 //change this to navigate into chat screen.
-                Navigator.pushNamed(context, chatScreen);
+                Navigator.pushNamed(context, searchScreen);
               },
               icon: const Icon(Icons.search)),
-          const Padding(
-            padding: EdgeInsets.all(15.0),
-          ),
+          // const Padding(
+          //   padding: EdgeInsets.all(15.0),
+          // ),
           //IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
-          const Padding(
-            padding: EdgeInsets.all(15.0),
-          ),
+          // const Padding(
+          //   padding: EdgeInsets.all(5.0),
+          // ),
         ],
+        // bottom: TabController(),
       ),
       backgroundColor: Colors.white,
       body: ListView.builder(
@@ -116,7 +119,7 @@ class HomescreenState extends State<Homescreen> {
           // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
+            DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
@@ -131,6 +134,7 @@ class HomescreenState extends State<Homescreen> {
             ),
             ListTile(
               title: const Text('Settings'),
+              leading: const Icon(Icons.settings),
               onTap: () {
                 // Update the state of the app.
                 // ...

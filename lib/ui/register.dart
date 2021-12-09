@@ -39,16 +39,24 @@ class RegisterPageState extends State<RegisterPage> {
           children: <Widget>[
             const SizedBox(height: 80.0),
             Column(
-              children: const <Widget>[
+              children: [
                 //img
                 //Image.asset(
                 //'Place logo here'),
-                SizedBox(height: 16.0),
-                Text('Anonia'),
+                const SizedBox(height: 16.0),
+                const Text('Anonia'),
+                SizedBox(
+                  width: 300,
+                  height: 300,
+                  //Image Network widget is not const, so you cant use const in the parent widget
+
+                  child: Image.network(
+                      'https://img.freepik.com/free-vector/people-putting-puzzle-pieces-together_52683-28610.jpg?size=626&ext=jpg'),
+                ),
               ],
             ),
             //this one is textfield boxification
-            const SizedBox(height: 120.0),
+            const SizedBox(height: 60.0),
             //textfield is a box that can be filled with user input keyboard
 
             //TODO:Create A Validator for textfield 1

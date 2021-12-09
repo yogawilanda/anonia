@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
-
 import 'language_screen.dart';
-import 'route/route.dart' as route;
+// import 'route/route.dart' as route;
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -27,16 +26,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title: 'Language',
                 subtitle: 'English',
                 leading: const Icon(Icons.language),
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          const LanguagesScreen()));
+                onPressed: (context) {
+                  MaterialPageRoute(builder: (_) => const LanguagesScreen());
                 },
+                //move this
+                // const LanguagesScreen()
               ),
-              const SettingsTile(
+              SettingsTile(
+                  onPressed: (context) {
+                    MaterialPageRoute(builder: (_) => const LanguagesScreen());
+                  },
                   title: 'Environment',
                   subtitle: 'Production',
-                  leading: Icon(Icons.cloud_queue)),
+                  leading: const Icon(Icons.cloud_queue)),
             ],
           ),
           SettingsSection(
@@ -48,8 +50,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ],
           ),
           SettingsSection(
-            title: 'Secutiry',
+            title: 'Security',
             tiles: [
+              SettingsTile(
+                title: 'Account Privacy',
+                subtitle: 'Set how your privacy is configured',
+                onPressed: (context) {},
+                leading: const Icon(Icons.privacy_tip),
+              ),
               SettingsTile.switchTile(
                 title: 'Lock app in background',
                 leading: const Icon(Icons.phonelink_lock),
@@ -63,7 +71,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               SettingsTile.switchTile(
                   title: 'Use fingerprint',
                   leading: const Icon(Icons.fingerprint),
-                  onToggle: (bool value) {},
+                  onToggle: (bool value) {
+                    setState(() {});
+                  },
                   switchValue: false),
               SettingsTile.switchTile(
                 title: 'Change password',
