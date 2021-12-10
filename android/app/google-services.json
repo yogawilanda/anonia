@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "388352953162",
+    "project_id": "android-login-aa24f",
+    "storage_bucket": "android-login-aa24f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388352953162:android:e8d686c2619fd6579f0fb3",
+        "android_client_info": {
+          "package_name": "com.example.anonia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "388352953162-0cf7i8i032j1b1kf2occl3e7pjlqc53c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeqfRdhZ8bRffG7nRzZmSFatAZ1fe9sgs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "388352953162-0cf7i8i032j1b1kf2occl3e7pjlqc53c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

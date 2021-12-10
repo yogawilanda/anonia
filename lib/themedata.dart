@@ -1,578 +1,580 @@
-import 'dart:ui';
-import 'package:flutter/material.dart';
 
-final Color background = Color(0xFFfafafac);
-final Color sliverBackground = Color(0xFFfafafac);
-final Color menu1Color = Color(0xFFf9d263);
-final Color menu2Color = Color(0xFFf2603d);
-final Color menu3Color = Color(0xFF04abe6);
-final Color tabVarViewColor = Color(0xFFfdfdfd);
-final Color starColor = Color(0xFFfdc746);
-final Color subsTitleText = Color(0xFFc5c4ca);
-final Color loveColor = Color(0xFF00ace6);
-final Color audioBluishBackground = Color(0xFfdee7fa);
-final Color audioBlueBackground = Color(0xFfdee7fa);
-final Color audioGreyBackground = Color(0xFFf2f2f2);
 
-// For internal usage only. Use values from theme itself.
+// import 'dart:ui';
+// import 'package:flutter/material.dart';
 
-/// See [ChatTheme.userAvatarNameColors]
-const colors = [
-  Color(0xffff6767),
-  Color(0xff66e0da),
-  Color(0xfff5a2d9),
-  Color(0xfff0c722),
-  Color(0xff6a85e5),
-  Color(0xfffd9a6f),
-  Color(0xff92db6e),
-  Color(0xff73b8e5),
-  Color(0xfffd7590),
-  Color(0xffc78ae5),
-];
+// final Color background = const Color(0xFFfafafac);
+// final Color sliverBackground = Color(0xFFfafafac);
+// final Color menu1Color = Color(0xFFf9d263);
+// final Color menu2Color = Color(0xFFf2603d);
+// final Color menu3Color = Color(0xFF04abe6);
+// final Color tabVarViewColor = Color(0xFFfdfdfd);
+// final Color starColor = Color(0xFFfdc746);
+// final Color subsTitleText = Color(0xFFc5c4ca);
+// final Color loveColor = Color(0xFF00ace6);
+// final Color audioBluishBackground = Color(0xFfdee7fa);
+// final Color audioBlueBackground = Color(0xFfdee7fa);
+// final Color audioGreyBackground = Color(0xFFf2f2f2);
 
-/// Dark
-const dark = Color(0xff1f1c38);
+// // For internal usage only. Use values from theme itself.
 
-/// Error
-const error = Color(0xffff6767);
+// /// See [ChatTheme.userAvatarNameColors]
+// const colors = [
+//   Color(0xffff6767),
+//   Color(0xff66e0da),
+//   Color(0xfff5a2d9),
+//   Color(0xfff0c722),
+//   Color(0xff6a85e5),
+//   Color(0xfffd9a6f),
+//   Color(0xff92db6e),
+//   Color(0xff73b8e5),
+//   Color(0xfffd7590),
+//   Color(0xffc78ae5),
+// ];
 
-/// N0
-const neutral0 = Color(0xff1d1c21);
+// /// Dark
+// const dark = Color(0xff1f1c38);
 
-/// N2
-const neutral2 = Color(0xff9e9cab);
+// /// Error
+// const error = Color(0xffff6767);
 
-/// N7
-const neutral7 = Color(0xffffffff);
+// /// N0
+// const neutral0 = Color(0xff1d1c21);
 
-/// N7 with opacity
-const neutral7WithOpacity = Color(0x80ffffff);
+// /// N2
+// const neutral2 = Color(0xff9e9cab);
 
-/// Primary
-const primary = Color(0xff6f61e8);
+// /// N7
+// const neutral7 = Color(0xffffffff);
 
-/// Secondary
-const secondary = Color(0xfff5f5f7);
+// /// N7 with opacity
+// const neutral7WithOpacity = Color(0x80ffffff);
 
-/// Secondary dark
-const secondaryDark = Color(0xff2b2250);
+// /// Primary
+// const primary = Color(0xff6f61e8);
 
-/// Base chat theme containing all required properties to make a theme.
-/// Extend this class if you want to create a custom theme.
-@immutable
-abstract class ChatTheme {
-  /// Creates a new chat theme based on provided colors and text styles.
-  const ChatTheme({
-    required this.attachmentButtonIcon,
-    required this.backgroundColor,
-    required this.dateDividerMargin,
-    required this.dateDividerTextStyle,
-    required this.deliveredIcon,
-    required this.documentIcon,
-    required this.emptyChatPlaceholderTextStyle,
-    required this.errorColor,
-    required this.errorIcon,
-    required this.inputBackgroundColor,
-    required this.inputBorderRadius,
-    required this.inputPadding,
-    required this.inputTextColor,
-    this.inputTextCursorColor,
-    required this.inputTextDecoration,
-    required this.inputTextStyle,
-    required this.messageBorderRadius,
-    required this.messageInsetsHorizontal,
-    required this.messageInsetsVertical,
-    required this.primaryColor,
-    required this.receivedEmojiMessageTextStyle,
-    required this.receivedMessageBodyTextStyle,
-    required this.receivedMessageCaptionTextStyle,
-    required this.receivedMessageDocumentIconColor,
-    required this.receivedMessageLinkDescriptionTextStyle,
-    required this.receivedMessageLinkTitleTextStyle,
-    required this.secondaryColor,
-    required this.seenIcon,
-    required this.sendButtonIcon,
-    required this.sendingIcon,
-    required this.sentEmojiMessageTextStyle,
-    required this.sentMessageBodyTextStyle,
-    required this.sentMessageCaptionTextStyle,
-    required this.sentMessageDocumentIconColor,
-    required this.sentMessageLinkDescriptionTextStyle,
-    required this.sentMessageLinkTitleTextStyle,
-    required this.statusIconPadding,
-    required this.userAvatarImageBackgroundColor,
-    required this.userAvatarNameColors,
-    required this.userAvatarTextStyle,
-    required this.userNameTextStyle,
-  });
+// /// Secondary
+// const secondary = Color(0xfff5f5f7);
 
-  /// Icon for select attachment button
-  final Widget? attachmentButtonIcon;
+// /// Secondary dark
+// const secondaryDark = Color(0xff2b2250);
 
-  /// Used as a background color of a chat widget
-  final Color backgroundColor;
+// /// Base chat theme containing all required properties to make a theme.
+// /// Extend this class if you want to create a custom theme.
+// @immutable
+// abstract class ChatTheme {
+//   /// Creates a new chat theme based on provided colors and text styles.
+//   const ChatTheme({
+//     required this.attachmentButtonIcon,
+//     required this.backgroundColor,
+//     required this.dateDividerMargin,
+//     required this.dateDividerTextStyle,
+//     required this.deliveredIcon,
+//     required this.documentIcon,
+//     required this.emptyChatPlaceholderTextStyle,
+//     required this.errorColor,
+//     required this.errorIcon,
+//     required this.inputBackgroundColor,
+//     required this.inputBorderRadius,
+//     required this.inputPadding,
+//     required this.inputTextColor,
+//     this.inputTextCursorColor,
+//     required this.inputTextDecoration,
+//     required this.inputTextStyle,
+//     required this.messageBorderRadius,
+//     required this.messageInsetsHorizontal,
+//     required this.messageInsetsVertical,
+//     required this.primaryColor,
+//     required this.receivedEmojiMessageTextStyle,
+//     required this.receivedMessageBodyTextStyle,
+//     required this.receivedMessageCaptionTextStyle,
+//     required this.receivedMessageDocumentIconColor,
+//     required this.receivedMessageLinkDescriptionTextStyle,
+//     required this.receivedMessageLinkTitleTextStyle,
+//     required this.secondaryColor,
+//     required this.seenIcon,
+//     required this.sendButtonIcon,
+//     required this.sendingIcon,
+//     required this.sentEmojiMessageTextStyle,
+//     required this.sentMessageBodyTextStyle,
+//     required this.sentMessageCaptionTextStyle,
+//     required this.sentMessageDocumentIconColor,
+//     required this.sentMessageLinkDescriptionTextStyle,
+//     required this.sentMessageLinkTitleTextStyle,
+//     required this.statusIconPadding,
+//     required this.userAvatarImageBackgroundColor,
+//     required this.userAvatarNameColors,
+//     required this.userAvatarTextStyle,
+//     required this.userNameTextStyle,
+//   });
 
-  /// Margin around date dividers
-  final EdgeInsetsGeometry dateDividerMargin;
+//   /// Icon for select attachment button
+//   final Widget? attachmentButtonIcon;
 
-  /// Text style of the date dividers
-  final TextStyle dateDividerTextStyle;
+//   /// Used as a background color of a chat widget
+//   final Color backgroundColor;
 
-  /// Icon for message's `delivered` status. For the best look use size of 16.
-  final Widget? deliveredIcon;
+//   /// Margin around date dividers
+//   final EdgeInsetsGeometry dateDividerMargin;
 
-  /// Icon inside file message
-  final Widget? documentIcon;
+//   /// Text style of the date dividers
+//   final TextStyle dateDividerTextStyle;
 
-  /// Text style of the empty chat placeholder
-  final TextStyle emptyChatPlaceholderTextStyle;
+//   /// Icon for message's `delivered` status. For the best look use size of 16.
+//   final Widget? deliveredIcon;
 
-  /// Color to indicate something bad happened (usually - shades of red)
-  final Color errorColor;
+//   /// Icon inside file message
+//   final Widget? documentIcon;
 
-  /// Icon for message's `error` status. For the best look use size of 16.
-  final Widget? errorIcon;
+//   /// Text style of the empty chat placeholder
+//   final TextStyle emptyChatPlaceholderTextStyle;
 
-  /// Color of the bottom bar where text field is
-  final Color inputBackgroundColor;
+//   /// Color to indicate something bad happened (usually - shades of red)
+//   final Color errorColor;
 
-  /// Top border radius of the bottom bar where text field is
-  final BorderRadius inputBorderRadius;
+//   /// Icon for message's `error` status. For the best look use size of 16.
+//   final Widget? errorIcon;
 
-  /// Insets of the bottom bar where text field is
-  final EdgeInsetsGeometry inputPadding;
+//   /// Color of the bottom bar where text field is
+//   final Color inputBackgroundColor;
 
-  /// Color of the text field's text and attachment/send buttons
-  final Color inputTextColor;
+//   /// Top border radius of the bottom bar where text field is
+//   final BorderRadius inputBorderRadius;
 
-  /// Color of the text field's cursor
-  final Color? inputTextCursorColor;
+//   /// Insets of the bottom bar where text field is
+//   final EdgeInsetsGeometry inputPadding;
 
-  /// Decoration of the input text field
-  final InputDecoration inputTextDecoration;
+//   /// Color of the text field's text and attachment/send buttons
+//   final Color inputTextColor;
 
-  /// Text style of the message input. To change the color use [inputTextColor].
-  final TextStyle inputTextStyle;
+//   /// Color of the text field's cursor
+//   final Color? inputTextCursorColor;
 
-  /// Border radius of message container
-  final double messageBorderRadius;
+//   /// Decoration of the input text field
+//   final InputDecoration inputTextDecoration;
 
-  /// Horizontal message bubble insets
-  final double messageInsetsHorizontal;
+//   /// Text style of the message input. To change the color use [inputTextColor].
+//   final TextStyle inputTextStyle;
 
-  /// Vertical message bubble insets
-  final double messageInsetsVertical;
+//   /// Border radius of message container
+//   final double messageBorderRadius;
 
-  /// Primary color of the chat used as a background of sent messages
-  /// and statuses
-  final Color primaryColor;
+//   /// Horizontal message bubble insets
+//   final double messageInsetsHorizontal;
 
-  /// Text style used for displaying emojis on text messages
-  final TextStyle receivedEmojiMessageTextStyle;
+//   /// Vertical message bubble insets
+//   final double messageInsetsVertical;
 
-  /// Body text style used for displaying text on different types
-  /// of received messages
-  final TextStyle receivedMessageBodyTextStyle;
+//   /// Primary color of the chat used as a background of sent messages
+//   /// and statuses
+//   final Color primaryColor;
 
-  /// Caption text style used for displaying secondary info (e.g. file size)
-  /// on different types of received messages
-  final TextStyle receivedMessageCaptionTextStyle;
+//   /// Text style used for displaying emojis on text messages
+//   final TextStyle receivedEmojiMessageTextStyle;
 
-  /// Color of the document icon on received messages. Has no effect when
-  /// [documentIcon] is used.
-  final Color receivedMessageDocumentIconColor;
+//   /// Body text style used for displaying text on different types
+//   /// of received messages
+//   final TextStyle receivedMessageBodyTextStyle;
 
-  /// Text style used for displaying link description on received messages
-  final TextStyle receivedMessageLinkDescriptionTextStyle;
+//   /// Caption text style used for displaying secondary info (e.g. file size)
+//   /// on different types of received messages
+//   final TextStyle receivedMessageCaptionTextStyle;
 
-  /// Text style used for displaying link title on received messages
-  final TextStyle receivedMessageLinkTitleTextStyle;
+//   /// Color of the document icon on received messages. Has no effect when
+//   /// [documentIcon] is used.
+//   final Color receivedMessageDocumentIconColor;
 
-  /// Secondary color, used as a background of received messages
-  final Color secondaryColor;
+//   /// Text style used for displaying link description on received messages
+//   final TextStyle receivedMessageLinkDescriptionTextStyle;
 
-  /// Icon for message's `seen` status. For the best look use size of 16.
-  final Widget? seenIcon;
+//   /// Text style used for displaying link title on received messages
+//   final TextStyle receivedMessageLinkTitleTextStyle;
 
-  /// Icon for send button
-  final Widget? sendButtonIcon;
+//   /// Secondary color, used as a background of received messages
+//   final Color secondaryColor;
 
-  /// Icon for message's `sending` status. For the best look use size of 10.
-  final Widget? sendingIcon;
+//   /// Icon for message's `seen` status. For the best look use size of 16.
+//   final Widget? seenIcon;
 
-  /// Text style used for displaying emojis on text messages
-  final TextStyle sentEmojiMessageTextStyle;
+//   /// Icon for send button
+//   final Widget? sendButtonIcon;
 
-  /// Body text style used for displaying text on different types
-  /// of sent messages
-  final TextStyle sentMessageBodyTextStyle;
+//   /// Icon for message's `sending` status. For the best look use size of 10.
+//   final Widget? sendingIcon;
 
-  /// Caption text style used for displaying secondary info (e.g. file size)
-  /// on different types of sent messages
-  final TextStyle sentMessageCaptionTextStyle;
+//   /// Text style used for displaying emojis on text messages
+//   final TextStyle sentEmojiMessageTextStyle;
 
-  /// Color of the document icon on sent messages. Has no effect when
-  /// [documentIcon] is used.
-  final Color sentMessageDocumentIconColor;
+//   /// Body text style used for displaying text on different types
+//   /// of sent messages
+//   final TextStyle sentMessageBodyTextStyle;
 
-  /// Text style used for displaying link description on sent messages
-  final TextStyle sentMessageLinkDescriptionTextStyle;
+//   /// Caption text style used for displaying secondary info (e.g. file size)
+//   /// on different types of sent messages
+//   final TextStyle sentMessageCaptionTextStyle;
 
-  /// Text style used for displaying link title on sent messages
-  final TextStyle sentMessageLinkTitleTextStyle;
+//   /// Color of the document icon on sent messages. Has no effect when
+//   /// [documentIcon] is used.
+//   final Color sentMessageDocumentIconColor;
 
-  /// Padding around status icons
-  final EdgeInsetsGeometry statusIconPadding;
+//   /// Text style used for displaying link description on sent messages
+//   final TextStyle sentMessageLinkDescriptionTextStyle;
 
-  /// Color used as a background for user avatar if an image is provided.
-  /// Visible if the image has some transparent parts.
-  final Color userAvatarImageBackgroundColor;
+//   /// Text style used for displaying link title on sent messages
+//   final TextStyle sentMessageLinkTitleTextStyle;
 
-  /// Colors used as backgrounds for user avatars with no image and so,
-  /// corresponding user names.
-  /// Calculated based on a user ID, so unique across the whole app.
-  final List<Color> userAvatarNameColors;
+//   /// Padding around status icons
+//   final EdgeInsetsGeometry statusIconPadding;
 
-  /// Text style used for displaying initials on user avatar if no
-  /// image is provided
-  final TextStyle userAvatarTextStyle;
+//   /// Color used as a background for user avatar if an image is provided.
+//   /// Visible if the image has some transparent parts.
+//   final Color userAvatarImageBackgroundColor;
 
-  /// User names text style. Color will be overwritten with [userAvatarNameColors].
-  final TextStyle userNameTextStyle;
-}
+//   /// Colors used as backgrounds for user avatars with no image and so,
+//   /// corresponding user names.
+//   /// Calculated based on a user ID, so unique across the whole app.
+//   final List<Color> userAvatarNameColors;
 
-/// Default chat theme which extends [ChatTheme]
-@immutable
-class DefaultChatTheme extends ChatTheme {
-  /// Creates a default chat theme. Use this constructor if you want to
-  /// override only a couple of properties, otherwise create a new class
-  /// which extends [ChatTheme]
-  const DefaultChatTheme({
-    Widget? attachmentButtonIcon,
-    Color backgroundColor = neutral7,
-    EdgeInsetsGeometry dateDividerMargin = const EdgeInsets.only(
-      bottom: 32,
-      top: 16,
-    ),
-    TextStyle dateDividerTextStyle = const TextStyle(
-      color: neutral2,
-      fontSize: 12,
-      fontWeight: FontWeight.w800,
-      height: 1.333,
-    ),
-    Widget? deliveredIcon,
-    Widget? documentIcon,
-    TextStyle emptyChatPlaceholderTextStyle = const TextStyle(
-      color: neutral2,
-      fontSize: 16,
-      fontWeight: FontWeight.w500,
-      height: 1.5,
-    ),
-    Color errorColor = error,
-    Widget? errorIcon,
-    Color inputBackgroundColor = neutral0,
-    BorderRadius inputBorderRadius = const BorderRadius.vertical(
-      top: Radius.circular(20),
-    ),
-    EdgeInsetsGeometry inputPadding = EdgeInsets.zero,
-    Color inputTextColor = neutral7,
-    Color? inputTextCursorColor,
-    InputDecoration inputTextDecoration = const InputDecoration(
-      border: InputBorder.none,
-      contentPadding: EdgeInsets.zero,
-      isCollapsed: true,
-    ),
-    TextStyle inputTextStyle = const TextStyle(
-      fontSize: 16,
-      fontWeight: FontWeight.w500,
-      height: 1.5,
-    ),
-    double messageBorderRadius = 20,
-    double messageInsetsHorizontal = 20,
-    double messageInsetsVertical = 16,
-    Color primaryColor = primary,
-    TextStyle receivedEmojiMessageTextStyle = const TextStyle(fontSize: 40),
-    TextStyle receivedMessageBodyTextStyle = const TextStyle(
-      color: neutral0,
-      fontSize: 16,
-      fontWeight: FontWeight.w500,
-      height: 1.5,
-    ),
-    TextStyle receivedMessageCaptionTextStyle = const TextStyle(
-      color: neutral2,
-      fontSize: 12,
-      fontWeight: FontWeight.w500,
-      height: 1.333,
-    ),
-    Color receivedMessageDocumentIconColor = primary,
-    TextStyle receivedMessageLinkDescriptionTextStyle = const TextStyle(
-      color: neutral0,
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
-      height: 1.428,
-    ),
-    TextStyle receivedMessageLinkTitleTextStyle = const TextStyle(
-      color: neutral0,
-      fontSize: 16,
-      fontWeight: FontWeight.w800,
-      height: 1.375,
-    ),
-    Color secondaryColor = secondary,
-    Widget? seenIcon,
-    Widget? sendButtonIcon,
-    Widget? sendingIcon,
-    TextStyle sentEmojiMessageTextStyle = const TextStyle(fontSize: 40),
-    TextStyle sentMessageBodyTextStyle = const TextStyle(
-      color: neutral7,
-      fontSize: 16,
-      fontWeight: FontWeight.w500,
-      height: 1.5,
-    ),
-    TextStyle sentMessageCaptionTextStyle = const TextStyle(
-      color: neutral7WithOpacity,
-      fontSize: 12,
-      fontWeight: FontWeight.w500,
-      height: 1.333,
-    ),
-    Color sentMessageDocumentIconColor = neutral7,
-    TextStyle sentMessageLinkDescriptionTextStyle = const TextStyle(
-      color: neutral7,
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
-      height: 1.428,
-    ),
-    TextStyle sentMessageLinkTitleTextStyle = const TextStyle(
-      color: neutral7,
-      fontSize: 16,
-      fontWeight: FontWeight.w800,
-      height: 1.375,
-    ),
-    EdgeInsetsGeometry statusIconPadding =
-        const EdgeInsets.symmetric(horizontal: 4),
-    Color userAvatarImageBackgroundColor = Colors.transparent,
-    List<Color> userAvatarNameColors = colors,
-    TextStyle userAvatarTextStyle = const TextStyle(
-      color: neutral7,
-      fontSize: 12,
-      fontWeight: FontWeight.w800,
-      height: 1.333,
-    ),
-    TextStyle userNameTextStyle = const TextStyle(
-      fontSize: 12,
-      fontWeight: FontWeight.w800,
-      height: 1.333,
-    ),
-  }) : super(
-          attachmentButtonIcon: attachmentButtonIcon,
-          backgroundColor: backgroundColor,
-          dateDividerMargin: dateDividerMargin,
-          dateDividerTextStyle: dateDividerTextStyle,
-          deliveredIcon: deliveredIcon,
-          documentIcon: documentIcon,
-          emptyChatPlaceholderTextStyle: emptyChatPlaceholderTextStyle,
-          errorColor: errorColor,
-          errorIcon: errorIcon,
-          inputBackgroundColor: inputBackgroundColor,
-          inputBorderRadius: inputBorderRadius,
-          inputPadding: inputPadding,
-          inputTextColor: inputTextColor,
-          inputTextCursorColor: inputTextCursorColor,
-          inputTextDecoration: inputTextDecoration,
-          inputTextStyle: inputTextStyle,
-          messageBorderRadius: messageBorderRadius,
-          messageInsetsHorizontal: messageInsetsHorizontal,
-          messageInsetsVertical: messageInsetsVertical,
-          primaryColor: primaryColor,
-          receivedEmojiMessageTextStyle: receivedEmojiMessageTextStyle,
-          receivedMessageBodyTextStyle: receivedMessageBodyTextStyle,
-          receivedMessageCaptionTextStyle: receivedMessageCaptionTextStyle,
-          receivedMessageDocumentIconColor: receivedMessageDocumentIconColor,
-          receivedMessageLinkDescriptionTextStyle:
-              receivedMessageLinkDescriptionTextStyle,
-          receivedMessageLinkTitleTextStyle: receivedMessageLinkTitleTextStyle,
-          secondaryColor: secondaryColor,
-          seenIcon: seenIcon,
-          sendButtonIcon: sendButtonIcon,
-          sendingIcon: sendingIcon,
-          sentEmojiMessageTextStyle: sentEmojiMessageTextStyle,
-          sentMessageBodyTextStyle: sentMessageBodyTextStyle,
-          sentMessageCaptionTextStyle: sentMessageCaptionTextStyle,
-          sentMessageDocumentIconColor: sentMessageDocumentIconColor,
-          sentMessageLinkDescriptionTextStyle:
-              sentMessageLinkDescriptionTextStyle,
-          sentMessageLinkTitleTextStyle: sentMessageLinkTitleTextStyle,
-          statusIconPadding: statusIconPadding,
-          userAvatarImageBackgroundColor: userAvatarImageBackgroundColor,
-          userAvatarNameColors: userAvatarNameColors,
-          userAvatarTextStyle: userAvatarTextStyle,
-          userNameTextStyle: userNameTextStyle,
-        );
-}
+//   /// Text style used for displaying initials on user avatar if no
+//   /// image is provided
+//   final TextStyle userAvatarTextStyle;
 
-/// Dark chat theme which extends [ChatTheme]
-@immutable
-class DarkChatTheme extends ChatTheme {
-  /// Creates a dark chat theme. Use this constructor if you want to
-  /// override only a couple of properties, otherwise create a new class
-  /// which extends [ChatTheme]
-  const DarkChatTheme({
-    Widget? attachmentButtonIcon,
-    Color backgroundColor = dark,
-    EdgeInsetsGeometry dateDividerMargin = const EdgeInsets.only(
-      bottom: 32,
-      top: 16,
-    ),
-    TextStyle dateDividerTextStyle = const TextStyle(
-      color: neutral7,
-      fontSize: 12,
-      fontWeight: FontWeight.w800,
-      height: 1.333,
-    ),
-    Widget? deliveredIcon,
-    Widget? documentIcon,
-    TextStyle emptyChatPlaceholderTextStyle = const TextStyle(
-      color: neutral2,
-      fontSize: 16,
-      fontWeight: FontWeight.w500,
-      height: 1.5,
-    ),
-    Color errorColor = error,
-    Widget? errorIcon,
-    Color inputBackgroundColor = secondaryDark,
-    BorderRadius inputBorderRadius = const BorderRadius.vertical(
-      top: Radius.circular(20),
-    ),
-    EdgeInsetsGeometry inputPadding = EdgeInsets.zero,
-    Color inputTextColor = neutral7,
-    Color? inputTextCursorColor,
-    InputDecoration inputTextDecoration = const InputDecoration(
-      border: InputBorder.none,
-      contentPadding: EdgeInsets.zero,
-      isCollapsed: true,
-    ),
-    TextStyle inputTextStyle = const TextStyle(
-      fontSize: 16,
-      fontWeight: FontWeight.w500,
-      height: 1.5,
-    ),
-    double messageBorderRadius = 20,
-    double messageInsetsHorizontal = 20,
-    double messageInsetsVertical = 16,
-    Color primaryColor = primary,
-    TextStyle receivedEmojiMessageTextStyle = const TextStyle(fontSize: 40),
-    TextStyle receivedMessageBodyTextStyle = const TextStyle(
-      color: neutral7,
-      fontSize: 16,
-      fontWeight: FontWeight.w500,
-      height: 1.5,
-    ),
-    TextStyle receivedMessageCaptionTextStyle = const TextStyle(
-      color: neutral7WithOpacity,
-      fontSize: 12,
-      fontWeight: FontWeight.w500,
-      height: 1.333,
-    ),
-    Color receivedMessageDocumentIconColor = primary,
-    TextStyle receivedMessageLinkDescriptionTextStyle = const TextStyle(
-      color: neutral7,
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
-      height: 1.428,
-    ),
-    TextStyle receivedMessageLinkTitleTextStyle = const TextStyle(
-      color: neutral7,
-      fontSize: 16,
-      fontWeight: FontWeight.w800,
-      height: 1.375,
-    ),
-    Color secondaryColor = secondaryDark,
-    Widget? seenIcon,
-    Widget? sendButtonIcon,
-    Widget? sendingIcon,
-    TextStyle sentEmojiMessageTextStyle = const TextStyle(fontSize: 40),
-    TextStyle sentMessageBodyTextStyle = const TextStyle(
-      color: neutral7,
-      fontSize: 16,
-      fontWeight: FontWeight.w500,
-      height: 1.5,
-    ),
-    TextStyle sentMessageCaptionTextStyle = const TextStyle(
-      color: neutral7WithOpacity,
-      fontSize: 12,
-      fontWeight: FontWeight.w500,
-      height: 1.333,
-    ),
-    Color sentMessageDocumentIconColor = neutral7,
-    TextStyle sentMessageLinkDescriptionTextStyle = const TextStyle(
-      color: neutral7,
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
-      height: 1.428,
-    ),
-    TextStyle sentMessageLinkTitleTextStyle = const TextStyle(
-      color: neutral7,
-      fontSize: 16,
-      fontWeight: FontWeight.w800,
-      height: 1.375,
-    ),
-    EdgeInsetsGeometry statusIconPadding =
-        const EdgeInsets.symmetric(horizontal: 4),
-    Color userAvatarImageBackgroundColor = Colors.transparent,
-    List<Color> userAvatarNameColors = colors,
-    TextStyle userAvatarTextStyle = const TextStyle(
-      color: neutral7,
-      fontSize: 12,
-      fontWeight: FontWeight.w800,
-      height: 1.333,
-    ),
-    TextStyle userNameTextStyle = const TextStyle(
-      fontSize: 12,
-      fontWeight: FontWeight.w800,
-      height: 1.333,
-    ),
-  }) : super(
-          attachmentButtonIcon: attachmentButtonIcon,
-          backgroundColor: backgroundColor,
-          dateDividerMargin: dateDividerMargin,
-          dateDividerTextStyle: dateDividerTextStyle,
-          deliveredIcon: deliveredIcon,
-          documentIcon: documentIcon,
-          emptyChatPlaceholderTextStyle: emptyChatPlaceholderTextStyle,
-          errorColor: errorColor,
-          errorIcon: errorIcon,
-          inputBackgroundColor: inputBackgroundColor,
-          inputBorderRadius: inputBorderRadius,
-          messageInsetsHorizontal: messageInsetsHorizontal,
-          messageInsetsVertical: messageInsetsVertical,
-          inputPadding: inputPadding,
-          inputTextColor: inputTextColor,
-          inputTextCursorColor: inputTextCursorColor,
-          inputTextDecoration: inputTextDecoration,
-          inputTextStyle: inputTextStyle,
-          messageBorderRadius: messageBorderRadius,
-          primaryColor: primaryColor,
-          receivedEmojiMessageTextStyle: receivedEmojiMessageTextStyle,
-          receivedMessageBodyTextStyle: receivedMessageBodyTextStyle,
-          receivedMessageCaptionTextStyle: receivedMessageCaptionTextStyle,
-          receivedMessageDocumentIconColor: receivedMessageDocumentIconColor,
-          receivedMessageLinkDescriptionTextStyle:
-              receivedMessageLinkDescriptionTextStyle,
-          receivedMessageLinkTitleTextStyle: receivedMessageLinkTitleTextStyle,
-          secondaryColor: secondaryColor,
-          seenIcon: seenIcon,
-          sendButtonIcon: sendButtonIcon,
-          sendingIcon: sendingIcon,
-          sentEmojiMessageTextStyle: sentEmojiMessageTextStyle,
-          sentMessageBodyTextStyle: sentMessageBodyTextStyle,
-          sentMessageCaptionTextStyle: sentMessageCaptionTextStyle,
-          sentMessageDocumentIconColor: sentMessageDocumentIconColor,
-          sentMessageLinkDescriptionTextStyle:
-              sentMessageLinkDescriptionTextStyle,
-          sentMessageLinkTitleTextStyle: sentMessageLinkTitleTextStyle,
-          statusIconPadding: statusIconPadding,
-          userAvatarImageBackgroundColor: userAvatarImageBackgroundColor,
-          userAvatarNameColors: userAvatarNameColors,
-          userAvatarTextStyle: userAvatarTextStyle,
-          userNameTextStyle: userNameTextStyle,
-        );
-}
+//   /// User names text style. Color will be overwritten with [userAvatarNameColors].
+//   final TextStyle userNameTextStyle;
+// }
+
+// /// Default chat theme which extends [ChatTheme]
+// @immutable
+// class DefaultChatTheme extends ChatTheme {
+//   /// Creates a default chat theme. Use this constructor if you want to
+//   /// override only a couple of properties, otherwise create a new class
+//   /// which extends [ChatTheme]
+//   const DefaultChatTheme({
+//     Widget? attachmentButtonIcon,
+//     Color backgroundColor = neutral7,
+//     EdgeInsetsGeometry dateDividerMargin = const EdgeInsets.only(
+//       bottom: 32,
+//       top: 16,
+//     ),
+//     TextStyle dateDividerTextStyle = const TextStyle(
+//       color: neutral2,
+//       fontSize: 12,
+//       fontWeight: FontWeight.w800,
+//       height: 1.333,
+//     ),
+//     Widget? deliveredIcon,
+//     Widget? documentIcon,
+//     TextStyle emptyChatPlaceholderTextStyle = const TextStyle(
+//       color: neutral2,
+//       fontSize: 16,
+//       fontWeight: FontWeight.w500,
+//       height: 1.5,
+//     ),
+//     Color errorColor = error,
+//     Widget? errorIcon,
+//     Color inputBackgroundColor = neutral0,
+//     BorderRadius inputBorderRadius = const BorderRadius.vertical(
+//       top: Radius.circular(20),
+//     ),
+//     EdgeInsetsGeometry inputPadding = EdgeInsets.zero,
+//     Color inputTextColor = neutral7,
+//     Color? inputTextCursorColor,
+//     InputDecoration inputTextDecoration = const InputDecoration(
+//       border: InputBorder.none,
+//       contentPadding: EdgeInsets.zero,
+//       isCollapsed: true,
+//     ),
+//     TextStyle inputTextStyle = const TextStyle(
+//       fontSize: 16,
+//       fontWeight: FontWeight.w500,
+//       height: 1.5,
+//     ),
+//     double messageBorderRadius = 20,
+//     double messageInsetsHorizontal = 20,
+//     double messageInsetsVertical = 16,
+//     Color primaryColor = primary,
+//     TextStyle receivedEmojiMessageTextStyle = const TextStyle(fontSize: 40),
+//     TextStyle receivedMessageBodyTextStyle = const TextStyle(
+//       color: neutral0,
+//       fontSize: 16,
+//       fontWeight: FontWeight.w500,
+//       height: 1.5,
+//     ),
+//     TextStyle receivedMessageCaptionTextStyle = const TextStyle(
+//       color: neutral2,
+//       fontSize: 12,
+//       fontWeight: FontWeight.w500,
+//       height: 1.333,
+//     ),
+//     Color receivedMessageDocumentIconColor = primary,
+//     TextStyle receivedMessageLinkDescriptionTextStyle = const TextStyle(
+//       color: neutral0,
+//       fontSize: 14,
+//       fontWeight: FontWeight.w400,
+//       height: 1.428,
+//     ),
+//     TextStyle receivedMessageLinkTitleTextStyle = const TextStyle(
+//       color: neutral0,
+//       fontSize: 16,
+//       fontWeight: FontWeight.w800,
+//       height: 1.375,
+//     ),
+//     Color secondaryColor = secondary,
+//     Widget? seenIcon,
+//     Widget? sendButtonIcon,
+//     Widget? sendingIcon,
+//     TextStyle sentEmojiMessageTextStyle = const TextStyle(fontSize: 40),
+//     TextStyle sentMessageBodyTextStyle = const TextStyle(
+//       color: neutral7,
+//       fontSize: 16,
+//       fontWeight: FontWeight.w500,
+//       height: 1.5,
+//     ),
+//     TextStyle sentMessageCaptionTextStyle = const TextStyle(
+//       color: neutral7WithOpacity,
+//       fontSize: 12,
+//       fontWeight: FontWeight.w500,
+//       height: 1.333,
+//     ),
+//     Color sentMessageDocumentIconColor = neutral7,
+//     TextStyle sentMessageLinkDescriptionTextStyle = const TextStyle(
+//       color: neutral7,
+//       fontSize: 14,
+//       fontWeight: FontWeight.w400,
+//       height: 1.428,
+//     ),
+//     TextStyle sentMessageLinkTitleTextStyle = const TextStyle(
+//       color: neutral7,
+//       fontSize: 16,
+//       fontWeight: FontWeight.w800,
+//       height: 1.375,
+//     ),
+//     EdgeInsetsGeometry statusIconPadding =
+//         const EdgeInsets.symmetric(horizontal: 4),
+//     Color userAvatarImageBackgroundColor = Colors.transparent,
+//     List<Color> userAvatarNameColors = colors,
+//     TextStyle userAvatarTextStyle = const TextStyle(
+//       color: neutral7,
+//       fontSize: 12,
+//       fontWeight: FontWeight.w800,
+//       height: 1.333,
+//     ),
+//     TextStyle userNameTextStyle = const TextStyle(
+//       fontSize: 12,
+//       fontWeight: FontWeight.w800,
+//       height: 1.333,
+//     ),
+//   }) : super(
+//           attachmentButtonIcon: attachmentButtonIcon,
+//           backgroundColor: backgroundColor,
+//           dateDividerMargin: dateDividerMargin,
+//           dateDividerTextStyle: dateDividerTextStyle,
+//           deliveredIcon: deliveredIcon,
+//           documentIcon: documentIcon,
+//           emptyChatPlaceholderTextStyle: emptyChatPlaceholderTextStyle,
+//           errorColor: errorColor,
+//           errorIcon: errorIcon,
+//           inputBackgroundColor: inputBackgroundColor,
+//           inputBorderRadius: inputBorderRadius,
+//           inputPadding: inputPadding,
+//           inputTextColor: inputTextColor,
+//           inputTextCursorColor: inputTextCursorColor,
+//           inputTextDecoration: inputTextDecoration,
+//           inputTextStyle: inputTextStyle,
+//           messageBorderRadius: messageBorderRadius,
+//           messageInsetsHorizontal: messageInsetsHorizontal,
+//           messageInsetsVertical: messageInsetsVertical,
+//           primaryColor: primaryColor,
+//           receivedEmojiMessageTextStyle: receivedEmojiMessageTextStyle,
+//           receivedMessageBodyTextStyle: receivedMessageBodyTextStyle,
+//           receivedMessageCaptionTextStyle: receivedMessageCaptionTextStyle,
+//           receivedMessageDocumentIconColor: receivedMessageDocumentIconColor,
+//           receivedMessageLinkDescriptionTextStyle:
+//               receivedMessageLinkDescriptionTextStyle,
+//           receivedMessageLinkTitleTextStyle: receivedMessageLinkTitleTextStyle,
+//           secondaryColor: secondaryColor,
+//           seenIcon: seenIcon,
+//           sendButtonIcon: sendButtonIcon,
+//           sendingIcon: sendingIcon,
+//           sentEmojiMessageTextStyle: sentEmojiMessageTextStyle,
+//           sentMessageBodyTextStyle: sentMessageBodyTextStyle,
+//           sentMessageCaptionTextStyle: sentMessageCaptionTextStyle,
+//           sentMessageDocumentIconColor: sentMessageDocumentIconColor,
+//           sentMessageLinkDescriptionTextStyle:
+//               sentMessageLinkDescriptionTextStyle,
+//           sentMessageLinkTitleTextStyle: sentMessageLinkTitleTextStyle,
+//           statusIconPadding: statusIconPadding,
+//           userAvatarImageBackgroundColor: userAvatarImageBackgroundColor,
+//           userAvatarNameColors: userAvatarNameColors,
+//           userAvatarTextStyle: userAvatarTextStyle,
+//           userNameTextStyle: userNameTextStyle,
+//         );
+// }
+
+// /// Dark chat theme which extends [ChatTheme]
+// @immutable
+// class DarkChatTheme extends ChatTheme {
+//   /// Creates a dark chat theme. Use this constructor if you want to
+//   /// override only a couple of properties, otherwise create a new class
+//   /// which extends [ChatTheme]
+//   const DarkChatTheme({
+//     Widget? attachmentButtonIcon,
+//     Color backgroundColor = dark,
+//     EdgeInsetsGeometry dateDividerMargin = const EdgeInsets.only(
+//       bottom: 32,
+//       top: 16,
+//     ),
+//     TextStyle dateDividerTextStyle = const TextStyle(
+//       color: neutral7,
+//       fontSize: 12,
+//       fontWeight: FontWeight.w800,
+//       height: 1.333,
+//     ),
+//     Widget? deliveredIcon,
+//     Widget? documentIcon,
+//     TextStyle emptyChatPlaceholderTextStyle = const TextStyle(
+//       color: neutral2,
+//       fontSize: 16,
+//       fontWeight: FontWeight.w500,
+//       height: 1.5,
+//     ),
+//     Color errorColor = error,
+//     Widget? errorIcon,
+//     Color inputBackgroundColor = secondaryDark,
+//     BorderRadius inputBorderRadius = const BorderRadius.vertical(
+//       top: Radius.circular(20),
+//     ),
+//     EdgeInsetsGeometry inputPadding = EdgeInsets.zero,
+//     Color inputTextColor = neutral7,
+//     Color? inputTextCursorColor,
+//     InputDecoration inputTextDecoration = const InputDecoration(
+//       border: InputBorder.none,
+//       contentPadding: EdgeInsets.zero,
+//       isCollapsed: true,
+//     ),
+//     TextStyle inputTextStyle = const TextStyle(
+//       fontSize: 16,
+//       fontWeight: FontWeight.w500,
+//       height: 1.5,
+//     ),
+//     double messageBorderRadius = 20,
+//     double messageInsetsHorizontal = 20,
+//     double messageInsetsVertical = 16,
+//     Color primaryColor = primary,
+//     TextStyle receivedEmojiMessageTextStyle = const TextStyle(fontSize: 40),
+//     TextStyle receivedMessageBodyTextStyle = const TextStyle(
+//       color: neutral7,
+//       fontSize: 16,
+//       fontWeight: FontWeight.w500,
+//       height: 1.5,
+//     ),
+//     TextStyle receivedMessageCaptionTextStyle = const TextStyle(
+//       color: neutral7WithOpacity,
+//       fontSize: 12,
+//       fontWeight: FontWeight.w500,
+//       height: 1.333,
+//     ),
+//     Color receivedMessageDocumentIconColor = primary,
+//     TextStyle receivedMessageLinkDescriptionTextStyle = const TextStyle(
+//       color: neutral7,
+//       fontSize: 14,
+//       fontWeight: FontWeight.w400,
+//       height: 1.428,
+//     ),
+//     TextStyle receivedMessageLinkTitleTextStyle = const TextStyle(
+//       color: neutral7,
+//       fontSize: 16,
+//       fontWeight: FontWeight.w800,
+//       height: 1.375,
+//     ),
+//     Color secondaryColor = secondaryDark,
+//     Widget? seenIcon,
+//     Widget? sendButtonIcon,
+//     Widget? sendingIcon,
+//     TextStyle sentEmojiMessageTextStyle = const TextStyle(fontSize: 40),
+//     TextStyle sentMessageBodyTextStyle = const TextStyle(
+//       color: neutral7,
+//       fontSize: 16,
+//       fontWeight: FontWeight.w500,
+//       height: 1.5,
+//     ),
+//     TextStyle sentMessageCaptionTextStyle = const TextStyle(
+//       color: neutral7WithOpacity,
+//       fontSize: 12,
+//       fontWeight: FontWeight.w500,
+//       height: 1.333,
+//     ),
+//     Color sentMessageDocumentIconColor = neutral7,
+//     TextStyle sentMessageLinkDescriptionTextStyle = const TextStyle(
+//       color: neutral7,
+//       fontSize: 14,
+//       fontWeight: FontWeight.w400,
+//       height: 1.428,
+//     ),
+//     TextStyle sentMessageLinkTitleTextStyle = const TextStyle(
+//       color: neutral7,
+//       fontSize: 16,
+//       fontWeight: FontWeight.w800,
+//       height: 1.375,
+//     ),
+//     EdgeInsetsGeometry statusIconPadding =
+//         const EdgeInsets.symmetric(horizontal: 4),
+//     Color userAvatarImageBackgroundColor = Colors.transparent,
+//     List<Color> userAvatarNameColors = colors,
+//     TextStyle userAvatarTextStyle = const TextStyle(
+//       color: neutral7,
+//       fontSize: 12,
+//       fontWeight: FontWeight.w800,
+//       height: 1.333,
+//     ),
+//     TextStyle userNameTextStyle = const TextStyle(
+//       fontSize: 12,
+//       fontWeight: FontWeight.w800,
+//       height: 1.333,
+//     ),
+//   }) : super(
+//           attachmentButtonIcon: attachmentButtonIcon,
+//           backgroundColor: backgroundColor,
+//           dateDividerMargin: dateDividerMargin,
+//           dateDividerTextStyle: dateDividerTextStyle,
+//           deliveredIcon: deliveredIcon,
+//           documentIcon: documentIcon,
+//           emptyChatPlaceholderTextStyle: emptyChatPlaceholderTextStyle,
+//           errorColor: errorColor,
+//           errorIcon: errorIcon,
+//           inputBackgroundColor: inputBackgroundColor,
+//           inputBorderRadius: inputBorderRadius,
+//           messageInsetsHorizontal: messageInsetsHorizontal,
+//           messageInsetsVertical: messageInsetsVertical,
+//           inputPadding: inputPadding,
+//           inputTextColor: inputTextColor,
+//           inputTextCursorColor: inputTextCursorColor,
+//           inputTextDecoration: inputTextDecoration,
+//           inputTextStyle: inputTextStyle,
+//           messageBorderRadius: messageBorderRadius,
+//           primaryColor: primaryColor,
+//           receivedEmojiMessageTextStyle: receivedEmojiMessageTextStyle,
+//           receivedMessageBodyTextStyle: receivedMessageBodyTextStyle,
+//           receivedMessageCaptionTextStyle: receivedMessageCaptionTextStyle,
+//           receivedMessageDocumentIconColor: receivedMessageDocumentIconColor,
+//           receivedMessageLinkDescriptionTextStyle:
+//               receivedMessageLinkDescriptionTextStyle,
+//           receivedMessageLinkTitleTextStyle: receivedMessageLinkTitleTextStyle,
+//           secondaryColor: secondaryColor,
+//           seenIcon: seenIcon,
+//           sendButtonIcon: sendButtonIcon,
+//           sendingIcon: sendingIcon,
+//           sentEmojiMessageTextStyle: sentEmojiMessageTextStyle,
+//           sentMessageBodyTextStyle: sentMessageBodyTextStyle,
+//           sentMessageCaptionTextStyle: sentMessageCaptionTextStyle,
+//           sentMessageDocumentIconColor: sentMessageDocumentIconColor,
+//           sentMessageLinkDescriptionTextStyle:
+//               sentMessageLinkDescriptionTextStyle,
+//           sentMessageLinkTitleTextStyle: sentMessageLinkTitleTextStyle,
+//           statusIconPadding: statusIconPadding,
+//           userAvatarImageBackgroundColor: userAvatarImageBackgroundColor,
+//           userAvatarNameColors: userAvatarNameColors,
+//           userAvatarTextStyle: userAvatarTextStyle,
+//           userNameTextStyle: userNameTextStyle,
+//         );
+// }
