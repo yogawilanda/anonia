@@ -18,6 +18,26 @@ class LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController();
   final _usernameFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
+  final _loginAnonymousKey = GlobalKey();
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+
+  String passwordValidator(String value) {
+    if (value.isEmpty) {
+      return "*Masukan Password kamu dahulu";
+    } else if (value.length < 6) {
+      return "Password minimal 6 digit";
+    }
+    return 'Password benar';
+  }
+
+  String userIdValidator(String value) {
+    if (value.isEmpty) {
+      return "*Masukan Password kamu dahulu";
+    } else if (value.length < 6) {
+      return "Password minimal 6 digit";
+    }
+    return 'Password benar';
+  }
 
   @override
   // void dispose() {
@@ -40,142 +60,142 @@ class LoginPageState extends State<LoginPage> {
     });
   }
 
-  Future<void> _signInAnonymously() async {
-    try {
-      await FirebaseAuth.instance.signInAnonymously();
-    } catch (e) {
-      print(e); // TODO: show dialog with error
-    }
-  }
+  // Future<void> _signInAnonymously() async {
+  //   try {
+  //     await FirebaseAuth.instance.signInAnonymously();
+  //   } catch (e) {
+  //     print(e); // TODO: show dialog with error
+  //   }
+  // }
 
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        return Scaffold(
-          body: SafeArea(
-            child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+    return Scaffold(
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          children: [
+            const SizedBox(height: 80.0),
+            Form(
+              autovalidateMode: AutovalidateMode.always,
+              key: formkey,
+              child: Column(
+                children: [
+                  //img
+                  //Image.asset(
+                  //'Place logo here'),
+                  // const SizedBox(height: 16.0),
+                  RichText(
+                    text: const TextSpan(
+                      // Note: Styles for TextSpans must be explicitly defined.
+                      // Child text spans will inherit styles from parent
+                      style: TextStyle(
+                        fontSize: 36,
+                        color: Colors.blue,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(text: ''),
+                        TextSpan(
+                          text: 'Anonia',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  SizedBox(
+                    width: 250,
+                    height: 250,
+                    child: Image.network(
+                        'https://img.freepik.com/free-vector/people-putting-puzzle-pieces-together_52683-28610.jpg?size=626&ext=jpg'),
+                  ),
+                ],
+              ),
+            ),
+
+            //this one is textfield boxification
+            const SizedBox(height: 60.0),
+            //textfield is a box that can be filled with user input keyboard
+            //TODO:Create A Validator for textfield 1
+            TextFormField(
+              //create the controller
+              controller: _usernameController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  Navigator.pushNamed(context, route.homeScreenPage);
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('Oops, kamu lupa masukkan password nih')));
+                }
+              },
+
+              decoration: const InputDecoration(
+                labelText: 'Enter Your Persona ID',
+                //errorText:
+              ),
+            ),
+            const SizedBox(height: 12.0),
+            //
+            TextField(
+              //create the controller
+              controller: _passwordController,
+              focusNode: _passwordFocusNode,
+              decoration: const InputDecoration(
+                labelText: 'Your Treasure Key',
+              ),
+              obscureText: true,
+              //enter your node here
+            ),
+            //Buttonbar goes BRRRRR~!
+            ButtonBar(
               children: [
-                const SizedBox(height: 80.0),
-                Column(
-                  children: [
-                    //img
-                    //Image.asset(
-                    //'Place logo here'),
-                    const SizedBox(height: 16.0),
-                    const Text('Anonia',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 30,
-                        )),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    SizedBox(
-                      width: 250,
-                      height: 250,
-                      child: Image.network(
-                          'https://img.freepik.com/free-vector/people-putting-puzzle-pieces-together_52683-28610.jpg?size=626&ext=jpg'),
-                    ),
-                  ],
-                ),
-
-                //this one is textfield boxification
-                const SizedBox(height: 60.0),
-                //textfield is a box that can be filled with user input keyboard
-                //TODO:Create A Validator for textfield 1
-                TextField(
-                  //create the controller
-                  controller: _usernameController,
-
-                  decoration: const InputDecoration(
-                    labelText: 'Enter Your Persona ID',
-                    //errorText:
-                  ),
-                ),
-                const SizedBox(height: 12.0),
-                //
-                TextField(
-                  //create the controller
-                  controller: _passwordController,
-                  focusNode: _passwordFocusNode,
-                  decoration: const InputDecoration(
-                    labelText: 'Your Treasure Key',
-                  ),
-                  obscureText: true,
-                  //enter your node here
-                ),
-                //Buttonbar goes BRRRRR~!
-                ButtonBar(
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, route.homeScreenPage);
-                      },
-                      //async {await AuthServices.signInAnonymous();},
-                      child: const Text('Login Anonymously'),
-                    ),
-                    TextButton(
-                      //still unfunctional give it snackbar
-                      // it said I/flutter (22164): [core/no-app] No Firebase App '[DEFAULT]' has been created - call Firebase.initializeApp()
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                            content: Text(
-                                'Still under services, use login anonymously instead!')));
-                        //
-                        //                       if (priceController.text == "") {
-                        //     showDialog(
-                        //         context: context,
-                        //         builder: (BuildContext context) {
-                        //           return AlertDialog(
-                        //             title: Text("Enter a price"),
-                        //           );
-                        //         });
-                        //   } else {
-                        //     apiRequest(url, {'price': priceController.text, 'user_id': "user2"});
-                        //   }
-                        // },
-                        // final snackBar = SnackBar(
-                        //   content: Text('Sorry, Still under development'),
-                        //   action: SnackBarAction(
-                        //     label: 'Undo',
-                        //     onPressed: () {
-                        //       // Some code to undo the change.
-                        //     },
-                        //   ),
-                        // );
-                        // _signInAnonymously();
-                      },
-
-                      child: const Text('Login'),
-                    ),
-                  ],
-                ),
-                const Spacer(flex: 1),
-                ElevatedButton(
+                //--Login Anonymously Button--//
+                TextButton(
+                  key: _loginAnonymousKey,
+                  child: const Text('Login Anonymously'),
                   onPressed: () {
-                    Navigator.pushNamed(context, route.registerPage);
+                    Navigator.pushNamed(context, route.homeScreenPage);
+                    // Navigator.pushNamed(context, route.homeScreenPage);
                   },
-                  child: const Text("Register"),
+                  //async {await AuthServices.signInAnonymous();},
                 ),
-                const Spacer(flex: 1),
-                Row(
-                  children: [
-                    const Text('Do you forget your password?'),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(
-                            context, route.forgotPasswordScreen);
-                      },
-                      child: const Text('Tap here'),
-                    ),
-                  ],
-                )
+                //login Button//
+                TextButton(
+                  //still unfunctional give it snackbar
+                  // it said I/flutter (22164): [core/no-app] No Firebase App '[DEFAULT]' has been created - call Firebase.initializeApp()
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text(
+                            'Still under services, use login anonymously instead!')));
+                  },
+
+                  child: const Text('Login'),
+                ),
               ],
             ),
-          ),
-        );
-      },
+            const Spacer(flex: 1),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, route.registerPage);
+              },
+              child: const Text("Register"),
+            ),
+            const Spacer(flex: 1),
+            Row(
+              children: [
+                const Text('Do you forget your password?'),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, route.forgotPasswordScreen);
+                  },
+                  child: const Text('Tap here'),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }
