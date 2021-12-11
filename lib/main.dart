@@ -21,25 +21,6 @@ class AnoniaApp extends StatefulWidget {
 
 }
 
-// class AnoniaAppState extends State<AnoniaApp> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return StreamBuilder<FireBaseUser>(
-//         stream: FirebaseAuth.instance.onAuthStateChanged,
-//         builder: (context, snapshot) {
-//           if (snapshot.connectionState == ConnectionState.active) {
-//             FirebaseUser user = snapshot.data;
-//             if (user == null) {
-//               return const LoginPage();
-//             }
-//             return const Homescreen();
-//           } else {
-//             return const RegisterPage();
-//           }
-//           }
-//         );
-//   }
-// }
 class AnoniaAppState extends State<AnoniaApp> {
   @override
   Widget build(BuildContext context) {

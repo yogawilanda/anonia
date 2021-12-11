@@ -1,5 +1,35 @@
 
 
+// from main.dart//
+//this code is for authentication research//
+// class AnoniaAppState extends State<AnoniaApp> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return StreamBuilder<FireBaseUser>(
+//         stream: FirebaseAuth.instance.onAuthStateChanged,
+//         builder: (context, snapshot) {
+//           if (snapshot.connectionState == ConnectionState.active) {
+//             FirebaseUser user = snapshot.data;
+//             if (user == null) {
+//               return const LoginPage();
+//             }
+//             return const Homescreen();
+//           } else {
+//             return const RegisterPage();
+//           }
+//           }
+//         );
+//   }
+// }
+
+//-------------------- end of main.dart --------------//
+
+//themedata.dart//
+
+//this code is for reconfiguring the theme data for its parents.//
+
+
+
 // import 'dart:ui';
 // import 'package:flutter/material.dart';
 
@@ -246,9 +276,9 @@
 // /// Default chat theme which extends [ChatTheme]
 // @immutable
 // class DefaultChatTheme extends ChatTheme {
-//   /// Creates a default chat theme. Use this constructor if you want to
-//   /// override only a couple of properties, otherwise create a new class
-//   /// which extends [ChatTheme]
+  /// Creates a default chat theme. Use this constructor if you want to
+  /// override only a couple of properties, otherwise create a new class
+  /// which extends [ChatTheme]
 //   const DefaultChatTheme({
 //     Widget? attachmentButtonIcon,
 //     Color backgroundColor = neutral7,
@@ -411,12 +441,12 @@
 //         );
 // }
 
-// /// Dark chat theme which extends [ChatTheme]
+/// Dark chat theme which extends [ChatTheme]
 // @immutable
 // class DarkChatTheme extends ChatTheme {
-//   /// Creates a dark chat theme. Use this constructor if you want to
-//   /// override only a couple of properties, otherwise create a new class
-//   /// which extends [ChatTheme]
+  /// Creates a dark chat theme. Use this constructor if you want to
+  /// override only a couple of properties, otherwise create a new class
+  /// which extends [ChatTheme]
 //   const DarkChatTheme({
 //     Widget? attachmentButtonIcon,
 //     Color backgroundColor = dark,
@@ -578,3 +608,329 @@
 //           userNameTextStyle: userNameTextStyle,
 //         );
 // }
+
+//----------------end of themedata.dart contents-----------------------//
+
+//---------------show_dialog.dart-------------------------------//
+//this source code is to show a dialog pop up for its parent's actions//
+
+// import 'package:flutter/cupertino.dart';
+// import 'package:flutter/material.dart';
+
+// showConfirmDialog(
+//   BuildContext context,
+//   String title,
+//   String description,
+//   String confirmBtnTxt,
+//   String cancelBtnTxt,
+//   Function onConfirmClicked,
+// ) {
+//   // set up the buttons
+//   Widget cancelButton = TextButton(
+//     child: Text(cancelBtnTxt),
+//     onPressed: () {
+//       Navigator.of(context).pop(); // dismiss dialog
+//     },
+//   );
+//   Widget confirmButton = TextButton(
+//     child: Text(confirmBtnTxt),
+//     onPressed: () {
+//       onConfirmClicked.call();
+//       Navigator.of(context).pop(); // dismiss dialog
+//     },
+//   );
+//   // set up the AlertDialog
+//   AlertDialog alert = AlertDialog(
+//     title: Text(title),
+//     content: Text(description),
+//     actions: [
+//       cancelButton,
+//       confirmButton,
+//     ],
+//   );
+//   // show the dialog
+//   showDialog(
+//     context: context,
+//     builder: (BuildContext context) {
+//       return alert;
+//     },
+//   );
+// }
+
+// showInfoDialog(BuildContext context, String title, String description, String confirmBtnTxt) {
+//   // set up the buttons
+
+//   Widget confirmButton = TextButton(
+//     child: Text(confirmBtnTxt),
+//     onPressed: () {
+//       Navigator.of(context).pop(); // dismiss dialog
+//     },
+//   );
+//   // set up the AlertDialog
+//   AlertDialog alert = AlertDialog(
+//     title: Text(title),
+//     content: Text(description),
+//     actions: [
+//       confirmButton,
+//     ],
+//   );
+//   // show the dialog
+//   showDialog(
+//     context: context,
+//     builder: (BuildContext context) {
+//       return alert;
+//     },
+//   );
+// }
+
+
+//-------------------------- end of show_dialog.dart-----------------//
+
+//-----------------searchscreen.dart-------------------------//
+
+// testing code//
+// Container(
+//         margin: const EdgeInsets.all(10.0),
+//         ref https://daily-dev-tips.com/posts/flutter-scrollable-horizontal-avatar-list/
+//         child: ListView.separated(
+//           itemBuilder: (context, index) => const AvatarFormat(),
+//           scrollDirection: Axis.horizontal,
+//           itemCount: 16,
+//           separatorBuilder: (BuildContext context, int index) {
+//             return const SizedBox(
+//               width: 10,
+//             );
+//           },
+//         ),
+//         if the implementation fail, put it here #12
+        
+//       ),
+
+// builder: (context) {
+//   return Scaffold(
+//     appBar: AppBar(
+//       // toolbarHeight: 65,
+//       flexibleSpace: Container(
+//         color: Colors.amber,
+//         child: TextField(
+//           textAlign: TextAlign.start,
+//           controller: _searchController,
+//           decoration: InputDecoration(
+//               // contentPadding: const EdgeInsets.symmetric(
+//               //     vertical: 10, horizontal: 10),
+//               filled: true,
+//               fillColor: Colors.amber[100],
+//               prefixIcon: const Icon(Icons.search, color: Colors.amber),
+//               // border: const OutlineInputBorder(
+//               //   borderRadius: BorderRadius.all(
+//               //     Radius.circular(5),
+//               //   ),
+//               // ),
+//               hintStyle: const TextStyle(color: Colors.black38),
+//               hintText: "Search"),
+//         ),
+//       ),
+//     ),
+//   );
+// },
+
+// if the implementation fails, back it up to its code #12
+// child: Column(
+//           children: [
+//             const Text('Header Box'),
+//             Row(
+//               //TODO: Stylize circle avatar so it can be swiped horizontally.
+//               mainAxisAlignment: MainAxisAlignment.start,
+//               children: const [
+//                 ///reference: https://www.codegrepper.com/code-examples/whatever/how+to+add+space+between+circle+avatar+in+flutter
+//                 CircleAvatar(
+//                   backgroundColor: Colors.transparent,
+//                   radius: 30,
+//                 ),
+//                 CircleAvatar(
+//                   backgroundColor: Colors.transparent,
+//                   radius: 30,
+//                 ),
+//                 CircleAvatar(
+//                   backgroundColor: Colors.transparent,
+//                   radius: 30,
+//                 ),
+//                 CircleAvatar(
+//                   backgroundColor: Colors.transparent,
+//                   radius: 30,
+//                 ),
+//                 CircleAvatar(),
+//                 CircleAvatar(),
+//                 CircleAvatar(),
+//                 CircleAvatar(),
+//               ],
+//             ),
+//           ],
+//         ),
+
+// ------------------------- end of searchscreen.dart's content--------//
+
+
+
+// import 'package:flutter/cupertino.dart';
+// import 'package:flutter/material.dart';
+// export 'messaging.dart';
+
+// class ChatMessage{
+//   String messageText;
+//   String imageURL;
+//   String time;
+//   ChatUsers({@required this.name,@required this.messageText,@required this.imageURL,@required this.time});
+// }
+
+
+// List<ChatUsers> chatUsers = [
+//     ChatUsers(text: "Jane Russel", secondaryText: "Awesome Setup", image: "images/userImage1.jpeg", time: "Now"),
+//     ChatUsers(text: "Glady's Murphy", secondaryText: "That's Great", image: "images/userImage2.jpeg", time: "Yesterday"),
+//     ChatUsers(text: "Jorge Henry", secondaryText: "Hey where are you?", image: "images/userImage3.jpeg", time: "31 Mar"),
+//     ChatUsers(text: "Philip Fox", secondaryText: "Busy! Call me in 20 mins", image: "images/userImage4.jpeg", time: "28 Mar"),
+//     ChatUsers(text: "Debra Hawkins", secondaryText: "Thankyou, It's awesome", image: "images/userImage5.jpeg", time: "23 Mar"),
+//     ChatUsers(text: "Jacob Pena", secondaryText: "will update you in evening", image: "images/userImage6.jpeg", time: "17 Mar"),
+//     ChatUsers(text: "Andrey Jones", secondaryText: "Can you please share the file?", image: "images/userImage7.jpeg", time: "24 Feb"),
+//     ChatUsers(text: "John Wick", secondaryText: "How are you?", image: "images/userImage8.jpeg", time: "18 Feb"),
+// ];
+
+
+
+  
+// // import 'package:flutter/cupertino.dart';
+// // import 'package:flutter/material.dart';
+// // export 'messaging.dart';
+
+// // class ChatMessage{
+// //   String name;
+// //   String messageText;
+// //   String imageURL;
+// //   String time;
+// //   ChatUsers({@required this.name,@required this.messageText,@required this.imageURL,@required this.time});
+// // }
+
+
+// // List<ChatUsers> chatUsers = [
+// //     ChatUsers(text: "Jane Russel", secondaryText: "Awesome Setup", image: "images/userImage1.jpeg", time: "Now"),
+// //     ChatUsers(text: "Glady's Murphy", secondaryText: "That's Great", image: "images/userImage2.jpeg", time: "Yesterday"),
+// //     ChatUsers(text: "Jorge Henry", secondaryText: "Hey where are you?", image: "images/userImage3.jpeg", time: "31 Mar"),
+// //     ChatUsers(text: "Philip Fox", secondaryText: "Busy! Call me in 20 mins", image: "images/userImage4.jpeg", time: "28 Mar"),
+// //     ChatUsers(text: "Debra Hawkins", secondaryText: "Thankyou, It's awesome", image: "images/userImage5.jpeg", time: "23 Mar"),
+// //     ChatUsers(text: "Jacob Pena", secondaryText: "will update you in evening", image: "images/userImage6.jpeg", time: "17 Mar"),
+// //     ChatUsers(text: "Andrey Jones", secondaryText: "Can you please share the file?", image: "images/userImage7.jpeg", time: "24 Feb"),
+// //     ChatUsers(text: "John Wick", secondaryText: "How are you?", image: "images/userImage8.jpeg", time: "18 Feb"),
+// //   ];
+
+//------------------------------person_data'slist.dart---------------//
+
+
+
+// import 'package:flutter/cupertino.dart';
+// import 'package:flutter/material.dart';
+// export 'messaging.dart';
+
+// class ChatMessage{
+//   String messageText;
+//   String imageURL;
+//   String time;
+//   ChatUsers({@required this.name,@required this.messageText,@required this.imageURL,@required this.time});
+// }
+
+
+// List<ChatUsers> chatUsers = [
+//     ChatUsers(text: "Jane Russel", secondaryText: "Awesome Setup", image: "images/userImage1.jpeg", time: "Now"),
+//     ChatUsers(text: "Glady's Murphy", secondaryText: "That's Great", image: "images/userImage2.jpeg", time: "Yesterday"),
+//     ChatUsers(text: "Jorge Henry", secondaryText: "Hey where are you?", image: "images/userImage3.jpeg", time: "31 Mar"),
+//     ChatUsers(text: "Philip Fox", secondaryText: "Busy! Call me in 20 mins", image: "images/userImage4.jpeg", time: "28 Mar"),
+//     ChatUsers(text: "Debra Hawkins", secondaryText: "Thankyou, It's awesome", image: "images/userImage5.jpeg", time: "23 Mar"),
+//     ChatUsers(text: "Jacob Pena", secondaryText: "will update you in evening", image: "images/userImage6.jpeg", time: "17 Mar"),
+//     ChatUsers(text: "Andrey Jones", secondaryText: "Can you please share the file?", image: "images/userImage7.jpeg", time: "24 Feb"),
+//     ChatUsers(text: "John Wick", secondaryText: "How are you?", image: "images/userImage8.jpeg", time: "18 Feb"),
+// ];
+
+
+
+  
+// // import 'package:flutter/cupertino.dart';
+// // import 'package:flutter/material.dart';
+// // export 'messaging.dart';
+
+// // class ChatMessage{
+// //   String name;
+// //   String messageText;
+// //   String imageURL;
+// //   String time;
+// //   ChatUsers({@required this.name,@required this.messageText,@required this.imageURL,@required this.time});
+// // }
+
+
+// // List<ChatUsers> chatUsers = [
+// //     ChatUsers(text: "Jane Russel", secondaryText: "Awesome Setup", image: "images/userImage1.jpeg", time: "Now"),
+// //     ChatUsers(text: "Glady's Murphy", secondaryText: "That's Great", image: "images/userImage2.jpeg", time: "Yesterday"),
+// //     ChatUsers(text: "Jorge Henry", secondaryText: "Hey where are you?", image: "images/userImage3.jpeg", time: "31 Mar"),
+// //     ChatUsers(text: "Philip Fox", secondaryText: "Busy! Call me in 20 mins", image: "images/userImage4.jpeg", time: "28 Mar"),
+// //     ChatUsers(text: "Debra Hawkins", secondaryText: "Thankyou, It's awesome", image: "images/userImage5.jpeg", time: "23 Mar"),
+// //     ChatUsers(text: "Jacob Pena", secondaryText: "will update you in evening", image: "images/userImage6.jpeg", time: "17 Mar"),
+// //     ChatUsers(text: "Andrey Jones", secondaryText: "Can you please share the file?", image: "images/userImage7.jpeg", time: "24 Feb"),
+// //     ChatUsers(text: "John Wick", secondaryText: "How are you?", image: "images/userImage8.jpeg", time: "18 Feb"),
+// //   ];
+
+//------------------------- end of person data list.dart---------------//
+
+//-------------------listview_builder.dart---------------------------//
+// import 'package:flutter/material.dart';
+
+// void main() {
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: BelajarListView(),
+//     );
+//   }
+// }
+
+// class BelajarListView extends StatelessWidget {
+//   final List bulan = [
+//     "Januari",
+//     "Fabruari",
+//     "Maret",
+//     "April",
+//     "Mei",
+//     "Juni",
+//     "Juli",
+//     "Agustus",
+//     "September",
+//     "Oktober",
+//     "November",
+//     "Desember"
+//   ];
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text("belajarFlutter.com"),
+//       ),
+//       body: ListView.builder(
+//         itemCount: bulan.length,
+//         itemBuilder: (context, index) {
+//           return Card(
+//             child: Padding(
+//               padding: const EdgeInsets.all(15.0),
+//               child: Text(bulan[index], style: TextStyle(fontSize: 30)),
+//             ),
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
+
+// ----------------------- end of listview.dart ----------------------//
+
