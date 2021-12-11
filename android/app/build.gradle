@@ -8,7 +8,9 @@ if (localPropertiesFile.exists()) {
 
 def flutterRoot = localProperties.getProperty('flutter.sdk')
 if (flutterRoot == null) {
-    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+
+    throw new FileNotFoundException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+
 }
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
@@ -24,6 +26,8 @@ if (flutterVersionName == null) {
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+
+
 
 android {
     compileSdkVersion 30
@@ -65,6 +69,9 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    compileOnly files("$flutterRoot/bin/cache/artifacts/engine/android-arm/flutter.jar")
+    compileOnly 'androidx.annotation:annotation:1.1.0'
+    apply plugin: 'com.google.gms.google-services'
 }
 
 apply plugin: 'com.google.gms.google-services'
