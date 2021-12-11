@@ -1,8 +1,11 @@
 // import 'package:anonia/auth_services.dart';
+import 'package:anonia/google_sign_in.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../route/route.dart' as route;
 import 'forgot_pass_screen.dart';
+import 'package:provider/provider.dart';
 // import 'package:flutter/services.dart';
 
 class LoginPage extends StatefulWidget {
@@ -172,6 +175,22 @@ class LoginPageState extends State<LoginPage> {
 
                   child: const Text('Login'),
                 ),
+                ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.amber,
+                      onPrimary: Colors.black,
+                    ),
+                    onPressed: () {
+                      final provider = Provider.of<GoogleSignInProvider>(
+                          context,
+                          listen: false);
+                      provider.googleLogin();
+                    },
+                    icon: const FaIcon(
+                      FontAwesomeIcons.google,
+                      color: Colors.red,
+                    ),
+                    label: const Text('Login with Google'))
               ],
             ),
             const Spacer(flex: 1),
