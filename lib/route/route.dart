@@ -1,12 +1,12 @@
-import 'package:anonia/ui/register.dart';
+import 'package:anonia/authentication/register.dart';
 import 'package:flutter/material.dart';
-import '../ui/login.dart';
+import 'package:anonia/authentication/login.dart';
 import 'package:anonia/home_screen.dart';
 import '../messaging.dart';
 import 'package:anonia/language_screen.dart';
 import 'package:anonia/settings_page.dart';
 import 'package:anonia/search_screen.dart';
-import 'package:anonia/ui/forgot_pass_screen.dart';
+import 'package:anonia/authentication/forgot_pass_screen.dart';
 
 //Navigation Protocol for this app
 const String loginPage = '/';

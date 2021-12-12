@@ -1,7 +1,10 @@
 // import 'package:anonia/person_data.dart';
+import 'package:anonia/main.dart';
 import 'package:flutter/material.dart';
 import 'route/route.dart';
 import 'show_dialog.dart';
+import 'package:provider/provider.dart';
+
 // import 'person_data.dart';
 
 class Homescreen extends StatefulWidget {
@@ -60,7 +63,6 @@ class HomescreenState extends State<Homescreen> {
               Navigator.pop(context,
                   MaterialPageRoute(builder: (_) => const AlertDialogHapus()));
               //===================fail method=========================//
-              //{Navigator.pushNamed(context, showDialog(context: context, builder: (context) {},));
             },
             child: const Card(
               elevation: 2,
@@ -112,6 +114,14 @@ class HomescreenState extends State<Homescreen> {
                 // Update the state of the app.
                 // ...
                 Navigator.pushNamed(context, settingsScreen);
+              },
+            ),
+            ListTile(
+              title: const Text('Logout'),
+              leading: const Icon(Icons.logout),
+              onTap: () {
+                // Update the state of the app.
+                // ...
               },
             ),
           ],

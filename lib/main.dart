@@ -2,7 +2,10 @@
 // import 'package:anonia/route/route.dart';
 // import 'package:anonia/ui/login.dart';
 // import 'package:anonia/ui/register.dart';
+import 'package:anonia/authentication/login.dart';
+import 'package:anonia/google_logged_in_widget.dart';
 import 'package:anonia/google_sign_in.dart';
+import 'package:anonia/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'route/route.dart' as route;
@@ -30,15 +33,16 @@ class AnoniaApp extends StatefulWidget {
 }
 
 class AnoniaAppState extends State<AnoniaApp> {
+  static final String title = 'Anonia';
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
         create: (context) => GoogleSignInProvider(),
-        child: const MaterialApp(
+        child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Anonia',
-          // home: SearchScreen(),
-          initialRoute: '/',
-          onGenerateRoute: route.getRoute,
+          title: title,
+          home: HomePage(),
+          // initialRoute: '/',
+          // onGenerateRoute: route.getRoute,
 
           // TODO: Pindahkan ThemeData ini ke theme data file terpisah
 
@@ -46,3 +50,19 @@ class AnoniaAppState extends State<AnoniaApp> {
         ),
       );
 }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     /// wrap MaterialApp in Provider widget
+//     return ChangeNotifierProvider(
+//       create: (context) => GoogleSignInProvider(), // ← create/init your state model
+//       child: MaterialApp(
+//           home: Homescreen(),
+//           Navigator.of(MaterialApp).push(
+//   MaterialPageRoute(builder: (MaterialAppContext) => route.homeScreenPage())
+// )
+//       ),
+//     );
+//   }
+// //}
