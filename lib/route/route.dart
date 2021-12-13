@@ -1,12 +1,16 @@
-import 'package:anonia/authentication/register.dart';
+// import 'dart:js';
+
+import 'package:anonia/register.dart';
+// import 'package:anonia/google_logged_in_widget.dart';
+import 'package:anonia/messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:anonia/authentication/login.dart';
+import 'package:anonia/login.dart';
 import 'package:anonia/home_screen.dart';
-import '../messaging.dart';
+// import '../messaging.dart';
 import 'package:anonia/language_screen.dart';
 import 'package:anonia/settings_page.dart';
 import 'package:anonia/search_screen.dart';
-import 'package:anonia/authentication/forgot_pass_screen.dart';
+// import 'package:anonia/authentication/forgot_pass_screen.dart';
 
 //Navigation Protocol for this app
 const String loginPage = '/';

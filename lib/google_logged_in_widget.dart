@@ -1,6 +1,6 @@
-import 'package:anonia/authentication/login.dart';
-import 'package:anonia/authentication/register.dart';
-import 'package:anonia/home_screen.dart';
+import 'package:anonia/login.dart';
+// import 'package:anonia/register.dart';
+// import 'package:anonia/home_screen.dart';
 import 'package:anonia/login_success_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
+              return Center(child: CircularProgressIndicator());
             } else if (snapshot.hasData) {
               //create this instance.
               return UserLoginSuccess();

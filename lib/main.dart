@@ -2,7 +2,7 @@
 // import 'package:anonia/route/route.dart';
 // import 'package:anonia/ui/login.dart';
 // import 'package:anonia/ui/register.dart';
-import 'package:anonia/authentication/login.dart';
+import 'package:anonia/login.dart';
 import 'package:anonia/google_logged_in_widget.dart';
 import 'package:anonia/google_sign_in.dart';
 import 'package:anonia/home_screen.dart';
@@ -16,13 +16,31 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 
-Future main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(const AnoniaApp());
+  runApp(AnoniaApp());
 }
 
+//if this code fail to do the task, restore #1
+
+// class AnoniaApp extends StatelessWidget {
+//   const AnoniaApp({Key? key}) : super(key: key);
+//   static final String title = 'Anonia';
+//   @override
+//   Widget build(BuildContext context) => ChangeNotifierProvider(
+//         create: (context) => GoogleSignInProvider(),
+//         child: MaterialApp(
+//           debugShowCheckedModeBanner: false,
+//           title: title,
+//           home: HomePage(),
+//           onGenerateRoute: route.getRoute,
+//         ),
+//       );
+// }
+
+// /----------------------#1-----------------------///
 class AnoniaApp extends StatefulWidget {
   const AnoniaApp({Key? key}) : super(key: key);
 
@@ -50,6 +68,18 @@ class AnoniaAppState extends State<AnoniaApp> {
         ),
       );
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 // class MyApp extends StatelessWidget {
 //   @override
