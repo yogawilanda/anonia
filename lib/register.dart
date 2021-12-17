@@ -12,7 +12,7 @@ class RegisterPage extends StatefulWidget {
 class RegisterPageState extends State<RegisterPage> {
   //TODONE: create controller variables in here
   final _usernameController = TextEditingController();
-  // final _passwordController = TextEditingController();
+  final _passwordController = TextEditingController();
   // final _usernameFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
 
@@ -44,7 +44,13 @@ class RegisterPageState extends State<RegisterPage> {
                 //Image.asset(
                 //'Place logo here'),
                 const SizedBox(height: 16.0),
-                const Text('Anonia'),
+                const Text(
+                  'Let\'s Join Our Nice Community',
+                  style: TextStyle(
+                    fontSize: 28,
+                    color: Colors.blue,
+                  ),
+                ),
                 SizedBox(
                   width: 300,
                   height: 300,

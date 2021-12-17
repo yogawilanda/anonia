@@ -3,13 +3,13 @@
 // that can be found in the LICENSE file.
 
 // import 'package:flutter/cupertino.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 //import 'package:anonia/route/route.dart';
 import 'route/route.dart' as route;
 import 'person_data.dart';
-
-String name = 'Your Name';
 
 // class ChatMessage {
 //   String messageText;
@@ -23,13 +23,14 @@ String name = 'Your Name';
 // }
 
 class ChatMessage extends StatelessWidget {
-  const ChatMessage({
+  ChatMessage({
     required this.text,
     required this.animationController,
     Key? key,
   }) : super(key: key);
   final String text;
   final AnimationController animationController;
+  final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -59,10 +60,19 @@ class ChatMessage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(name, style: Theme.of(context).textTheme.headline4),
+                  // this children need to be wrapped into chat bubbles.
+                  Text(
+                    user.displayName!, // <--- current username bubbles name
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
                   Container(
                     margin: const EdgeInsets.only(top: 5.0),
-                    child: Text(text),
+                    child: Text(
+                      text,
+                      style: const TextStyle(color: Colors.black87),
+                    ),
                   ),
                 ],
               ),
@@ -89,6 +99,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   final List<ChatMessage> _messages = [];
   final _textController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
+  final user = FirebaseAuth.instance.currentUser!;
   bool _isComposing = false;
 
   void _handleSubmitted(String text) {
@@ -99,7 +110,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     var message = ChatMessage(
       text: text,
       animationController: AnimationController(
-        duration: const Duration(milliseconds: 700),
+        duration: const Duration(milliseconds: 300),
         vsync: this,
       ),
     );
@@ -110,35 +121,52 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     message.animationController.forward();
   }
 
+  //this is how the user can send CRUD to database. but dont use it yet.
+  // void sendMessage() async {
+  //   FocusScope.of(context).unfocus();
+
+  //   // await FirebaseApi.uploadMessage(widget.idUser, message); <-- this one should be imported its API first
+  //   //to open its FirebaseApi.uploadMessage, it's should be imported already
+  //   //should create API folder and create a page which contain
+  //   //class of Firebase API
+  //   //here it is the source code https://github.com/JohannesMilke/firebase_chat_example/blob/master/lib/api/firebase_api.dart
+  //   //inside of its code, there is Message Class to parse its json which contain idUser,urlAvatar, userName, message, and createAt.
+  //   //refUser is ... study this.
+  //   // to configure it. it is on FireStore that store the message.
+  //   //because this need a connection to firebase API, This should be built based on stream builder.
+  //   // to create chat bubble based on whose represent it, create
+  //   //isMe == stuff. its on source code message_widget.dart
+  //   //stream builder had to initiate FirebaseFireStore.instance.
+
+  //   // _textController.clear(); <-- this should subtitute the code above. so i disabled it for now.
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Anonia'),
-
+        titleSpacing: 8,
+        title: const Text('Someone\'s name'),
         //TODO: Make the Circled avatar not overfilling the appbar
-        leading: const CircleAvatar(
-          backgroundImage: AssetImage(
-            'assets/hotelmacau.png',
-            //fit: BoxFit.cover,
-          ),
-
-          // backgroundImage: AssetImage('assets/hotelmacau.png'),
-          // ),
-          // child: Text(
-          //   angka[index][0],
-          //   style: TextStyle(fontSize: 20),
-          // ),
-        ),
         actions: <Widget>[
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, route.homeScreenPage);
-              },
-              tooltip: 'Back to Home Screen',
-              icon: const Icon(Icons.arrow_left))
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: const [
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: CircleAvatar(
+                  radius: 18,
+                  backgroundImage: AssetImage(
+                    'assets/hotelmacau.png',
+                    //fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
-        backgroundColor: Colors.orangeAccent,
+        backgroundColor: Colors.blue,
         elevation: Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
       ),
       body: Container(
@@ -174,9 +202,19 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     return IconTheme(
       data: IconThemeData(color: Theme.of(context).colorScheme.secondary),
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+        margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
         child: Row(
           children: [
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 0),
+              child: IconButton(
+                icon: const Icon(Icons.add),
+                onPressed: _isComposing
+                    ? () => _handleSubmitted(_textController.text)
+                    : null,
+              ),
+            ),
+            // text composer/text editor.
             Flexible(
               child: TextField(
                 controller: _textController,
@@ -186,13 +224,40 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                   });
                 },
                 onSubmitted: _isComposing ? _handleSubmitted : null,
-                decoration:
-                    const InputDecoration.collapsed(hintText: 'Send a message'),
+                decoration: InputDecoration.collapsed(
+                    hintText: 'Send a message',
+                    filled: true,
+                    // todo: fix this border to be bigger than its text.
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                      borderSide: const BorderSide(width: 0),
+                      gapPadding: 10,
+                    )
+                    //if the method above wont display as its will, back to the below way.
+                    // OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(300),
+                    //   borderSide: const BorderSide(
+                    //     width: 10,
+                    //   ),
+                    // ),
+                    ),
                 focusNode: _focusNode,
               ),
             ),
+
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 4.0),
+              // emoticon button
+              margin: const EdgeInsets.symmetric(horizontal: 0.1),
+              child: IconButton(
+                icon: const Icon(Icons.emoji_emotions_rounded),
+                onPressed: _isComposing
+                    ? () => _handleSubmitted(_textController.text)
+                    : null,
+              ),
+            ),
+            Container(
+              // send icon button
+              margin: const EdgeInsets.symmetric(horizontal: 2),
               child: IconButton(
                 icon: const Icon(Icons.send),
                 onPressed: _isComposing

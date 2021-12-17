@@ -60,6 +60,8 @@ class AnoniaAppState extends State<AnoniaApp> {
           title: title,
           home: HomePage(),
           // initialRoute: '/',
+          initialRoute: '/',
+          onGenerateRoute: route.getRoute,
           // onGenerateRoute: route.getRoute,
 
           // TODO: Pindahkan ThemeData ini ke theme data file terpisah
