@@ -99,7 +99,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   final List<ChatMessage> _messages = [];
   final _textController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
-  final user = FirebaseAuth.instance.currentUser!;
+
   bool _isComposing = false;
 
   void _handleSubmitted(String text) {

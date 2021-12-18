@@ -37,13 +37,15 @@ class RegisterPageState extends State<RegisterPage> {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           children: <Widget>[
-            const SizedBox(height: 80.0),
+            const SizedBox(height: 20.0),
             Column(
               children: [
                 //img
                 //Image.asset(
                 //'Place logo here'),
                 const SizedBox(height: 16.0),
+
+                //Header of this page.
                 const Text(
                   'Let\'s Join Our Nice Community',
                   style: TextStyle(
@@ -77,18 +79,19 @@ class RegisterPageState extends State<RegisterPage> {
             const SizedBox(height: 12.0),
 
             //Password
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: _usernameController,
+              decoration: const InputDecoration(
                 labelText: 'Your Email',
               ),
             ),
             const SizedBox(height: 12.0),
 
             //
-            const TextField(
+            TextField(
               //create the controller
-              //controller: _usernameController,
-              decoration: InputDecoration(
+              controller: _passwordController,
+              decoration: const InputDecoration(
                 labelText: 'Your Treasure Key',
               ),
               obscureText: true,
@@ -105,15 +108,18 @@ class RegisterPageState extends State<RegisterPage> {
                   child: const Text('Login Anonymously'),
                 ),
                 TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, route.homeScreenPage);
-                  },
-                  child: const Text('Login'),
+                  onPressed: () {},
+                  child: const Text('Register'),
                 ),
               ],
             ),
             const Spacer(flex: 1),
-            ElevatedButton(onPressed: () {}, child: const Text("Register")),
+
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, route.loginPage);
+                },
+                child: const Text("Register")),
             const Spacer(flex: 1),
           ],
         ),
