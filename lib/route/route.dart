@@ -11,6 +11,7 @@ import 'package:anonia/home_screen.dart';
 import 'package:anonia/language_screen.dart';
 import 'package:anonia/settings_page.dart';
 import 'package:anonia/search_screen.dart';
+import 'package:anonia/forgot_pass_screen.dart';
 // import 'package:anonia/authentication/forgot_pass_screen.dart';
 
 //Navigation Protocol for this app
@@ -45,6 +46,10 @@ Route<dynamic>? getRoute(RouteSettings settings) {
 
     case languageScreen:
       return MaterialPageRoute(builder: (context) => const LanguagesScreen());
+
+    case forgotPasswordScreen:
+      return MaterialPageRoute(
+          builder: (context) => const ForgotPasswordWidget());
 
     case searchScreen:
       return MaterialPageRoute(builder: (context) => const SearchScreen());
