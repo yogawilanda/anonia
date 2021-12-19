@@ -1,7 +1,15 @@
 // import 'package:anonia/person_data.dart';
+import 'dart:ffi';
+
+import 'package:anonia/google_sign_in.dart';
+import 'package:anonia/main.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'route/route.dart';
 import 'show_dialog.dart';
+import 'package:anonia/model/dummy_list.dart';
+import 'package:provider/provider.dart';
+
 // import 'person_data.dart';
 
 class Homescreen extends StatefulWidget {
@@ -12,39 +20,93 @@ class Homescreen extends StatefulWidget {
 }
 
 class HomescreenState extends State<Homescreen> {
-  final List<String> personData = [
-    "Januari",
-    "Fabruari",
-    "Maret",
-    "April",
-    "Mei",
-    "Juni",
-    "Juli",
-    "Agustus",
-    "September",
-    "Oktober",
-    "November",
-    "Desember"
-  ];
-
   //place the arrays here.
+  //positional parameter will create array based on your order, not in a sequence.
+  final List<Dummy> personData = [
+    Dummy(
+        personName: "Lisa",
+        imageUrl: "assets/lisa.jpg",
+        textMessage: "Yo! You Up Mate?",
+        timeStamp: "sekarang"),
+    Dummy(
+        personName: "Abah Hamed",
+        imageUrl: "assets/abah-hamed.jpg",
+        textMessage: "Sehat kan antum?",
+        timeStamp: "22.03"),
+    Dummy(
+        personName: "Brian USA",
+        imageUrl: "assets/rich-brian-1.jpg",
+        textMessage: "Eh kemarin project lo lancar bro?",
+        timeStamp: "kemarin"),
+    Dummy(
+        personName: "Osas",
+        imageUrl: "assets/Osas.jpg",
+        textMessage:
+            "Tanggal 25 tolong ambil filenya sekaligus deliv ke saya ya",
+        timeStamp: "kemarin"),
+    Dummy(
+        personName: "Demian Google Dev",
+        imageUrl: "assets/Demian.jpg",
+        textMessage: "Kapan main lagi ke kantor?",
+        timeStamp: "kemarin"),
+    Dummy(
+        personName: "Lisa",
+        imageUrl: "assets/lisa.jpg",
+        textMessage: "Yo! You Up Mate?",
+        timeStamp: "sekarang"),
+    Dummy(
+        personName: "Abah Hamed",
+        imageUrl: "assets/abah-hamed.jpg",
+        textMessage: "Sehat kan antum?",
+        timeStamp: "22.03"),
+    Dummy(
+        personName: "Brian USA",
+        imageUrl: "assets/rich-brian-1.jpg",
+        textMessage: "Eh kemarin project lo lancar bro?",
+        timeStamp: "kemarin"),
+    Dummy(
+        personName: "Osas",
+        imageUrl: "assets/Osas.jpg",
+        textMessage:
+            "Tanggal 25 tolong ambil filenya sekaligus deliv ke saya ya",
+        timeStamp: "kemarin"),
+    Dummy(
+        personName: "Demian Google Dev",
+        imageUrl: "assets/Demian.jpg",
+        textMessage: "Kapan main lagi ke kantor?",
+        timeStamp: "kemarin"),
+  ];
 
   @override
   Widget build(BuildContext context) {
     //in html those command will work as equal as a responsive website//
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HomeScreen'),
-        actions: <Widget>[
+        iconTheme: IconThemeData(color: Colors.blue),
+        title: const Text(
+          'Anonia',
+          style: TextStyle(
+            fontSize: 24,
+            color: Colors.blue,
+          ),
+        ),
+        centerTitle: true,
+        elevation: 1,
+        backgroundColor: Colors.white,
+        actions: [
           IconButton(
             onPressed: () {
-              //change this to navigate into chat screen.
               Navigator.pushNamed(context, searchScreen);
             },
-            icon: const Icon(Icons.search),
+            icon: const Icon(
+              Icons.search,
+              color: Colors.blue,
+              size: 28,
+            ),
           ),
         ],
       ),
+      //Contents.
       backgroundColor: Colors.white,
       body: ListView.builder(
         // physics: BouncingScrollPhysics(),
@@ -60,20 +122,18 @@ class HomescreenState extends State<Homescreen> {
               Navigator.pop(context,
                   MaterialPageRoute(builder: (_) => const AlertDialogHapus()));
               //===================fail method=========================//
-              //{Navigator.pushNamed(context, showDialog(context: context, builder: (context) {},));
             },
-            child: const Card(
+            child: Card(
               elevation: 2,
               child: Padding(
                 padding: EdgeInsets.all(14.0),
                 child: ListTile(
                   leading: CircleAvatar(
-                    backgroundImage:
-                        AssetImage('assets/beautiful-girl-image-57.jpg'),
+                    backgroundImage: AssetImage(personData[index].imageUrl),
                   ),
-                  title: Text('PersonName'),
-                  subtitle: Text('list.MessageText'),
-                  trailing: Text('timestamp'),
+                  title: Text(personData[index].personName),
+                  subtitle: Text(personData[index].textMessage),
+                  trailing: Text(personData[index].timeStamp),
                 ),
               ),
             ),
@@ -112,6 +172,16 @@ class HomescreenState extends State<Homescreen> {
                 // Update the state of the app.
                 // ...
                 Navigator.pushNamed(context, settingsScreen);
+              },
+            ),
+            ListTile(
+              title: const Text('Logout'),
+              leading: const Icon(Icons.logout),
+              onTap: () {
+                // Update the state of the app.
+                final provider =
+                    Provider.of<GoogleSignInProvider>(context, listen: false);
+                provider.logout();
               },
             ),
           ],
