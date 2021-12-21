@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 //if this method fail, use the main.dart method again.
 //HomePage is a stream builder, so itshould be the first things this app will renders
 class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -16,12 +16,12 @@ class HomePage extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasData) {
               //create this instance.
-              return UserLoginSuccess();
+              return const UserLoginSuccess();
             } else if (snapshot.hasError) {
-              return Center(child: Text('Something went wrong!'));
+              return const Center(child: Text('Something went wrong!'));
             } else {
               //Create this widget too.
               // return const RegisterPage();

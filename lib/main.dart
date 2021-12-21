@@ -57,9 +57,12 @@ class AnoniaAppState extends State<AnoniaApp> {
         create: (context) => GoogleSignInProvider(),
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
+          theme: ThemeData(scaffoldBackgroundColor: Colors.white),
           title: title,
           home: HomePage(),
           // initialRoute: '/',
+          initialRoute: '/',
+          onGenerateRoute: route.getRoute,
           // onGenerateRoute: route.getRoute,
 
           // TODO: Pindahkan ThemeData ini ke theme data file terpisah
