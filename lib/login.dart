@@ -1,14 +1,12 @@
-// import 'package:anonia/auth_services.dart';
-import 'package:anonia/google_sign_in.dart';
+import 'package:anonia/authenticator.dart';
+import 'package:anonia/protocoler/validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
-// import 'package:google_sign_in/google_sign_in.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'route/route.dart' as route;
-// import 'authentication/forgot_pass_screen.dart';
 import 'package:provider/provider.dart';
-// import 'package:flutter/services.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -19,30 +17,11 @@ class LoginPage extends StatefulWidget {
 
 class LoginPageState extends State<LoginPage> {
   //TODONE: create controller variables in here
-  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _usernameFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
-  final _loginAnonymousKey = GlobalKey();
-  GlobalKey<FormState> formkey = GlobalKey<FormState>();
-
-  String passwordValidator(String value) {
-    if (value.isEmpty) {
-      return "*Masukan Password kamu dahulu";
-    } else if (value.length < 6) {
-      return "Password minimal 6 digit";
-    }
-    return 'Password benar';
-  }
-
-  String userIdValidator(String value) {
-    if (value.isEmpty) {
-      return "*Masukan Password kamu dahulu";
-    } else if (value.length < 6) {
-      return "Password minimal 6 digit";
-    }
-    return 'Password benar';
-  }
+  final formkey = GlobalKey<FormState>();
 
   @override
   // void dispose() {
@@ -53,7 +32,7 @@ class LoginPageState extends State<LoginPage> {
   void initState() {
     super.initState();
 
-    _usernameController.addListener(() {
+    _emailController.addListener(() {
       setState(() {
         //
       });
@@ -64,14 +43,6 @@ class LoginPageState extends State<LoginPage> {
       });
     });
   }
-
-  // Future<void> _signInAnonymously() async {
-  //   try {
-  //     await FirebaseAuth.instance.signInAnonymously();
-  //   } catch (e) {
-  //     print(e); // TODO: show dialog with error
-  //   }
-  // }
 
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -117,75 +88,71 @@ class LoginPageState extends State<LoginPage> {
               ),
             ),
             const SizedBox(height: 20.0),
-            Card(
-              elevation: 0,
-              child: Column(
-                children: [
-                  SizedBox(height: height * 0.08),
-                  //textfield is a box that can be filled with user input keyboard
-                  //TODO:Create A Validator for textfield 1
-                  TextFormField(
-                    //create the controller
-                    controller: _usernameController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        Navigator.pushNamed(context, route.homeScreenPage);
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text(
-                                    'Oops, kamu lupa masukkan password nih')));
-                      }
-                    },
+            Form(
+              key: formkey,
+              child: Card(
+                elevation: 0,
+                child: Column(
+                  children: [
+                    SizedBox(height: height * 0.08),
+                    //textfield is a box that can be filled with user input keyboard
+                    //TODO:Create A Validator for textfield 1
+                    TextFormField(
+                      //create the controller
+                      controller: _emailController,
+                      validator: (value) =>
+                          Validator.validateEmail(email: value.toString()),
 
-                    decoration: const InputDecoration(
-                      labelText: 'Enter Your Anonia ID',
-                      //errorText:
+                      decoration: const InputDecoration(
+                        labelText: 'Enter Your Anonia ID',
+                        //errorText:
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 12.0),
-                  //
-                  TextField(
-                    //create the controller
-                    controller: _passwordController,
-                    focusNode: _passwordFocusNode,
-                    decoration: const InputDecoration(
-                      labelText: 'Your Treasure Key',
+                    const SizedBox(height: 12.0),
+                    //
+                    TextFormField(
+                      //create the controller
+                      controller: _passwordController,
+                      focusNode: _passwordFocusNode,
+                      validator: (value) => Validator.validatePassword(
+                          password: value.toString()),
+                      decoration: const InputDecoration(
+                        labelText: 'Your Treasure Key',
+                      ),
+                      obscureText: true,
+                      //enter your node here
                     ),
-                    obscureText: true,
-                    //enter your node here
-                  ),
-                  const SizedBox(
-                    height: 0,
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(
-                            context, route.forgotPasswordScreen);
-                      },
-                      child: const Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          fontSize: 12,
+                    const SizedBox(
+                      height: 0,
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, route.forgotPasswordScreen);
+                        },
+                        child: const Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  //Buttonbar goes BRRRRR~!
-                  ElevatedButton(
-                    //still unfunctional give it snackbar
-                    // it said I/flutter (22164): [core/no-app] No Firebase App '[DEFAULT]' has been created - call Firebase.initializeApp()
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text(
-                              'Still under services, use login anonymously instead!')));
-                    },
+                    //Buttonbar goes BRRRRR~!
+                    ElevatedButton(
+                      //still unfunctional give it snackbar
+                      // it said I/flutter (22164): [core/no-app] No Firebase App '[DEFAULT]' has been created - call Firebase.initializeApp()
+                      onPressed: () async {},
 
-                    child: const Text('Login'),
-                  ),
-                ],
+                      // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      //     content: Text(
+                      //         'Still under services, use login anonymously instead!')));
+                      child: const Text('Login'),
+                    ),
+                  ],
+                ),
               ),
             ),
             ButtonBar(
@@ -247,8 +214,16 @@ class LoginPageState extends State<LoginPage> {
                           ),
                           IconButton(
                             onPressed: () {
-                              Navigator.pushNamed(
-                                  context, route.homeScreenPage);
+                              //TODO: find a way to resolve creating this user.
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text(
+                                          'Hang on, this sign in method still under maintenance, use google sign in instead!')));
+                              //TODO DONT DELETE THIS
+                              final provider =
+                                  Provider.of<GoogleSignInProvider>(context,
+                                      listen: false);
+                              provider.signInAnonymously();
                             },
                             icon: const FaIcon(
                               FontAwesomeIcons.mask,

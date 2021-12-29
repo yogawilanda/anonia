@@ -1,14 +1,13 @@
-// import 'package:anonia/person_data.dart';
-import 'dart:ffi';
-
-import 'package:anonia/google_sign_in.dart';
+import 'package:anonia/authenticator.dart';
+import 'package:anonia/login_success_profile.dart';
 import 'package:anonia/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'route/route.dart';
-import 'show_dialog.dart';
+import 'widget/show_dialog.dart';
 import 'package:anonia/model/dummy_list.dart';
 import 'package:provider/provider.dart';
+import 'package:anonia/widget/show_dialog.dart';
 
 // import 'person_data.dart';
 
@@ -82,7 +81,7 @@ class HomescreenState extends State<Homescreen> {
     //in html those command will work as equal as a responsive website//
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.blue),
+        iconTheme: const IconThemeData(color: Colors.blue),
         title: const Text(
           'Anonia',
           style: TextStyle(
@@ -111,30 +110,31 @@ class HomescreenState extends State<Homescreen> {
       body: ListView.builder(
         // physics: BouncingScrollPhysics(),
         itemCount: personData.length,
+
         itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, chatScreen);
-            },
-            onLongPress: () {
-              //TODO: Find how to call the showDialog into this actions.
-              //------------success method but not effective-------------------//
-              Navigator.pop(context,
-                  MaterialPageRoute(builder: (_) => const AlertDialogHapus()));
-              //===================fail method=========================//
-            },
-            child: Card(
-              elevation: 2,
-              child: Padding(
-                padding: EdgeInsets.all(14.0),
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: AssetImage(personData[index].imageUrl),
-                  ),
-                  title: Text(personData[index].personName),
-                  subtitle: Text(personData[index].textMessage),
-                  trailing: Text(personData[index].timeStamp),
+          return Card(
+            elevation: 2,
+            child: Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundImage: AssetImage(personData[index].imageUrl),
                 ),
+                title: Text(personData[index].personName),
+                subtitle: Text(personData[index].textMessage),
+                trailing: Text(personData[index].timeStamp),
+                onTap: () {
+                  Navigator.pushNamed(context, chatScreen);
+                },
+                onLongPress: () {
+                  //TODO: Find how to call the showDialog into this actions.
+                  //------------success method but not effective-------------------//
+                  Navigator.pop(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const AlertDialogHapus()));
+                  //===================fail method=========================//
+                },
               ),
             ),
           );
@@ -159,10 +159,17 @@ class HomescreenState extends State<Homescreen> {
               child: Text('Drawer Header'),
             ),
             ListTile(
-              title: const Text('Item 1'),
+              title: const Text('Properties'),
               onTap: () {
                 // Update the state of the app.
                 // ...
+              },
+            ),
+            ListTile(
+              title: const Text('Profile'),
+              leading: const Icon(Icons.person),
+              onTap: () {
+                Navigator.pushNamed(context, loginSuccess);
               },
             ),
             ListTile(
@@ -182,6 +189,7 @@ class HomescreenState extends State<Homescreen> {
                 final provider =
                     Provider.of<GoogleSignInProvider>(context, listen: false);
                 provider.logout();
+                Navigator.pushReplacementNamed(context, loginPage);
               },
             ),
           ],

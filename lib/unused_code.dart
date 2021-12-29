@@ -934,3 +934,19 @@
 
 // ----------------------- end of listview.dart ----------------------//
 
+
+
+  //this below lead to null operator.
+  // Widget build(BuildContext context) {
+  //   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  //   return StreamBuilder(
+  //     stream: FirebaseAuth.instance.authStateChanges(),
+  //     builder: (context, AsyncSnapshot snapshot) {
+  //       if (snapshot.connectionState == ConnectionState.active) {
+  //         final bool signedIn = snapshot.hasData;
+  //         return UserLoginSuccess();
+  //       }
+  //       return CircularProgressIndicator();
+  //     },
+  //   );
+  // }
