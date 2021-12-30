@@ -1,12 +1,16 @@
+import 'package:anonia/login.dart';
 import 'package:anonia/login_success_profile.dart';
 import 'package:anonia/route/route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:get/get.dart';
 
 class GoogleSignInProvider extends ChangeNotifier {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  final googleSignIn = GoogleSignIn();
+  final googleSignIn = GoogleSignIn(signInOption: SignInOption.standard);
+
+  
 
 //Holds fields describing a signed in user's identity, following [GoogleSignInUserData].
 //[id] is guaranteed to be non-null.
@@ -14,22 +18,48 @@ class GoogleSignInProvider extends ChangeNotifier {
 
   GoogleSignInAccount get user => _user!;
 
-  Future signInAnonymously() async {
-    // UserCredential userCredential =
-    await FirebaseAuth.instance.signInAnonymously();
 
-    // Disable persistence on web platforms
-    await FirebaseAuth.instance.setPersistence(Persistence.NONE);
+  
 
-    FirebaseAuth.instance.userChanges().listen(
-      (User? user) async {
-        // if (user != null) {
-        // } else {}
-      },
-    );
-    notifyListeners();
-    await FirebaseAuth.instance.signOut();
+  Future<User> signInAnonymously() async {
+    User user = (await firebaseAuth.signInAnonymously()) as User;
+    print("Signed in ${user.uid}");
+    return user;
   }
+
+  void signOut() {
+    firebaseAuth.signOut();
+    print('Signed Out!');
+  }
+
+  // Future signInAnonymously() async {
+  //   // UserCredential userCredential =
+  //   await FirebaseAuth.instance.signInAnonymously();
+
+  //   // Disable persistence on web platforms
+  //   await FirebaseAuth.instance.setPersistence(Persistence.NONE);
+    
+
+  //   FirebaseAuth.instance.userChanges().listen(
+      
+  //     (User? user) async {
+  //       // if (user != null) {
+  //       // } else {}
+  //     },
+  //   );
+  //   notifyListeners();
+  //   Future<void> anonymousLogout() async {
+  //     // await FirebaseAuth.instance.signOut();
+  //     // Route;
+  //     await firebaseAuth.signOut();
+
+  //     await googleSignIn.disconnect();
+
+  //     Route;
+  //   }
+    
+    
+  // }
 
   Future googleLogin() async {
     try {
@@ -79,9 +109,9 @@ class SignWithEmail extends ChangeNotifier {
       user = auth.currentUser;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        // print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        // print('The account already exists for that email.');
       }
     } catch (e) {
       // print(e);
@@ -112,5 +142,10 @@ class SignWithEmail extends ChangeNotifier {
       }
     }
     notifyListeners();
+
+    Future logout() async {
+      await FirebaseAuth.instance.signOut();
+      Route;
+    }
   }
 }

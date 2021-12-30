@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'route/route.dart' as route;
 import 'package:provider/provider.dart';
 
+//todo: use this to do toggler button
+//toggle_switch 1.3.0 icon indicating copy to clipboard operation
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 

@@ -1,19 +1,28 @@
 import 'package:anonia/authenticator.dart';
+import 'package:anonia/firestore_collection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:anonia/route/route.dart' as route;
 import 'package:anonia/widget/show_dialog.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UserLoginSuccess extends StatelessWidget {
+class UserLoginSuccess extends StatefulWidget {
   const UserLoginSuccess({Key? key}) : super(key: key);
 
   @override
+  State<UserLoginSuccess> createState() => _UserLoginSuccessState();
+}
+
+class _UserLoginSuccessState extends State<UserLoginSuccess> {
+  @override
   Widget build(BuildContext context) {
-    //this code will show user informations.
+    //to show firebase user credentials.
     final user = FirebaseAuth.instance.currentUser!;
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+
+    // double height = MediaQuery.of(context).size.height;
+    // double width = MediaQuery.of(context).size.width;
 
     return GestureDetector(
       onVerticalDragUpdate: (dragUpdateDetails) {
@@ -25,10 +34,10 @@ class UserLoginSuccess extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: AppBar(
           elevation: 0,
-          title: Text('User Profile'),
+          title: const Text('User Profile'),
           centerTitle: true,
           backgroundColor: Colors.white,
-          titleTextStyle: TextStyle(
+          titleTextStyle: const TextStyle(
               color: Colors.blue,
               fontSize: 30,
               letterSpacing: 2,
@@ -39,50 +48,24 @@ class UserLoginSuccess extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  padding: EdgeInsets.all(2),
+                  padding: const EdgeInsets.all(2),
                   clipBehavior: Clip.none,
                   child: Column(
                     children: [
                       mainContent(
-                        width,
-                        height,
+                        // width,
+                        // height,
                         user,
                       ),
-                      // SizedBox(
-                      //   height: 70,
-                      //   child: Container(
-                      //     color: Colors.white,
-                      //   ),
-                      // ),
-                      // // Container(
-                      //   color: Colors.white,
-                      //   child: SpinKitFoldingCube(
-                      //     color: Colors.blue,
-                      //     duration: Duration(
-                      //       seconds: 3,
-                      //     ),
-                      //   ),
-                      // ),
-
-                      // Container(
-                      //   width: 60,
-                      //   color: Colors.white,
-                      //   child: SpinKitFadingCircle(
-                      //     itemBuilder: (BuildContext context, int index) {
-                      //       return DecoratedBox(
-                      //         decoration: BoxDecoration(
-                      //           color:
-                      //               index.isEven ? Colors.white : Colors.blue,
-                      //         ),
-                      //       );
-                      //     },
-                      //   ),
-                      // ),
+                      const ButtonBar(children: [
+                        // AddUser('rosa', 'hero', 25),
+                      ]),
                     ],
                   ),
                 ),
               ],
             ),
+            // GetUserName('rosa'),
           ],
         ),
       ),
@@ -90,7 +73,7 @@ class UserLoginSuccess extends StatelessWidget {
     // OldScaffold(user: user, height: height);
   }
 
-  Container mainContent(double width, double height, User user) {
+  Container mainContent(User user) {
     return Container(
       // color: Colors.white,
       // margin: EdgeInsets.all(30),
@@ -99,11 +82,11 @@ class UserLoginSuccess extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.max,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             userProfileImage(user),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Column(
@@ -113,11 +96,11 @@ class UserLoginSuccess extends StatelessWidget {
                 userEmailText(user),
                 SizedBox(
                   width: 300,
-                  child: user.uid == user.isAnonymous.toString()
-                      ? Text(
+                  child: user.uid == 'user.isAnonymous.toString()'
+                      ? const Text(
                           'Selamat datang, anonims!',
                           textAlign: TextAlign.left,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.black, // <-- to change text colors.
                             fontSize: 16,
                             // fontFamily: '', //<-- TODO: Import Googlefonts.
@@ -145,8 +128,8 @@ class UserLoginSuccess extends StatelessWidget {
                               ),
                             ),
                             user.emailVerified == 'not verified'
-                                ? Text('not verified')
-                                : Icon(Icons.verified)
+                                ? const Text('not verified')
+                                : const Icon(Icons.verified)
                           ],
                         ),
                 ),
@@ -160,14 +143,14 @@ class UserLoginSuccess extends StatelessWidget {
 
   userNameDisplayText(User user) => SizedBox(
         width: 300,
-        child: user.displayName == "Anonymous"
-            ? Text('Anonymous')
+        child: user.displayName == 'user.isAnonymous'
+            ? const Text('Anonymous')
             : Row(
                 children: [
                   Text(
                     user.displayName.toString(),
                     textAlign: TextAlign.left,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black, // <-- to change text colors.
                       fontSize: 18,
                       fontWeight: FontWeight.w800,
@@ -175,8 +158,8 @@ class UserLoginSuccess extends StatelessWidget {
                     ),
                   ),
                   user.emailVerified == 'not verified'
-                      ? Text('not verified')
-                      : Icon(
+                      ? const Text('not verified')
+                      : const Icon(
                           Icons.verified,
                           color: Colors.blue,
                         ),
@@ -187,8 +170,8 @@ class UserLoginSuccess extends StatelessWidget {
   userEmailText(User user) {
     return SizedBox(
       width: 300,
-      child: user.email == "Anonymous"
-          ? Text('Anonymous')
+      child: user.email != user.isAnonymous
+          ? const Text('Anonymous')
           : Text(
               user.email!,
               textAlign: TextAlign.left,
@@ -207,14 +190,14 @@ class UserLoginSuccess extends StatelessWidget {
       children: [
         IconButton(
             onPressed: () {},
-            icon: Icon(
+            icon: const Icon(
               Icons.male,
               color: Colors.blue,
               size: 45,
             )),
         IconButton(
           onPressed: () {},
-          icon: Icon(
+          icon: const Icon(
             Icons.female,
             color: Colors.pink,
             size: 45,
@@ -229,26 +212,70 @@ class UserLoginSuccess extends StatelessWidget {
       child: Stack(
         alignment: Alignment.bottomRight,
         children: [
-          user.photoURL == "lisa"
+          user.photoURL == 'user.isAnonymous'
               ? CircleAvatar(
-                  radius: 60,
-                  child: Image.asset(
-                    'assets/lisa.jpg',
-                  ),
-                )
-              : CircleAvatar(
                   radius: 60,
                   backgroundImage: NetworkImage(
                     user.photoURL!,
                   ),
+                )
+              : const CircleAvatar(
+                  radius: 60,
+                  backgroundImage: const AssetImage(
+                    'assets/lisa.jpg',
+                  ),
                 ),
           if (user.emailVerified == 'not verified')
-            Text('not verified')
+            const Text('not verified')
           else
-            Icon(
+            const Icon(
               Icons.verified,
               color: Colors.blue,
             ),
+        ],
+      ),
+    );
+  }
+}
+
+class LoadingAnimation extends StatelessWidget {
+  const LoadingAnimation({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 70,
+            child: Container(
+              color: Colors.white,
+            ),
+          ),
+          Container(
+            color: Colors.white,
+            child: const SpinKitFoldingCube(
+              color: Colors.blue,
+              duration: Duration(
+                seconds: 3,
+              ),
+            ),
+          ),
+          Container(
+            width: 60,
+            color: Colors.white,
+            child: SpinKitFadingCircle(
+              itemBuilder: (BuildContext context, int index) {
+                return DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: index.isEven ? Colors.white : Colors.blue,
+                  ),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
@@ -321,13 +348,13 @@ class OldScaffold extends StatelessWidget {
                         //solution is solved by only using an operator
 
                         child: user.displayName == "Anonymous"
-                            ? Text('Anonymous')
+                            ? const Text('Anonymous')
                             : Text(
                                 'Hello, ' + user.displayName!,
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   color: Colors
-                                      .white70, // <-- to change text colors.
+                                      .black, // <-- to change text colors.
                                   fontSize: 34,
                                   // fontFamily: '', //<-- TODO: Import Googlefonts.
                                 ),
@@ -418,7 +445,7 @@ class OldScaffold extends StatelessWidget {
           ),
         ],
       ),
-      drawer: ProfileDrawer(),
+      drawer: const ProfileDrawer(),
     );
   }
 }
@@ -433,7 +460,7 @@ class ProfileDrawer extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: [
-          DrawerHeader(
+          const DrawerHeader(
             child: CircleAvatar(
               radius: 10,
 
@@ -455,115 +482,3 @@ class ProfileDrawer extends StatelessWidget {
     );
   }
 }
-
-// class UserInformation extends StatelessWidget {
-//   const UserInformation({
-//     Key? key,
-//     required this.user,
-//   }) : super(key: key);
-
-//   final User user;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       child: Padding(
-//         padding: const EdgeInsets.all(16),
-//         child: Card(
-//           elevation: 5,
-//           child: Column(
-//             children: [
-//               const Text('This is your profile'),
-//               CircleAvatar(
-//                 radius: 8,
-//                 //to channel the current user photo profile
-//                 backgroundImage: NetworkImage(user.photoURL!),
-//               ),
-//               const SizedBox(height: 8),
-//               Text(
-//                 //to channel its name based on its email username.
-//                 'Name: ' + user.displayName!,
-//                 style: const TextStyle(color: Colors.amber, fontSize: 16),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// this is original form as if the builds fails.
-
-// @override
-//   Widget build(BuildContext context) {
-//     //this code will show user informations.
-//     final user = FirebaseAuth.instance.currentUser!;
-//     double height = MediaQuery.of(context).size.height;
-//     double width = MediaQuery.of(context).size.width;
-
-//     return Scaffold(
-//       body: Column(
-//         crossAxisAlignment: CrossAxisAlignment.center,
-//         mainAxisAlignment: MainAxisAlignment.end,
-//         mainAxisSize: MainAxisSize.max,
-//         children: [
-//           Container(
-//             width: MediaQuery.of(context).size.width * 1,
-//             height: MediaQuery.of(context).size.height * 0.7,
-//             decoration: const BoxDecoration(
-//               color: Colors.amber,
-//               borderRadius: BorderRadius.only(
-//                 topLeft: Radius.circular(25),
-//                 topRight: Radius.circular(25),
-//               ),
-//             ),
-//             child: Padding(
-//               padding: const EdgeInsets.all(16),
-//               child: Card(
-//                 elevation: 5,
-//                 child: Column(
-//                   children: [
-//                     const Text('This is your profile'),
-//                     CircleAvatar(
-//                       radius: 80,
-//                       //to channel the current user photo profile
-//                       backgroundImage: NetworkImage(user.photoURL!),
-//                     ),
-//                     const SizedBox(height: 8),
-//                     Text(
-//                       //to channel its name based on its email username.
-//                       'Name: ' + user.displayName!,
-//                       style: const TextStyle(color: Colors.amber, fontSize: 16),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//       drawer: Drawer(
-//         child: ListView(
-//           children: [
-//             DrawerHeader(
-//               child: CircleAvatar(
-//                 radius: 8,
-//                 //to channel the current user photo profile
-//                 backgroundImage: NetworkImage(user.photoURL!),
-//               ),
-//             ),
-//             ListTile(
-//               title: const Text('Sign Out'),
-//               onTap: () {
-//                 final provider =
-//                     Provider.of<GoogleSignInProvider>(context, listen: false);
-//                 provider.logout();
-//               },
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

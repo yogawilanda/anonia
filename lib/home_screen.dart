@@ -1,6 +1,7 @@
 import 'package:anonia/authenticator.dart';
 import 'package:anonia/login_success_profile.dart';
 import 'package:anonia/main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'route/route.dart';
@@ -76,6 +77,8 @@ class HomescreenState extends State<Homescreen> {
         timeStamp: "kemarin"),
   ];
 
+  final user = FirebaseAuth.instance.currentUser;
+
   @override
   Widget build(BuildContext context) {
     //in html those command will work as equal as a responsive website//
@@ -110,7 +113,6 @@ class HomescreenState extends State<Homescreen> {
       body: ListView.builder(
         // physics: BouncingScrollPhysics(),
         itemCount: personData.length,
-
         itemBuilder: (context, index) {
           return Card(
             elevation: 2,
@@ -129,11 +131,12 @@ class HomescreenState extends State<Homescreen> {
                 onLongPress: () {
                   //TODO: Find how to call the showDialog into this actions.
                   //------------success method but not effective-------------------//
-                  Navigator.pop(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => const AlertDialogHapus()));
+                  // Navigator.pop(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (_) => const AlertDialogHapus()));
                   //===================fail method=========================//
+                  Navigator.pushNamed(context, loginPage);
                 },
               ),
             ),
@@ -184,12 +187,18 @@ class HomescreenState extends State<Homescreen> {
             ListTile(
               title: const Text('Logout'),
               leading: const Icon(Icons.logout),
-              onTap: () {
+              onTap: () async {
                 // Update the state of the app.
                 final provider =
                     Provider.of<GoogleSignInProvider>(context, listen: false);
-                provider.logout();
+                user!.isAnonymous == user!.emailVerified
+                    ? await provider.logout()
+                    : provider.signOut();
                 Navigator.pushReplacementNamed(context, loginPage);
+                // final provider =
+                //     Provider.of<GoogleSignInProvider>(context, listen: false);
+                // await provider.logout();
+                // Navigator.pushReplacementNamed(context, loginPage);
               },
             ),
           ],

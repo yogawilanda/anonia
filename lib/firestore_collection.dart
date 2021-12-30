@@ -34,12 +34,14 @@ class AddUser extends StatelessWidget {
           .catchError((error) => print("Failed to add user: $error"));
     }
 
-    return TextButton(
+    return 
+    TextButton(
       onPressed: addUser,
       child: Text(
         "Add User",
       ),
-    );
+    )
+    ;
   }
 }
 

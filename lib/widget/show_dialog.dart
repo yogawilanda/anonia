@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:anonia/authenticator.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 class AlertDialogHapus extends StatelessWidget {
@@ -24,10 +26,7 @@ class AlertDialogHapus extends StatelessWidget {
 }
 
 class AlertDialogLogOut extends StatelessWidget {
-  const AlertDialogLogOut({
-    Key? key,
-  }) : super(key: key);
-
+  final googleSignIn = GoogleSignIn(signInOption: SignInOption.standard);
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -43,9 +42,7 @@ class AlertDialogLogOut extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                final provider =
-                    Provider.of<GoogleSignInProvider>(context, listen: false);
-                provider.logout();
+                Navigator.popUntil(context, ModalRoute.withName('/'));
               },
               child: const Text('Ya'),
             ),
@@ -53,5 +50,15 @@ class AlertDialogLogOut extends StatelessWidget {
         )
       ],
     );
+  }
+
+  Future<void> logout() async {
+    // await FirebaseAuth.instance.signOut();
+    // Route;
+    await FirebaseAuth.instance.signOut();
+
+    await googleSignIn.disconnect();
+
+    Route;
   }
 }

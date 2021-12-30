@@ -44,6 +44,7 @@ class RegisterPageState extends State<RegisterPage> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     MediaQuery.of(context).size;
     return SafeArea(

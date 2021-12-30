@@ -7,9 +7,6 @@ import 'package:anonia/login_success_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'route/route.dart' as route;
-// import 'search_screen.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:anonia/settings_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -19,24 +16,30 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(AnoniaApp());
+  runApp(const AnoniaApp());
 }
 
 class AnoniaApp extends StatelessWidget {
   const AnoniaApp({Key? key}) : super(key: key);
   static const String title = 'Anonia';
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-        create: (context) => GoogleSignInProvider(),
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: title,
-          home: HomePage(),
-          onGenerateRoute: route.getRoute,
-        ),
-      );
+  Widget build(BuildContext context) {
+    bool isInsider = false;
+    final user = FirebaseAuth.instance.currentUser;
+
+    return ChangeNotifierProvider(
+      create: (context) => GoogleSignInProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: title,
+        home: AppGate(),
+        onGenerateRoute: route.getRoute,
+      ),
+    );
+  }
 }
 
+//20 December 2021
 //if this code fail to do the task, restore #1
 // class AnoniaApp extends StatelessWidget {
 //   const AnoniaApp({Key? key}) : super(key: key);
