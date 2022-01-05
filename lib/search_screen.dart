@@ -1,7 +1,4 @@
 import 'package:anonia/model/dummy_list.dart';
-import 'package:anonia/route/route.dart';
-import 'package:anonia/show_dialog.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // ignore import 'route/route.dart' as route;
 

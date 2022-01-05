@@ -934,3 +934,131 @@
 
 // ----------------------- end of listview.dart ----------------------//
 
+
+
+  //this below lead to null operator.
+  // Widget build(BuildContext context) {
+  //   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  //   return StreamBuilder(
+  //     stream: FirebaseAuth.instance.authStateChanges(),
+  //     builder: (context, AsyncSnapshot snapshot) {
+  //       if (snapshot.connectionState == ConnectionState.active) {
+  //         final bool signedIn = snapshot.hasData;
+  //         return UserLoginSuccess();
+  //       }
+  //       return CircularProgressIndicator();
+  //     },
+  //   );
+  // }
+
+// class UserInformation extends StatelessWidget {
+//   const UserInformation({
+//     Key? key,
+//     required this.user,
+//   }) : super(key: key);
+
+//   final User user;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       child: Padding(
+//         padding: const EdgeInsets.all(16),
+//         child: Card(
+//           elevation: 5,
+//           child: Column(
+//             children: [
+//               const Text('This is your profile'),
+//               CircleAvatar(
+//                 radius: 8,
+//                 //to channel the current user photo profile
+//                 backgroundImage: NetworkImage(user.photoURL!),
+//               ),
+//               const SizedBox(height: 8),
+//               Text(
+//                 //to channel its name based on its email username.
+//                 'Name: ' + user.displayName!,
+//                 style: const TextStyle(color: Colors.amber, fontSize: 16),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// this is original form as if the builds fails.
+
+// @override
+//   Widget build(BuildContext context) {
+//     //this code will show user informations.
+//     final user = FirebaseAuth.instance.currentUser!;
+//     double height = MediaQuery.of(context).size.height;
+//     double width = MediaQuery.of(context).size.width;
+
+//     return Scaffold(
+//       body: Column(
+//         crossAxisAlignment: CrossAxisAlignment.center,
+//         mainAxisAlignment: MainAxisAlignment.end,
+//         mainAxisSize: MainAxisSize.max,
+//         children: [
+//           Container(
+//             width: MediaQuery.of(context).size.width * 1,
+//             height: MediaQuery.of(context).size.height * 0.7,
+//             decoration: const BoxDecoration(
+//               color: Colors.amber,
+//               borderRadius: BorderRadius.only(
+//                 topLeft: Radius.circular(25),
+//                 topRight: Radius.circular(25),
+//               ),
+//             ),
+//             child: Padding(
+//               padding: const EdgeInsets.all(16),
+//               child: Card(
+//                 elevation: 5,
+//                 child: Column(
+//                   children: [
+//                     const Text('This is your profile'),
+//                     CircleAvatar(
+//                       radius: 80,
+//                       //to channel the current user photo profile
+//                       backgroundImage: NetworkImage(user.photoURL!),
+//                     ),
+//                     const SizedBox(height: 8),
+//                     Text(
+//                       //to channel its name based on its email username.
+//                       'Name: ' + user.displayName!,
+//                       style: const TextStyle(color: Colors.amber, fontSize: 16),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//       drawer: Drawer(
+//         child: ListView(
+//           children: [
+//             DrawerHeader(
+//               child: CircleAvatar(
+//                 radius: 8,
+//                 //to channel the current user photo profile
+//                 backgroundImage: NetworkImage(user.photoURL!),
+//               ),
+//             ),
+//             ListTile(
+//               title: const Text('Sign Out'),
+//               onTap: () {
+//                 final provider =
+//                     Provider.of<GoogleSignInProvider>(context, listen: false);
+//                 provider.logout();
+//               },
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
