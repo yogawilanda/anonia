@@ -69,6 +69,7 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:multidex:1.0.3'
     compileOnly files("$flutterRoot/bin/cache/artifacts/engine/android-arm/flutter.jar")
     compileOnly 'androidx.annotation:annotation:1.1.0'
     apply plugin: 'com.google.gms.google-services'

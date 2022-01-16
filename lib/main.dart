@@ -1,11 +1,6 @@
-import 'package:anonia/authentication/loginview.dart';
-import 'package:anonia/login.dart';
 import 'package:anonia/google_logged_in_widget.dart';
 import 'package:anonia/authenticator.dart';
-import 'package:anonia/home_screen.dart';
-import 'package:anonia/login_success_profile.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'route/route.dart' as route;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -29,7 +24,7 @@ class AnoniaApp extends StatelessWidget {
 
     return ChangeNotifierProvider(
       create: (context) => GoogleSignInProvider(),
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: title,
         home: AppGate(),

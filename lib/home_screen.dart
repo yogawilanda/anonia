@@ -5,10 +5,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'route/route.dart';
-import 'widget/show_dialog.dart';
+
 import 'package:anonia/model/dummy_list.dart';
 import 'package:provider/provider.dart';
-import 'package:anonia/widget/show_dialog.dart';
+
 
 // import 'person_data.dart';
 

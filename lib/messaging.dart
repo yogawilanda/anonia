@@ -4,10 +4,7 @@
 
 import 'package:anonia/authenticator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'route/route.dart' as route;
-import 'person_data.dart';
 
 class ChatMessage extends StatelessWidget {
   ChatMessage({
@@ -51,7 +48,7 @@ class ChatMessage extends StatelessWidget {
                 children: [
                   // this children need to be wrapped into chat bubbles.
                   if (user.displayName == "anonymous")
-                    Text('Anonym')
+                    const Text('Anonym')
                   else
                     Text(
                       user.displayName!,
@@ -127,7 +124,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: user.photoURL == anonUser
                     ? CircleAvatar(
                         child: Image.asset('assets/lisa.jpg'),
@@ -205,7 +202,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                   // todo: fix this border to be bigger than its text.
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(0),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.transparent,
                       width: 1,
                     ),

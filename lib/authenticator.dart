@@ -10,16 +10,11 @@ class GoogleSignInProvider extends ChangeNotifier {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final googleSignIn = GoogleSignIn(signInOption: SignInOption.standard);
 
-  
-
 //Holds fields describing a signed in user's identity, following [GoogleSignInUserData].
 //[id] is guaranteed to be non-null.
   GoogleSignInAccount? _user;
 
   GoogleSignInAccount get user => _user!;
-
-
-  
 
   Future<User> signInAnonymously() async {
     User user = (await firebaseAuth.signInAnonymously()) as User;
@@ -31,35 +26,6 @@ class GoogleSignInProvider extends ChangeNotifier {
     firebaseAuth.signOut();
     print('Signed Out!');
   }
-
-  // Future signInAnonymously() async {
-  //   // UserCredential userCredential =
-  //   await FirebaseAuth.instance.signInAnonymously();
-
-  //   // Disable persistence on web platforms
-  //   await FirebaseAuth.instance.setPersistence(Persistence.NONE);
-    
-
-  //   FirebaseAuth.instance.userChanges().listen(
-      
-  //     (User? user) async {
-  //       // if (user != null) {
-  //       // } else {}
-  //     },
-  //   );
-  //   notifyListeners();
-  //   Future<void> anonymousLogout() async {
-  //     // await FirebaseAuth.instance.signOut();
-  //     // Route;
-  //     await firebaseAuth.signOut();
-
-  //     await googleSignIn.disconnect();
-
-  //     Route;
-  //   }
-    
-    
-  // }
 
   Future googleLogin() async {
     try {
@@ -76,14 +42,15 @@ class GoogleSignInProvider extends ChangeNotifier {
 
       await FirebaseAuth.instance.signInWithCredential(credential);
     } catch (e) {
-      // print(e.toString());
+      print(e.toString());
     }
     notifyListeners();
   }
 
+  
+
   Future logout() async {
     await googleSignIn.disconnect();
-    FirebaseAuth.instance.signOut();
     Route;
   }
 }

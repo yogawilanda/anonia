@@ -1,6 +1,5 @@
 import 'package:anonia/authenticator.dart';
 import 'package:anonia/protocoler/validator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -145,13 +144,7 @@ class LoginPageState extends State<LoginPage> {
                     ),
                     //Buttonbar goes BRRRRR~!
                     ElevatedButton(
-                      //still unfunctional give it snackbar
-                      // it said I/flutter (22164): [core/no-app] No Firebase App '[DEFAULT]' has been created - call Firebase.initializeApp()
                       onPressed: () async {},
-
-                      // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      //     content: Text(
-                      //         'Still under services, use login anonymously instead!')));
                       child: const Text('Login'),
                     ),
                   ],

@@ -1,12 +1,7 @@
-import 'package:anonia/authenticator.dart';
-import 'package:anonia/firestore_collection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:anonia/route/route.dart' as route;
-import 'package:anonia/widget/show_dialog.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserLoginSuccess extends StatefulWidget {
   const UserLoginSuccess({Key? key}) : super(key: key);
@@ -21,15 +16,12 @@ class _UserLoginSuccessState extends State<UserLoginSuccess> {
     //to show firebase user credentials.
     final user = FirebaseAuth.instance.currentUser!;
 
-    // double height = MediaQuery.of(context).size.height;
-    // double width = MediaQuery.of(context).size.width;
-
     return GestureDetector(
       onVerticalDragUpdate: (dragUpdateDetails) {
-        Navigator.pushReplacementNamed(context, route.chatUIPage);
-      },
+        Navigator.pushNamed(context, route.chatUIPage);
+      },  
       onHorizontalDragUpdate: (details) =>
-          Navigator.restorablePopAndPushNamed(context, route.chatScreen),
+          Navigator.pushNamed(context, route.chatScreen),
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -106,15 +98,6 @@ class _UserLoginSuccessState extends State<UserLoginSuccess> {
                             // fontFamily: '', //<-- TODO: Import Googlefonts.
                           ),
                         )
-                      // : Text(
-                      //     user.emailVerified.toString(),
-                      //     textAlign: TextAlign.left,
-                      //     style: const TextStyle(
-                      //       color: Colors.black, // <-- to change text colors.
-                      //       fontSize: 16,
-                      //       // fontFamily: '', //<-- TODO: Import Googlefonts.
-                      //     ),
-                      //   ),
                       : Row(
                           children: [
                             Text(
@@ -141,31 +124,33 @@ class _UserLoginSuccessState extends State<UserLoginSuccess> {
     );
   }
 
-  userNameDisplayText(User user) => SizedBox(
-        width: 300,
-        child: user.displayName == 'user.isAnonymous'
-            ? const Text('Anonymous')
-            : Row(
-                children: [
-                  Text(
-                    user.displayName.toString(),
-                    textAlign: TextAlign.left,
-                    style: const TextStyle(
-                      color: Colors.black, // <-- to change text colors.
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800,
-                      // fontFamily: '', //<-- TODO: Import Googlefonts.
-                    ),
+  userNameDisplayText(User user) {
+    return SizedBox(
+      width: 300,
+      child: 'user.isAnonymous' == user.displayName
+          ? const Text('Anonymous')
+          : Row(
+              children: [
+                Text(
+                  user.displayName.toString(),
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                    color: Colors.black, // <-- to change text colors.
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                    // fontFamily: '', //<-- TODO: Import Googlefonts.
                   ),
-                  user.emailVerified == 'not verified'
-                      ? const Text('not verified')
-                      : const Icon(
-                          Icons.verified,
-                          color: Colors.blue,
-                        ),
-                ],
-              ),
-      );
+                ),
+                user.emailVerified == 'not verified'
+                    ? const Text('not verified')
+                    : const Icon(
+                        Icons.verified,
+                        color: Colors.blue,
+                      ),
+              ],
+            ),
+    );
+  }
 
   userEmailText(User user) {
     return SizedBox(
@@ -328,11 +313,11 @@ class OldScaffold extends StatelessWidget {
                         //Create Logout Button Action.
                         IconButton(
                           onPressed: () {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialogLogOut();
-                                });
+                            // showDialog(
+                            //     context: context,
+                            //     builder: (BuildContext context) {
+                            //       return AlertDialogLogOut();
+                            //     });
                           },
                           icon: const Icon(Icons.logout),
                           color: Colors.white,
