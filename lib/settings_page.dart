@@ -20,11 +20,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: SettingsList(
         sections: [
           SettingsSection(
-            title: 'Common',
+            title: Text('Common'),
             tiles: [
               SettingsTile(
-                title: 'Language',
-                subtitle: 'English',
+                title: Text('Language'),
+                trailing: Text('English'),
                 leading: const Icon(Icons.language),
                 onPressed: (context) {
                   MaterialPageRoute(builder: (_) => const LanguagesScreen());
@@ -36,63 +36,62 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   onPressed: (context) {
                     MaterialPageRoute(builder: (_) => const LanguagesScreen());
                   },
-                  title: 'Environment',
-                  subtitle: 'Production',
+                  title: Text('Environment'),
+                  trailing: Text('Production'),
                   leading: const Icon(Icons.cloud_queue)),
             ],
           ),
           SettingsSection(
-            title: 'Account',
-            tiles: const [
-              SettingsTile(title: 'Phone number', leading: Icon(Icons.phone)),
-              SettingsTile(title: 'Email', leading: Icon(Icons.email)),
-              SettingsTile(title: 'Sign out', leading: Icon(Icons.exit_to_app)),
+            title: Text('Account'),
+            tiles: [
+              SettingsTile(
+                  title: Text('Phone number'), leading: Icon(Icons.phone)),
+              SettingsTile(title: Text('Email'), leading: Icon(Icons.email)),
+              SettingsTile(
+                  title: Text('Sign out'), leading: Icon(Icons.exit_to_app)),
             ],
           ),
           SettingsSection(
-            title: 'Security',
+            title: Text('Security'),
             tiles: [
               SettingsTile(
-                title: 'Account Privacy',
-                subtitle: 'Set how your privacy is configured',
+                title: Text('Account Privacy'),
+                trailing: Text('Set how your privacy is configured'),
                 onPressed: (context) {},
                 leading: const Icon(Icons.privacy_tip),
               ),
               SettingsTile.switchTile(
-                title: 'Lock app in background',
+                title: Text('Lock app in background'),
                 leading: const Icon(Icons.phonelink_lock),
-                switchValue: lockInBackground,
                 onToggle: (bool value) {
                   setState(() {
                     lockInBackground = value;
                   });
                 },
+                initialValue: false,
               ),
               SettingsTile.switchTile(
-                  title: 'Use fingerprint',
-                  leading: const Icon(Icons.fingerprint),
-                  onToggle: (bool value) {
-                    setState(() {});
-                  },
-                  switchValue: false),
+                title: Text('Use Fingerprint to unlock'),
+                leading: const Icon(Icons.phonelink_lock),
+                onToggle: (bool value) {
+                  setState(() {
+                    lockInBackground = value;
+                  });
+                },
+                initialValue: false,
+              ),
               SettingsTile.switchTile(
-                title: 'Change password',
-                leading: const Icon(Icons.lock),
-                switchValue: true,
-                onToggle: (bool value) {},
+                title: Text('Use Fingerprint to unlock'),
+                leading: const Icon(Icons.phonelink_lock),
+                onToggle: (bool value) {
+                  setState(() {
+                    lockInBackground = value;
+                  });
+                },
+                initialValue: false,
               ),
             ],
           ),
-          SettingsSection(
-            title: 'Misc',
-            tiles: const [
-              SettingsTile(
-                  title: 'Terms of Service', leading: Icon(Icons.description)),
-              SettingsTile(
-                  title: 'Open source licenses',
-                  leading: Icon(Icons.collections_bookmark)),
-            ],
-          )
         ],
       ),
     );

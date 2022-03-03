@@ -19,26 +19,8 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   runApp(AnoniaApp());
 }
-
-//if this code fail to do the task, restore #1
-
-// class AnoniaApp extends StatelessWidget {
-//   const AnoniaApp({Key? key}) : super(key: key);
-//   static final String title = 'Anonia';
-//   @override
-//   Widget build(BuildContext context) => ChangeNotifierProvider(
-//         create: (context) => GoogleSignInProvider(),
-//         child: MaterialApp(
-//           debugShowCheckedModeBanner: false,
-//           title: title,
-//           home: HomePage(),
-//           onGenerateRoute: route.getRoute,
-//         ),
-//       );
-// }
 
 // /----------------------#1-----------------------///
 class AnoniaApp extends StatefulWidget {
@@ -51,7 +33,7 @@ class AnoniaApp extends StatefulWidget {
 }
 
 class AnoniaAppState extends State<AnoniaApp> {
-  static final String title = 'Anonia';
+  String title = 'Anonia';
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
         create: (context) => GoogleSignInProvider(),
@@ -59,15 +41,9 @@ class AnoniaAppState extends State<AnoniaApp> {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(scaffoldBackgroundColor: Colors.white),
           title: title,
-          home: HomePage(),
-          // initialRoute: '/',
+          home: const HomePage(),
           initialRoute: '/',
           onGenerateRoute: route.getRoute,
-          // onGenerateRoute: route.getRoute,
-
-          // TODO: Pindahkan ThemeData ini ke theme data file terpisah
-
-          // TODO: Buat routing setelah pembuatan login interface selesai
         ),
       );
 }
