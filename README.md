@@ -2,6 +2,8 @@
 
 HELLO WORLD!
 
+![](https://github.com/yogawilanda/anonia/blob/master/Covers.png)
+
 This app is my first-well-concerned to develope, since I start code on this project since I can't even code properly with my self taught. I hope someone will help me to improve it! :D
 
 Ah, right, at first let me tell what about this app gonna works.
