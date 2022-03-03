@@ -1,10 +1,6 @@
-import 'package:anonia/login.dart';
-import 'package:anonia/login_success_profile.dart';
-import 'package:anonia/route/route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:get/get.dart';
 
 class GoogleSignInProvider extends ChangeNotifier {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -42,12 +38,10 @@ class GoogleSignInProvider extends ChangeNotifier {
 
       await FirebaseAuth.instance.signInWithCredential(credential);
     } catch (e) {
-      print(e.toString());
+      'error';
     }
     notifyListeners();
   }
-
-  
 
   Future logout() async {
     await googleSignIn.disconnect();

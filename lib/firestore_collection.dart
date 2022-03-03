@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-
-// Import the firebase_core and cloud_firestore plugin
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-//create
 class AddUser extends StatelessWidget {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   Stream collectionStream =
@@ -34,23 +30,22 @@ class AddUser extends StatelessWidget {
           .catchError((error) => print("Failed to add user: $error"));
     }
 
-    return 
-    TextButton(
+    return TextButton(
       onPressed: addUser,
-      child: Text(
+      child: const Text(
         "Add User",
       ),
-    )
-    ;
+    );
   }
 }
 
 //Read One Time
+
 class GetUserName extends StatelessWidget {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   final String documentId;
 
-  GetUserName(this.documentId);
+  GetUserName(this.documentId, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,11 +56,11 @@ class GetUserName extends StatelessWidget {
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.hasError) {
-          return Text("Something went wrong");
+          return const Text("Something went wrong");
         }
 
         if (snapshot.hasData && !snapshot.data!.exists) {
-          return Text("Document does not exist");
+          return const Text("Document does not exist");
         }
 
         if (snapshot.connectionState == ConnectionState.done) {
@@ -74,7 +69,7 @@ class GetUserName extends StatelessWidget {
           return Text("Full Name: ${data['full_name']} ${data['last_name']}");
         }
 
-        return Text("loading");
+        return const Text("loading");
       },
     );
   }
@@ -82,6 +77,8 @@ class GetUserName extends StatelessWidget {
 
 //realtime read data
 class UserInformation extends StatefulWidget {
+  const UserInformation({Key? key}) : super(key: key);
+
   @override
   _UserInformationState createState() => _UserInformationState();
 }
@@ -98,11 +95,11 @@ class _UserInformationState extends State<UserInformation> {
       stream: _usersStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
-          return Text('Something went wrong');
+          return const Text('Something went wrong');
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("Loading");
+          return const Text("Loading");
         }
 
         return ListView(
