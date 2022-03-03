@@ -1,12 +1,12 @@
 // import 'package:anonia/person_data.dart';
 import 'dart:ffi';
 
-import 'package:anonia/google_sign_in.dart';
+import 'package:anonia/route/google_sign_in.dart';
 import 'package:anonia/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'route/route.dart';
-import 'show_dialog.dart';
+import '../route/route.dart';
+import '../widget/show_dialog.dart';
 import 'package:anonia/model/dummy_list.dart';
 import 'package:provider/provider.dart';
 

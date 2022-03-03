@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'route/route.dart' as route;
+import '../route/route.dart' as route;
 
 class LanguagesScreen extends StatefulWidget {
   const LanguagesScreen({Key? key}) : super(key: key);

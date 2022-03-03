@@ -1,5 +1,5 @@
 // import 'package:anonia/auth_services.dart';
-import 'package:anonia/google_sign_in.dart';
+import 'package:anonia/route/google_sign_in.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -43,11 +43,6 @@ class LoginPageState extends State<LoginPage> {
   }
 
   @override
-  // void dispose() {
-  //   _text.dispose();
-  //   super.dispose();
-  // }
-
   void initState() {
     super.initState();
 
@@ -63,14 +58,7 @@ class LoginPageState extends State<LoginPage> {
     });
   }
 
-  // Future<void> _signInAnonymously() async {
-  //   try {
-  //     await FirebaseAuth.instance.signInAnonymously();
-  //   } catch (e) {
-  //     print(e); // TODO: show dialog with error
-  //   }
-  // }
-
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(

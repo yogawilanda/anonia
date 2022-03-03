@@ -8,8 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 //import 'package:anonia/route/route.dart';
-import 'route/route.dart' as route;
-import 'person_data.dart';
+import '../route/route.dart' as route;
 
 // class ChatMessage {
 //   String messageText;
