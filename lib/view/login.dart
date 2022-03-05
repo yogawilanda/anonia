@@ -1,10 +1,7 @@
-// import 'package:anonia/auth_services.dart';
 import 'package:anonia/route/google_sign_in.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../route/route.dart' as route;
-import 'forgot_pass_screen.dart';
 import 'package:provider/provider.dart';
 // import 'package:flutter/services.dart';
 
@@ -23,24 +20,6 @@ class LoginPageState extends State<LoginPage> {
   final _passwordFocusNode = FocusNode();
   final _loginAnonymousKey = GlobalKey();
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
-
-  String passwordValidator(String value) {
-    if (value.isEmpty) {
-      return "*Masukan Password kamu dahulu";
-    } else if (value.length < 6) {
-      return "Password minimal 6 digit";
-    }
-    return 'Password benar';
-  }
-
-  String userIdValidator(String value) {
-    if (value.isEmpty) {
-      return "*Masukan Password kamu dahulu";
-    } else if (value.length < 6) {
-      return "Password minimal 6 digit";
-    }
-    return 'Password benar';
-  }
 
   @override
   void initState() {
@@ -71,10 +50,6 @@ class LoginPageState extends State<LoginPage> {
               key: formkey,
               child: Column(
                 children: [
-                  //img
-                  //Image.asset(
-                  //'Place logo here'),
-                  // const SizedBox(height: 16.0),
                   RichText(
                     text: const TextSpan(
                       // Note: Styles for TextSpans must be explicitly defined.
@@ -105,10 +80,10 @@ class LoginPageState extends State<LoginPage> {
               ),
             ),
 
-            //this one is textfield boxification
+            //Manual Spacer
             const SizedBox(height: 60.0),
+
             //textfield is a box that can be filled with user input keyboard
-            //TODO:Create A Validator for textfield 1
             TextFormField(
               //create the controller
               controller: _usernameController,
@@ -117,26 +92,25 @@ class LoginPageState extends State<LoginPage> {
                   Navigator.pushNamed(context, route.homeScreenPage);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text('Oops, kamu lupa masukkan password nih')));
+                      content: Text('This value is under development')));
                 }
               },
-
               decoration: const InputDecoration(
                 labelText: 'Enter Your Persona ID',
-                //errorText:
               ),
             ),
+
+            //Manual Spacer
             const SizedBox(height: 12.0),
+
             //
             TextField(
-              //create the controller
               controller: _passwordController,
               focusNode: _passwordFocusNode,
               decoration: const InputDecoration(
                 labelText: 'Your Treasure Key',
               ),
               obscureText: true,
-              //enter your node here
             ),
             //Buttonbar goes BRRRRR~!
             ButtonBar(
@@ -149,18 +123,18 @@ class LoginPageState extends State<LoginPage> {
                     Navigator.pushNamed(context, route.homeScreenPage);
                     // Navigator.pushNamed(context, route.homeScreenPage);
                   },
-                  //async {await AuthServices.signInAnonymous();},
                 ),
+
                 //login Button//
                 TextButton(
-                  //still unfunctional give it snackbar
                   // it said I/flutter (22164): [core/no-app] No Firebase App '[DEFAULT]' has been created - call Firebase.initializeApp()
+                  //Fix it on back end development version
+
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text(
                             'Still under services, use login anonymously instead!')));
                   },
-
                   child: const Text('Login'),
                 ),
                 ElevatedButton.icon(
@@ -204,5 +178,23 @@ class LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  String passwordValidator(String value) {
+    if (value.isEmpty) {
+      return "*Masukan Password kamu dahulu";
+    } else if (value.length < 6) {
+      return "Password minimal 6 digit";
+    }
+    return 'Password benar';
+  }
+
+  String userIdValidator(String value) {
+    if (value.isEmpty) {
+      return "*Masukan Password kamu dahulu";
+    } else if (value.length < 6) {
+      return "Password minimal 6 digit";
+    }
+    return 'Password benar';
   }
 }
