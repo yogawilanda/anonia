@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import '../route/route.dart' as route;
 import 'package:provider/provider.dart';
-// import 'package:flutter/services.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -94,6 +93,7 @@ class LoginPageState extends State<LoginPage> {
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text('This value is under development')));
                 }
+                return;
               },
               decoration: const InputDecoration(
                 labelText: 'Enter Your Persona ID',
@@ -112,6 +112,7 @@ class LoginPageState extends State<LoginPage> {
               ),
               obscureText: true,
             ),
+
             //Buttonbar goes BRRRRR~!
             ButtonBar(
               children: [
@@ -131,28 +132,28 @@ class LoginPageState extends State<LoginPage> {
                   //Fix it on back end development version
 
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text(
-                            'Still under services, use login anonymously instead!')));
+                    Navigator.pushNamed(context, route.homeScreenPage);
                   },
                   child: const Text('Login'),
                 ),
+
+                //
                 ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.amber,
-                      onPrimary: Colors.black,
-                    ),
-                    onPressed: () {
-                      final provider = Provider.of<GoogleSignInProvider>(
-                          context,
-                          listen: false);
-                      provider.googleLogin();
-                    },
-                    icon: const FaIcon(
-                      FontAwesomeIcons.google,
-                      color: Colors.red,
-                    ),
-                    label: const Text('Login with Google'))
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.amber,
+                    onPrimary: Colors.black,
+                  ),
+                  onPressed: () {
+                    final provider = Provider.of<GoogleSignInProvider>(context,
+                        listen: false);
+                    provider.googleLogin();
+                  },
+                  icon: const FaIcon(
+                    FontAwesomeIcons.google,
+                    color: Colors.red,
+                  ),
+                  label: const Text('Login with Google'),
+                ),
               ],
             ),
             const Spacer(flex: 1),
@@ -165,7 +166,7 @@ class LoginPageState extends State<LoginPage> {
             const Spacer(flex: 1),
             Row(
               children: [
-                const Text('Do you forget your password?'),
+                const Text('Forget your password?'),
                 TextButton(
                   onPressed: () {
                     Navigator.pushNamed(context, route.forgotPasswordScreen);
