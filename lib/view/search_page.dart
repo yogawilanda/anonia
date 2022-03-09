@@ -1,7 +1,10 @@
 import 'package:anonia/model/dummy_list.dart';
+<<<<<<< HEAD:lib/view/search_page.dart
 import 'package:anonia/route/route.dart';
 import 'package:anonia/widget/show_dialog.dart';
 import 'package:flutter/cupertino.dart';
+=======
+>>>>>>> master:lib/search_screen.dart
 import 'package:flutter/material.dart';
 // ignore import 'route/route.dart' as route;
 

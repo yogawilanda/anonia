@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:anonia/route/route.dart' as route;
 
 class ForgotPasswordWidget extends StatefulWidget {
   const ForgotPasswordWidget({Key? key}) : super(key: key);
@@ -60,19 +59,20 @@ class ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 filled: true,
-                contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 20, 24),
+                contentPadding:
+                    const EdgeInsetsDirectional.fromSTEB(20, 24, 20, 24),
               ),
             ),
           ),
           //Text Self Explanatory.
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20, 12, 20, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(20, 12, 20, 0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: const [

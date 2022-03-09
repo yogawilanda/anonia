@@ -2,11 +2,10 @@
 // Use of this source code is governed by a BSD-style license
 // that can be found in the LICENSE file.
 
-// import 'package:flutter/cupertino.dart';
-
+import 'package:anonia/authenticator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD:lib/view/messaging_page.dart
 //import 'package:anonia/route/route.dart';
 import '../route/route.dart' as route;
 
@@ -20,6 +19,8 @@ import '../route/route.dart' as route;
 //       @required this.imageURL,
 //       @required this.time});
 // }
+=======
+>>>>>>> master:lib/messaging.dart
 
 class ChatMessage extends StatelessWidget {
   ChatMessage({
@@ -44,28 +45,33 @@ class ChatMessage extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.only(right: 16.0),
-              child: const CircleAvatar(
-                backgroundImage: AssetImage('assets/hotelmacau.png'),
-                // backgroundImage: AssetImage('assets/hotelmacau.png'),
-                // ),
-                // child: Text(
-                //   angka[index][0],
-                //   style: TextStyle(fontSize: 20),
-                // ),
-                //child: Text(_name[0])
-              ),
+              // ignore: unrelated_type_equality_checks
+              child: user.photoURL ==
+                      const CircleAvatar(
+                          backgroundImage: AssetImage('assets/lisa.jpg'))
+                  ? const CircleAvatar(
+                      backgroundImage: AssetImage('assets/lisa.jpg'),
+                    )
+                  : CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          user.photoURL!), // <-Bubble circle avatar
+                    ),
             ),
             Expanded(
+              // current username bubbles name
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // this children need to be wrapped into chat bubbles.
-                  Text(
-                    user.displayName!, // <--- current username bubbles name
-                    style: const TextStyle(
-                      fontSize: 18,
+                  if (user.displayName == "anonymous")
+                    const Text('Anonym')
+                  else
+                    Text(
+                      user.displayName!,
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
                     ),
-                  ),
                   Container(
                     margin: const EdgeInsets.only(top: 5.0),
                     child: Text(
@@ -98,7 +104,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   final List<ChatMessage> _messages = [];
   final _textController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
-
+  final user = FirebaseAuth.instance.currentUser!;
   bool _isComposing = false;
 
   void _handleSubmitted(String text) {
@@ -119,7 +125,12 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     _focusNode.requestFocus();
     message.animationController.forward();
   }
+<<<<<<< HEAD:lib/view/messaging_page.dart
   
+=======
+
+  final anonUser = GoogleSignInProvider;
+>>>>>>> master:lib/messaging.dart
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -131,16 +142,17 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
+            children: [
               Padding(
-                padding: EdgeInsets.all(8.0),
-                child: CircleAvatar(
-                  radius: 18,
-                  backgroundImage: AssetImage(
-                    'assets/hotelmacau.png',
-                    //fit: BoxFit.cover,
-                  ),
-                ),
+                padding: const EdgeInsets.all(8.0),
+                child: user.photoURL == anonUser
+                    ? CircleAvatar(
+                        child: Image.asset('assets/lisa.jpg'),
+                      )
+                    : CircleAvatar(
+                        radius: 18,
+                        backgroundImage: NetworkImage(user.photoURL!),
+                      ),
               ),
             ],
           ),
@@ -181,7 +193,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     return IconTheme(
       data: IconThemeData(color: Theme.of(context).colorScheme.secondary),
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+        margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
         child: Row(
           children: [
             Container(
@@ -197,6 +209,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
             Flexible(
               child: TextField(
                 controller: _textController,
+                textAlign: TextAlign.left,
                 onChanged: (text) {
                   setState(() {
                     _isComposing = text.isNotEmpty;
@@ -204,22 +217,24 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                 },
                 onSubmitted: _isComposing ? _handleSubmitted : null,
                 decoration: InputDecoration.collapsed(
-                    hintText: 'Send a message',
-                    filled: true,
-                    // todo: fix this border to be bigger than its text.
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
-                      borderSide: const BorderSide(width: 0),
-                      gapPadding: 10,
-                    )
-                    //if the method above wont display as its will, back to the below way.
-                    // OutlineInputBorder(
-                    //   borderRadius: BorderRadius.circular(300),
-                    //   borderSide: const BorderSide(
-                    //     width: 10,
-                    //   ),
-                    // ),
+                  hintText: 'Send a message',
+                  filled: true,
+                  // todo: fix this border to be bigger than its text.
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(0),
+                    borderSide: const BorderSide(
+                      color: Colors.transparent,
+                      width: 1,
                     ),
+                  ),
+                  //if the method above wont display as its will, back to the below way.
+                  // OutlineInputBorder(
+                  //   borderRadius: BorderRadius.circular(300),
+                  //   borderSide: const BorderSide(
+                  //     width: 10,
+                  //   ),
+                  // ),
+                ),
                 focusNode: _focusNode,
               ),
             ),
