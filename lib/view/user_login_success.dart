@@ -1,10 +1,7 @@
-<<<<<<< HEAD:lib/view/user_login_success.dart
 // import 'package:anonia/authentication/google_sign_in.dart';
 // import 'dart:html';
 
 import 'package:anonia/route/google_sign_in.dart';
-=======
->>>>>>> master:lib/login_success_profile.dart
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:anonia/route/route.dart' as route;
@@ -26,7 +23,7 @@ class _UserLoginSuccessState extends State<UserLoginSuccess> {
     return GestureDetector(
       onVerticalDragUpdate: (dragUpdateDetails) {
         Navigator.pushNamed(context, route.chatUIPage);
-      },  
+      },
       onHorizontalDragUpdate: (details) =>
           Navigator.pushNamed(context, route.chatScreen),
       child: Scaffold(

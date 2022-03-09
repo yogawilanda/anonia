@@ -103,8 +103,6 @@ class LoginPageState extends State<LoginPage> {
                     TextFormField(
                       //create the controller
                       controller: _emailController,
-                      validator: (value) =>
-                          Validator.validateEmail(email: value.toString()),
 
                       decoration: const InputDecoration(
                         labelText: 'Enter Your Anonia ID',
@@ -117,8 +115,7 @@ class LoginPageState extends State<LoginPage> {
                       //create the controller
                       controller: _passwordController,
                       focusNode: _passwordFocusNode,
-                      validator: (value) => Validator.validatePassword(
-                          password: value.toString()),
+
                       decoration: const InputDecoration(
                         labelText: 'Your Treasure Key',
                       ),

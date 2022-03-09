@@ -5,7 +5,6 @@
 import 'package:anonia/authenticator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD:lib/view/messaging_page.dart
 //import 'package:anonia/route/route.dart';
 import '../route/route.dart' as route;
 
@@ -19,8 +18,6 @@ import '../route/route.dart' as route;
 //       @required this.imageURL,
 //       @required this.time});
 // }
-=======
->>>>>>> master:lib/messaging.dart
 
 class ChatMessage extends StatelessWidget {
   ChatMessage({
@@ -125,12 +122,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     _focusNode.requestFocus();
     message.animationController.forward();
   }
-<<<<<<< HEAD:lib/view/messaging_page.dart
-  
-=======
 
-  final anonUser = GoogleSignInProvider;
->>>>>>> master:lib/messaging.dart
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -145,7 +137,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: user.photoURL == anonUser
+                child: user.photoURL == user.emailVerified
                     ? CircleAvatar(
                         child: Image.asset('assets/lisa.jpg'),
                       )

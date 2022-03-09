@@ -1,23 +1,12 @@
-<<<<<<< HEAD:lib/view/home_page.dart
 import 'package:anonia/route/google_sign_in.dart';
-=======
-import 'package:anonia/authenticator.dart';
-import 'package:anonia/login_success_profile.dart';
->>>>>>> master:lib/home_screen.dart
 import 'package:anonia/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-<<<<<<< HEAD:lib/view/home_page.dart
 import '../route/route.dart';
 import '../widget/show_dialog.dart';
-=======
-import 'route/route.dart';
-
->>>>>>> master:lib/home_screen.dart
 import 'package:anonia/model/dummy_list.dart';
 import 'package:provider/provider.dart';
-
 
 // import 'person_data.dart';
 
@@ -198,16 +187,11 @@ class HomescreenState extends State<Homescreen> {
               leading: const Icon(Icons.logout),
               onTap: () async {
                 // Update the state of the app.
+                Navigator.pushReplacementNamed(context, loginPage);
                 final provider =
                     Provider.of<GoogleSignInProvider>(context, listen: false);
-                user!.isAnonymous == user!.emailVerified
-                    ? await provider.logout()
-                    : provider.signOut();
+                await provider.logout();
                 Navigator.pushReplacementNamed(context, loginPage);
-                // final provider =
-                //     Provider.of<GoogleSignInProvider>(context, listen: false);
-                // await provider.logout();
-                // Navigator.pushReplacementNamed(context, loginPage);
               },
             ),
           ],
