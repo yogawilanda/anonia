@@ -1,13 +1,8 @@
 import 'package:anonia/authenticator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD:lib/view/register_page.dart
-import 'dart:ui';
 import '../../route/route.dart' as route;
-=======
-import '../route/route.dart' as route;
-import 'package:anonia/protocoler/validator.dart';
->>>>>>> master:lib/register.dart
+import '../model/validator.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
