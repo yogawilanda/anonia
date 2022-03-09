@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'language_screen.dart';
+import 'language_page.dart';
 // import 'route/route.dart' as route;
 
 class SettingsScreen extends StatefulWidget {

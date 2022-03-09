@@ -1,17 +1,17 @@
 // import 'dart:js';
 
-import 'package:anonia/view/login_success_profile.dart';
-import 'package:anonia/view/register.dart';
+import 'package:anonia/view/user_login_success.dart';
+import 'package:anonia/view/register_page.dart';
 // import 'package:anonia/google_logged_in_widget.dart';
-import 'package:anonia/view/messaging.dart';
-import 'package:anonia/view/login.dart';
+import 'package:anonia/view/messaging_page.dart';
+import 'package:anonia/view/login_page.dart';
 import 'package:flutter/material.dart';
-import 'package:anonia/view/home_screen.dart';
+import 'package:anonia/view/home_page.dart';
 // import '../messaging.dart';
-import 'package:anonia/view/language_screen.dart';
+import 'package:anonia/view/language_page.dart';
 import 'package:anonia/view/settings_page.dart';
-import 'package:anonia/view/search_screen.dart';
-import 'package:anonia/view/forgot_pass_screen.dart';
+import 'package:anonia/view/search_page.dart';
+import 'package:anonia/view/forgot_page.dart';
 // import 'package:anonia/authentication/forgot_pass_screen.dart';
 
 //Navigation Protocol for this app

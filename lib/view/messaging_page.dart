@@ -119,27 +119,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     _focusNode.requestFocus();
     message.animationController.forward();
   }
-
-  //this is how the user can send CRUD to database. but dont use it yet.
-  // void sendMessage() async {
-  //   FocusScope.of(context).unfocus();
-
-  //   // await FirebaseApi.uploadMessage(widget.idUser, message); <-- this one should be imported its API first
-  //   //to open its FirebaseApi.uploadMessage, it's should be imported already
-  //   //should create API folder and create a page which contain
-  //   //class of Firebase API
-  //   //here it is the source code https://github.com/JohannesMilke/firebase_chat_example/blob/master/lib/api/firebase_api.dart
-  //   //inside of its code, there is Message Class to parse its json which contain idUser,urlAvatar, userName, message, and createAt.
-  //   //refUser is ... study this.
-  //   // to configure it. it is on FireStore that store the message.
-  //   //because this need a connection to firebase API, This should be built based on stream builder.
-  //   // to create chat bubble based on whose represent it, create
-  //   //isMe == stuff. its on source code message_widget.dart
-  //   //stream builder had to initiate FirebaseFireStore.instance.
-
-  //   // _textController.clear(); <-- this should subtitute the code above. so i disabled it for now.
-  // }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

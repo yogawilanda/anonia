@@ -1,6 +1,3 @@
-// import 'package:anonia/person_data.dart';
-import 'dart:ffi';
-
 import 'package:anonia/route/google_sign_in.dart';
 import 'package:anonia/main.dart';
 import 'package:flutter/material.dart';

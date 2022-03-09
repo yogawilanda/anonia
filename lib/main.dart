@@ -1,17 +1,16 @@
-import 'package:anonia/view/login.dart';
-import 'package:anonia/route/authenticator.dart';
-import 'package:anonia/route/google_sign_in.dart';
-import 'package:anonia/view/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+
 import 'route/route.dart' as route;
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:firebase_core/firebase_core.dart';
-import 'package:provider/provider.dart';
+
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const AnoniaApp());
 }
 
@@ -30,37 +29,8 @@ class AnoniaAppState extends State<AnoniaApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(scaffoldBackgroundColor: Colors.white),
       title: title,
-      home: const LoginPage(),
       initialRoute: '/',
       onGenerateRoute: route.getRoute,
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     /// wrap MaterialApp in Provider widget
-//     return ChangeNotifierProvider(
-//       create: (context) => GoogleSignInProvider(), // ← create/init your state model
-//       child: MaterialApp(
-//           home: Homescreen(),
-//           Navigator.of(MaterialApp).push(
-//   MaterialPageRoute(builder: (MaterialAppContext) => route.homeScreenPage())
-// )
-//       ),
-//     );
-//   }
-// //}
