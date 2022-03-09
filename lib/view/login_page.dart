@@ -41,9 +41,9 @@ class LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: SafeArea(
         child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 36.0),
           children: [
-            const SizedBox(height: 80.0),
+            const SizedBox(height: 40.0),
             Form(
               autovalidateMode: AutovalidateMode.always,
               key: formkey,
@@ -58,7 +58,6 @@ class LoginPageState extends State<LoginPage> {
                         color: Colors.blue,
                       ),
                       children: <TextSpan>[
-                        TextSpan(text: ''),
                         TextSpan(
                           text: 'Anonia',
                           style: TextStyle(fontWeight: FontWeight.bold),

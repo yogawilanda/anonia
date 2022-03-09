@@ -23,6 +23,7 @@ dependencies:
   html: ^0.15.0
   provider: ^6.0.1
   settings_ui: ^2.0.1
+  responsive_framework: ^0.1.7
 
 flutter_native_splash:
   color: "#ffffff"
