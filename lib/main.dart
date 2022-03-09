@@ -26,7 +26,7 @@ class AnoniaAppState extends State<AnoniaApp> {
   String title = 'Anonia';
   @override
   Widget build(BuildContext context) {
-    final widget = Widget;
+    const widget = Widget;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(scaffoldBackgroundColor: Colors.white),
@@ -36,11 +36,11 @@ class AnoniaAppState extends State<AnoniaApp> {
           minWidth: 480,
           defaultScale: true,
           breakpoints: [
-            ResponsiveBreakpoint.resize(480, name: MOBILE),
-            ResponsiveBreakpoint.autoScale(800, name: TABLET),
-            ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+            const ResponsiveBreakpoint.resize(480, name: MOBILE),
+            const ResponsiveBreakpoint.autoScale(800, name: TABLET),
+            const ResponsiveBreakpoint.resize(1000, name: DESKTOP),
           ],
-          background: Container(color: Color(0xFFF5F5F5))),
+          background: Container(color: const Color(0xFFF5F5F5))),
       initialRoute: '/',
       onGenerateRoute: route.getRoute,
     );

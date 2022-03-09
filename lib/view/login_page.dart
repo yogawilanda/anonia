@@ -38,79 +38,93 @@ class LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 36.0),
           children: [
             const SizedBox(height: 40.0),
-            Form(
-              autovalidateMode: AutovalidateMode.always,
-              key: formkey,
-              child: Column(
-                children: [
-                  RichText(
-                    text: const TextSpan(
-                      // Note: Styles for TextSpans must be explicitly defined.
-                      // Child text spans will inherit styles from parent
-                      style: TextStyle(
-                        fontSize: 36,
-                        color: Colors.blue,
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: 'Anonia',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ],
+            Column(
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+
+                //Title on Login Page
+                RichText(
+                  text: const TextSpan(
+                    style: TextStyle(
+                      fontSize: 36,
+                      color: Colors.blue,
                     ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'Anonia',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  SizedBox(
-                    width: 250,
-                    height: 250,
-                    child: Image.network(
-                        'https://img.freepik.com/free-vector/people-putting-puzzle-pieces-together_52683-28610.jpg?size=626&ext=jpg'),
-                  ),
-                ],
-              ),
+                ),
+
+                //Simple Spacer
+                const SizedBox(
+                  height: 20.0,
+                ),
+
+                //Image Hero
+                SizedBox(
+                  width: 250,
+                  height: 250,
+                  child: Image.network(
+                      'https://img.freepik.com/free-vector/people-putting-puzzle-pieces-together_52683-28610.jpg?size=626&ext=jpg'),
+                ),
+              ],
             ),
 
-            //Manual Spacer
+            //Simple Spacer
             const SizedBox(height: 60.0),
 
-            //textfield is a box that can be filled with user input keyboard
-            TextFormField(
-              //create the controller
-              controller: _usernameController,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  Navigator.pushNamed(context, route.homeScreenPage);
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text('This value is under development')));
-                }
-                return;
-              },
-              decoration: const InputDecoration(
-                labelText: 'Enter Your Persona ID',
-              ),
-            ),
+            //Forms properties
+            Form(
+                autovalidateMode: AutovalidateMode.always,
+                key: formkey,
+                child: Column(
+                  children: [
+                    //Textfield is a box that can be filled with user input keyboard
+                    TextField(
+                      controller: _usernameController,
+                      // validator: (value) {
+                      //   if (value == null || value.isEmpty) {
+                      //     Navigator.pushNamed(context, route.homeScreenPage);
+                      //   } else {
+                      //     ScaffoldMessenger.of(context).showSnackBar(
+                      //         const SnackBar(
+                      //             content:
+                      //                 Text('This value is under development')));
+                      //   }
+                      //   return;
+                      // },
+                      decoration: const InputDecoration(
+                        labelText: 'Enter Your Persona ID',
+                      ),
+                    ),
 
-            //Manual Spacer
-            const SizedBox(height: 12.0),
+                    //Manual Spacer
+                    const SizedBox(height: 12.0),
 
-            //
-            TextField(
-              controller: _passwordController,
-              focusNode: _passwordFocusNode,
-              decoration: const InputDecoration(
-                labelText: 'Your Treasure Key',
-              ),
-              obscureText: true,
-            ),
+                    //
+                    TextField(
+                      controller: _passwordController,
+                      focusNode: _passwordFocusNode,
+                      decoration: const InputDecoration(
+                        labelText: 'Your Treasure Key',
+                      ),
+                      obscureText: true,
+                    ),
+                  ],
+                )),
 
             //Buttonbar goes BRRRRR~!
             ButtonBar(
