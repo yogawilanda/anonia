@@ -41,16 +41,31 @@ class LoginPageState extends State<LoginPage> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 36.0),
+      body: Container(
+        padding: const EdgeInsets.only(right: 20, left: 20),
+        child: Column(
           children: [
+            //spacer
             const SizedBox(height: 40.0),
             Column(
               children: [
-                
                 SizedBox(
                   height: 10,
+                ),
+
+                //Image Hero
+                Container(
+                  width: 300,
+                  height: 300,
+                  child: Image.network(
+                      'https://img.freepik.com/free-vector/people-putting-puzzle-pieces-together_52683-28610.jpg?size=626&ext=jpg',
+                      fit: BoxFit.scaleDown,
+                      scale: 2),
+                ),
+
+                //Simple Spacer
+                const SizedBox(
+                  height: 20.0,
                 ),
 
                 //Title on Login Page
@@ -68,37 +83,20 @@ class LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-
-                //Simple Spacer
-                const SizedBox(
-                  height: 20.0,
-                ),
-
-                //Image Hero
-                SizedBox(
-                  width: 250,
-                  height: 250,
-                  child: Image.network(
-                      'https://img.freepik.com/free-vector/people-putting-puzzle-pieces-together_52683-28610.jpg?size=626&ext=jpg'),
-                ),
               ],
             ),
 
-            //Simple Spacer
-            const SizedBox(height: 60.0),
-
             //Forms properties
-            Form(
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30),
+              child: Form(
                 autovalidateMode: AutovalidateMode.always,
                 key: formkey,
                 child: Column(
                   children: [
-                    
-                    
                     //Textfield is a box that can be filled with user input keyboard
                     TextField(
                       controller: _usernameController,
-                     
                       decoration: const InputDecoration(
                         labelText: 'Enter Your Persona ID',
                       ),
@@ -107,7 +105,7 @@ class LoginPageState extends State<LoginPage> {
                     //Manual Spacer
                     const SizedBox(height: 12.0),
 
-                    //
+                    //Passwords Field
                     TextField(
                       controller: _passwordController,
                       focusNode: _passwordFocusNode,
@@ -116,71 +114,141 @@ class LoginPageState extends State<LoginPage> {
                       ),
                       obscureText: true,
                     ),
+                    //ForgotPasswordButton
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, route.forgotPasswordScreen);
+                          },
+                          child: const Text('Forget your password?'),
+                        ),
+                      ],
+                    ),
                   ],
-                )),
-
-            //Buttonbar goes BRRRRR~!
-            ButtonBar(
-              children: [
-                //--Login Anonymously Button--//
-                TextButton(
-                  key: _loginAnonymousKey,
-                  child: const Text('Login Anonymously'),
-                  onPressed: () {
-                    Navigator.pushNamed(context, route.homeScreenPage);
-                    // Navigator.pushNamed(context, route.homeScreenPage);
-                  },
                 ),
-
-                //login Button//
-                TextButton(
-                  // it said I/flutter (22164): [core/no-app] No Firebase App '[DEFAULT]' has been created - call Firebase.initializeApp()
-                  //Fix it on back end development version
-
-                  onPressed: () {
-                    Navigator.pushNamed(context, route.homeScreenPage);
-                  },
-                  child: const Text('Login'),
-                ),
-
-                //
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.amber,
-                    onPrimary: Colors.black,
-                  ),
-                  onPressed: () {
-                    final provider = Provider.of<GoogleSignInProvider>(context,
-                        listen: false);
-                    provider.googleLogin();
-                  },
-                  icon: const FaIcon(
-                    FontAwesomeIcons.google,
-                    color: Colors.red,
-                  ),
-                  label: const Text('Login with Google'),
-                ),
-              ],
+              ),
             ),
-            const Spacer(flex: 1),
+
+            //LoginButton
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, route.registerPage);
+                Navigator.pushNamed(context, route.homeScreenPage);
               },
-              child: const Text("Register"),
+              child: const Text('Login'),
+              style: ButtonStyle(),
             ),
-            const Spacer(flex: 1),
-            Row(
-              children: [
-                const Text('Forget your password?'),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, route.forgotPasswordScreen);
-                  },
-                  child: const Text('Tap here'),
-                ),
-              ],
-            )
+
+            //Quick Login Buttons
+            Container(
+              margin: EdgeInsets.only(top: 50),
+              padding: EdgeInsets.symmetric(vertical: 30),
+              child: Column(
+                children: [
+                  Text(
+                    'Sign in faster with',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.blue),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ButtonBar(
+                    alignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      //Anonymous Login
+                      IconButton(
+                        onPressed: () {
+                          final provider = Provider.of<GoogleSignInProvider>(
+                              context,
+                              listen: false);
+                          provider.googleLogin();
+                        },
+                        icon: FaIcon(
+                          FontAwesomeIcons.mask,
+                          color: Colors.blue,
+                        ),
+                      ),
+                      //Google Login
+                      IconButton(
+                        onPressed: () {
+                          final provider = Provider.of<GoogleSignInProvider>(
+                              context,
+                              listen: false);
+                          provider.googleLogin();
+                        },
+                        icon: FaIcon(
+                          FontAwesomeIcons.google,
+                          color: Colors.blue,
+                        ),
+                      ),
+
+                      //Facebook Login
+                      IconButton(
+                        onPressed: () {
+                          final provider = Provider.of<GoogleSignInProvider>(
+                              context,
+                              listen: false);
+                          provider.googleLogin();
+                        },
+                        icon: FaIcon(
+                          FontAwesomeIcons.facebook,
+                          color: Colors.blue,
+                        ),
+                      ),
+                      //Facebook Login
+                      IconButton(
+                        onPressed: () {
+                          final provider = Provider.of<GoogleSignInProvider>(
+                              context,
+                              listen: false);
+                          provider.googleLogin();
+                        },
+                        icon: FaIcon(
+                          FontAwesomeIcons.twitter,
+                          color: Colors.blue,
+                        ),
+                      ),
+
+                      //Facebook Login
+                      IconButton(
+                        onPressed: () {
+                          final provider = Provider.of<GoogleSignInProvider>(
+                              context,
+                              listen: false);
+                          provider.googleLogin();
+                        },
+                        icon: FaIcon(
+                          FontAwesomeIcons.phone,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            //Register Actions
+            Expanded(
+              flex: 2,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Don\'t have an account yet?'),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, route.registerPage);
+                    },
+                    child: const Text("Register"),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
