@@ -48,6 +48,7 @@ class LoginPageState extends State<LoginPage> {
             const SizedBox(height: 40.0),
             Column(
               children: [
+                
                 SizedBox(
                   height: 10,
                 ),
@@ -92,20 +93,12 @@ class LoginPageState extends State<LoginPage> {
                 key: formkey,
                 child: Column(
                   children: [
+                    
+                    
                     //Textfield is a box that can be filled with user input keyboard
                     TextField(
                       controller: _usernameController,
-                      // validator: (value) {
-                      //   if (value == null || value.isEmpty) {
-                      //     Navigator.pushNamed(context, route.homeScreenPage);
-                      //   } else {
-                      //     ScaffoldMessenger.of(context).showSnackBar(
-                      //         const SnackBar(
-                      //             content:
-                      //                 Text('This value is under development')));
-                      //   }
-                      //   return;
-                      // },
+                     
                       decoration: const InputDecoration(
                         labelText: 'Enter Your Persona ID',
                       ),
