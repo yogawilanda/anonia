@@ -1,7 +1,7 @@
 // import 'package:anonia/register.dart';
 // import 'package:anonia/home_screen.dart';
 import 'package:anonia/view/user_login_success.dart';
-import 'package:anonia/view/login_page.dart';
+import 'package:anonia/view/login/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

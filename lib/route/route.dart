@@ -1,10 +1,10 @@
 // import 'dart:js';
 
 import 'package:anonia/view/user_login_success.dart';
-import 'package:anonia/view/register_page.dart';
+import 'package:anonia/view/register/register_page.dart';
 // import 'package:anonia/google_logged_in_widget.dart';
 import 'package:anonia/view/messaging_page.dart';
-import 'package:anonia/view/login_page.dart';
+import 'package:anonia/view/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:anonia/view/home_page.dart';
 // import '../messaging.dart';

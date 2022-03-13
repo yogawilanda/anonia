@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 //import 'package:anonia/route/route.dart';
 import '../route/route.dart' as route;
 
+//ChatBubble goes here
 class ChatMessage extends StatelessWidget {
   ChatMessage({
     required this.text,
@@ -71,6 +72,7 @@ class ChatMessage extends StatelessWidget {
   }
 }
 
+//This is Page that represents messaging layout
 class ChatPage extends StatefulWidget {
   //implement userdata chat and data here
 

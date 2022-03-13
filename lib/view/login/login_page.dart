@@ -1,7 +1,8 @@
 import 'package:anonia/route/google_sign_in.dart';
+import 'package:anonia/view/login/desktop_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
-import '../route/route.dart' as route;
+import '../../route/route.dart' as route;
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -40,81 +41,25 @@ class LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+    double mobileViewConstraint = 600;
 
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.only(right: 20, left: 20),
-        child: Column(
-          children: [
-            //spacer
-            const SizedBox(height: 40.0),
-            Column(
-              children: [
-                SizedBox(
-                  height: 10,
-                ),
-
-                //Image Hero
-                Container(
-                  width: 300,
-                  height: 300,
-                  child: Image.network(
-                      'https://img.freepik.com/free-vector/people-putting-puzzle-pieces-together_52683-28610.jpg?size=626&ext=jpg',
-                      fit: BoxFit.scaleDown,
-                      scale: 2),
-                ),
-
-                //Simple Spacer
-                const SizedBox(
-                  height: 20.0,
-                ),
-
-                //Title on Login Page
-                RichText(
-                  text: const TextSpan(
-                    style: TextStyle(
-                      fontSize: 36,
-                      color: Colors.blue,
-                    ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'Anonia',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-
-            //Forms properties
-            FormLogin(
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          if (constraints.maxWidth > mobileViewConstraint) {
+            return DesktopViewLogin(
                 formkey: formkey,
                 usernameController: _usernameController,
                 passwordController: _passwordController,
-                passwordFocusNode: _passwordFocusNode),
-
-            //Quick Login Buttons
-            QuickLogin(),
-
-            //Register Actions
-            Expanded(
-              flex: 2,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Don\'t have an account yet?'),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, route.registerPage);
-                    },
-                    child: const Text("Register"),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+                passwordFocusNode: _passwordFocusNode);
+          } else {
+            return MobileViewLogin(
+                formkey: formkey,
+                usernameController: _usernameController,
+                passwordController: _passwordController,
+                passwordFocusNode: _passwordFocusNode);
+          }
+        },
       ),
     );
   }
@@ -135,6 +80,102 @@ class LoginPageState extends State<LoginPage> {
       return "Password minimal 6 digit";
     }
     return 'Password benar';
+  }
+}
+
+class MobileViewLogin extends StatelessWidget {
+  const MobileViewLogin({
+    Key? key,
+    required this.formkey,
+    required TextEditingController usernameController,
+    required TextEditingController passwordController,
+    required FocusNode passwordFocusNode,
+  })  : _usernameController = usernameController,
+        _passwordController = passwordController,
+        _passwordFocusNode = passwordFocusNode,
+        super(key: key);
+
+  final GlobalKey<FormState> formkey;
+  final TextEditingController _usernameController;
+  final TextEditingController _passwordController;
+  final FocusNode _passwordFocusNode;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(right: 20, left: 20),
+      child: Column(
+        children: [
+          //spacer
+          const SizedBox(height: 40.0),
+          Column(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+
+              //Image Hero
+              Container(
+                width: 300,
+                height: 300,
+                child: Image.network(
+                    'https://img.freepik.com/free-vector/people-putting-puzzle-pieces-together_52683-28610.jpg?size=626&ext=jpg',
+                    fit: BoxFit.scaleDown,
+                    scale: 2),
+              ),
+
+              //Simple Spacer
+              const SizedBox(
+                height: 20.0,
+              ),
+
+              //Title on Login Page
+              RichText(
+                text: const TextSpan(
+                  style: TextStyle(
+                    fontSize: 36,
+                    color: Colors.blue,
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'Anonia',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+
+          //Forms properties
+          FormLogin(
+              formkey: formkey,
+              usernameController: _usernameController,
+              passwordController: _passwordController,
+              passwordFocusNode: _passwordFocusNode),
+
+          //Quick Login Buttons
+          QuickLogin(),
+
+          //Register Actions
+          Expanded(
+            flex: 2,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Don\'t have an account yet?'),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, route.registerPage);
+                  },
+                  child: const Text("Register"),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -251,7 +292,6 @@ class FormLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 30),
       child: Form(
         autovalidateMode: AutovalidateMode.always,
         key: formkey,
@@ -291,11 +331,14 @@ class FormLogin extends StatelessWidget {
             ),
 
             //LoginButton
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, route.homeScreenPage);
-              },
-              child: const Text('Login'),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, route.homeScreenPage);
+                },
+                child: const Text('Login'),
+              ),
             ),
           ],
         ),
