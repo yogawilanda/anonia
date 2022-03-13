@@ -19,7 +19,7 @@ const String loginPage = '/';
 const String registerPage = 'register';
 const String homeScreenPage = 'homescreen';
 const String chatUIPage = 'homescreen';
-const String chatScreen = 'chatscreen';
+const String messagingPage = 'messagingpage';
 const String settingsScreen = 'settings';
 const String languageScreen = 'languagescreen';
 const String searchScreen = 'searchscreen';
@@ -38,8 +38,8 @@ Route<dynamic>? getRoute(RouteSettings settings) {
     case registerPage:
       return MaterialPageRoute(builder: (context) => const RegisterPage());
 
-    case chatScreen:
-      return MaterialPageRoute(builder: (context) => const ChatScreen());
+    case messagingPage:
+      return MaterialPageRoute(builder: (context) => const ChatPage());
 
     case settingsScreen:
       return MaterialPageRoute(builder: (context) => const SettingsScreen());

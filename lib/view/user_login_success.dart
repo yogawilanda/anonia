@@ -25,7 +25,7 @@ class _UserLoginSuccessState extends State<UserLoginSuccess> {
         Navigator.pushNamed(context, route.chatUIPage);
       },
       onHorizontalDragUpdate: (details) =>
-          Navigator.pushNamed(context, route.chatScreen),
+          Navigator.pushNamed(context, route.messagingPage),
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(

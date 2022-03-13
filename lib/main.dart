@@ -22,7 +22,7 @@ class AnoniaApp extends StatefulWidget {
   State<AnoniaApp> createState() => AnoniaAppState();
 }
 
-class AnoniaAppState extends State<AnoniaApp> {
+class AnoniaAppState extends State<AnoniaApp> with ChangeNotifier {
   String title = 'Anonia';
   @override
   Widget build(BuildContext context) {

@@ -1,23 +1,8 @@
-// Copyright 2017, 2020 The Flutter team. All rights reserved.
-// Use of this source code is governed by a BSD-style license
-// that can be found in the LICENSE file.
-
 import 'package:anonia/authenticator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 //import 'package:anonia/route/route.dart';
 import '../route/route.dart' as route;
-
-// class ChatMessage {
-//   String messageText;
-//   String imageURL;
-//   String time;
-//   ChatUsers(
-//       {@required this.name,
-//       @required this.messageText,
-//       @required this.imageURL,
-//       @required this.time});
-// }
 
 class ChatMessage extends StatelessWidget {
   ChatMessage({
@@ -86,18 +71,18 @@ class ChatMessage extends StatelessWidget {
   }
 }
 
-class ChatScreen extends StatefulWidget {
+class ChatPage extends StatefulWidget {
   //implement userdata chat and data here
 
-  const ChatScreen({
+  const ChatPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<ChatScreen> createState() => ChatScreenState();
+  State<ChatPage> createState() => ChatPageState();
 }
 
-class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
+class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   final List<ChatMessage> _messages = [];
   final _textController = TextEditingController();
   final FocusNode _focusNode = FocusNode();

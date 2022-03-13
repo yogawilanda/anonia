@@ -40,6 +40,7 @@ class LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(right: 20, left: 20),
@@ -87,151 +88,14 @@ class LoginPageState extends State<LoginPage> {
             ),
 
             //Forms properties
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30),
-              child: Form(
-                autovalidateMode: AutovalidateMode.always,
-                key: formkey,
-                child: Column(
-                  children: [
-                    //Textfield is a box that can be filled with user input keyboard
-                    TextField(
-                      controller: _usernameController,
-                      decoration: const InputDecoration(
-                        labelText: 'Enter Your Persona ID',
-                      ),
-                    ),
-
-                    //Manual Spacer
-                    const SizedBox(height: 12.0),
-
-                    //Passwords Field
-                    TextField(
-                      controller: _passwordController,
-                      focusNode: _passwordFocusNode,
-                      decoration: const InputDecoration(
-                        labelText: 'Your Treasure Key',
-                      ),
-                      obscureText: true,
-                    ),
-                    //ForgotPasswordButton
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, route.forgotPasswordScreen);
-                          },
-                          child: const Text('Forget your password?'),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            //LoginButton
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, route.homeScreenPage);
-              },
-              child: const Text('Login'),
-              style: ButtonStyle(),
-            ),
+            FormLogin(
+                formkey: formkey,
+                usernameController: _usernameController,
+                passwordController: _passwordController,
+                passwordFocusNode: _passwordFocusNode),
 
             //Quick Login Buttons
-            Container(
-              margin: EdgeInsets.only(top: 50),
-              padding: EdgeInsets.symmetric(vertical: 30),
-              child: Column(
-                children: [
-                  Text(
-                    'Sign in faster with',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.blue),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  ButtonBar(
-                    alignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      //Anonymous Login
-                      IconButton(
-                        onPressed: () {
-                          final provider = Provider.of<GoogleSignInProvider>(
-                              context,
-                              listen: false);
-                          provider.googleLogin();
-                        },
-                        icon: FaIcon(
-                          FontAwesomeIcons.mask,
-                          color: Colors.blue,
-                        ),
-                      ),
-                      //Google Login
-                      IconButton(
-                        onPressed: () {
-                          final provider = Provider.of<GoogleSignInProvider>(
-                              context,
-                              listen: false);
-                          provider.googleLogin();
-                        },
-                        icon: FaIcon(
-                          FontAwesomeIcons.google,
-                          color: Colors.blue,
-                        ),
-                      ),
-
-                      //Facebook Login
-                      IconButton(
-                        onPressed: () {
-                          final provider = Provider.of<GoogleSignInProvider>(
-                              context,
-                              listen: false);
-                          provider.googleLogin();
-                        },
-                        icon: FaIcon(
-                          FontAwesomeIcons.facebook,
-                          color: Colors.blue,
-                        ),
-                      ),
-                      //Facebook Login
-                      IconButton(
-                        onPressed: () {
-                          final provider = Provider.of<GoogleSignInProvider>(
-                              context,
-                              listen: false);
-                          provider.googleLogin();
-                        },
-                        icon: FaIcon(
-                          FontAwesomeIcons.twitter,
-                          color: Colors.blue,
-                        ),
-                      ),
-
-                      //Facebook Login
-                      IconButton(
-                        onPressed: () {
-                          final provider = Provider.of<GoogleSignInProvider>(
-                              context,
-                              listen: false);
-                          provider.googleLogin();
-                        },
-                        icon: FaIcon(
-                          FontAwesomeIcons.phone,
-                          color: Colors.blue,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            QuickLogin(),
 
             //Register Actions
             Expanded(
@@ -271,5 +135,171 @@ class LoginPageState extends State<LoginPage> {
       return "Password minimal 6 digit";
     }
     return 'Password benar';
+  }
+}
+
+class QuickLogin extends StatelessWidget {
+  const QuickLogin({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 50),
+      padding: const EdgeInsets.symmetric(vertical: 30),
+      child: Column(
+        children: [
+          const Text(
+            'Sign in faster with',
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.w500, color: Colors.blue),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          ButtonBar(
+            alignment: MainAxisAlignment.spaceBetween,
+            children: [
+              //Anonymous Login
+              IconButton(
+                onPressed: () {
+                  final provider =
+                      Provider.of<GoogleSignInProvider>(context, listen: false);
+                  provider.googleLogin();
+                },
+                icon: FaIcon(
+                  FontAwesomeIcons.mask,
+                  color: Colors.blue,
+                ),
+              ),
+              //Google Login
+              IconButton(
+                onPressed: () {
+                  final provider =
+                      Provider.of<GoogleSignInProvider>(context, listen: false);
+                  provider.googleLogin();
+                },
+                icon: FaIcon(
+                  FontAwesomeIcons.google,
+                  color: Colors.blue,
+                ),
+              ),
+
+              //Facebook Login
+              IconButton(
+                onPressed: () {
+                  final provider =
+                      Provider.of<GoogleSignInProvider>(context, listen: false);
+                  provider.googleLogin();
+                },
+                icon: FaIcon(
+                  FontAwesomeIcons.facebook,
+                  color: Colors.blue,
+                ),
+              ),
+              //Facebook Login
+              IconButton(
+                onPressed: () {
+                  final provider =
+                      Provider.of<GoogleSignInProvider>(context, listen: false);
+                  provider.googleLogin();
+                },
+                icon: FaIcon(
+                  FontAwesomeIcons.twitter,
+                  color: Colors.blue,
+                ),
+              ),
+
+              //Facebook Login
+              IconButton(
+                onPressed: () {
+                  final provider =
+                      Provider.of<GoogleSignInProvider>(context, listen: false);
+                  provider.googleLogin();
+                },
+                icon: FaIcon(
+                  FontAwesomeIcons.phone,
+                  color: Colors.blue,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class FormLogin extends StatelessWidget {
+  const FormLogin({
+    Key? key,
+    required this.formkey,
+    required TextEditingController usernameController,
+    required TextEditingController passwordController,
+    required FocusNode passwordFocusNode,
+  })  : _usernameController = usernameController,
+        _passwordController = passwordController,
+        _passwordFocusNode = passwordFocusNode,
+        super(key: key);
+
+  final GlobalKey<FormState> formkey;
+  final TextEditingController _usernameController;
+  final TextEditingController _passwordController;
+  final FocusNode _passwordFocusNode;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 30),
+      child: Form(
+        autovalidateMode: AutovalidateMode.always,
+        key: formkey,
+        child: Column(
+          children: [
+            //Textfield is a box that can be filled with user input keyboard
+            TextField(
+              controller: _usernameController,
+              decoration: const InputDecoration(
+                labelText: 'Enter Your Persona ID',
+              ),
+            ),
+
+            //Manual Spacer
+            const SizedBox(height: 12.0),
+
+            //Passwords Field
+            TextField(
+              controller: _passwordController,
+              focusNode: _passwordFocusNode,
+              decoration: const InputDecoration(
+                labelText: 'Your Treasure Key',
+              ),
+              obscureText: true,
+            ),
+            //ForgotPasswordButton
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, route.forgotPasswordScreen);
+                  },
+                  child: const Text('Forget your password?'),
+                ),
+              ],
+            ),
+
+            //LoginButton
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, route.homeScreenPage);
+              },
+              child: const Text('Login'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

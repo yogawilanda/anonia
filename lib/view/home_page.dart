@@ -1,5 +1,6 @@
 import 'package:anonia/route/google_sign_in.dart';
 import 'package:anonia/main.dart';
+import 'package:anonia/view/messaging_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -124,16 +125,9 @@ class HomescreenState extends State<Homescreen> {
                 subtitle: Text(personData[index].textMessage),
                 trailing: Text(personData[index].timeStamp),
                 onTap: () {
-                  Navigator.pushNamed(context, chatScreen);
+                  Navigator.pushNamed(context, messagingPage);
                 },
                 onLongPress: () {
-                  //TODO: Find how to call the showDialog into this actions.
-                  //------------success method but not effective-------------------//
-                  // Navigator.pop(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (_) => const AlertDialogHapus()));
-                  //===================fail method=========================//
                   Navigator.pushNamed(context, loginPage);
                 },
               ),
@@ -143,7 +137,7 @@ class HomescreenState extends State<Homescreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, chatScreen);
+          Navigator.pushNamed(context, messagingPage);
         },
         child: const Icon(Icons.message),
         backgroundColor: Colors.blue,
