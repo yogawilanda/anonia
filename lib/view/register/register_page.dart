@@ -134,7 +134,8 @@ class RegisterPageState extends State<RegisterPage> {
                                       _isProcessing = false;
                                     });
 
-                                    if (user != null) {
+                                    if (_formRegisterKey.currentState!
+                                        .validate()) {
                                       Navigator.pushNamed(
                                           context, route.loginPage);
                                       // setState(() {

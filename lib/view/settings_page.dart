@@ -1,3 +1,4 @@
+import 'package:anonia/route/route.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'language_page.dart';
@@ -19,6 +20,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(title: const Text('Settings UI')),
       body: SettingsList(
         sections: [
+          //Common Section
           SettingsSection(
             title: Text('Common'),
             tiles: [
@@ -41,6 +43,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   leading: const Icon(Icons.cloud_queue)),
             ],
           ),
+
+          //Account Section
           SettingsSection(
             title: Text('Account'),
             tiles: [
@@ -51,21 +55,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   title: Text('Sign out'), leading: Icon(Icons.exit_to_app)),
             ],
           ),
+
+          //Security And Privacy Section
           SettingsSection(
-            title: Text('Security'),
+            title: Text('Security And Privacy'),
             tiles: [
               SettingsTile(
-                title: Text('Account Privacy'),
-                trailing: Text('Set how your privacy is configured'),
-                onPressed: (context) {},
                 leading: const Icon(Icons.privacy_tip),
+                title: Text('Account Privacy'),
+                description: Text('Set how your account visible to other user'),
+                onPressed: (context) {
+                  setState(() {
+                    Navigator.pushNamed(context, searchScreen);
+                  });
+                },
               ),
               SettingsTile.switchTile(
-                title: Text('Lock app in background'),
                 leading: const Icon(Icons.phonelink_lock),
+                description: Text('Lock app in background'),
+                title: Text('Fingeprint to reauthenticate'),
                 onToggle: (bool value) {
                   setState(() {
-                    lockInBackground = value;
+                    lockInBackground = !value;
                   });
                 },
                 initialValue: false,
@@ -80,16 +91,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
                 initialValue: false,
               ),
-              SettingsTile.switchTile(
-                title: Text('Use Fingerprint to unlock'),
-                leading: const Icon(Icons.phonelink_lock),
-                onToggle: (bool value) {
-                  setState(() {
-                    lockInBackground = value;
-                  });
-                },
-                initialValue: false,
-              ),
+              SettingsTile(
+                  leading: Icon(Icons.control_point), title: Text('Contribute'))
             ],
           ),
         ],
