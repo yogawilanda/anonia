@@ -164,7 +164,7 @@ class HomescreenState extends State<Homescreen> {
               title: const Text('Profile'),
               leading: const Icon(Icons.person),
               onTap: () {
-                Navigator.pushNamed(context, loginSuccess);
+                Navigator.pushNamed(context, profilePage);
               },
             ),
             ListTile(
