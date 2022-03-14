@@ -47,117 +47,115 @@ class RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     MediaQuery.of(context).size;
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            children: [
-              const SizedBox(height: 16.0),
-              //Header of register page.
-              const Text(
-                'Let\'s Join Our Nice Community',
-                style: TextStyle(
-                  fontSize: 28,
-                  color: Colors.blue,
-                ),
+    return Scaffold(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Column(
+          children: [
+            const SizedBox(height: 16.0),
+            //Header of register page.
+            const Text(
+              'Let\'s Join Our Nice Community',
+              style: TextStyle(
+                fontSize: 28,
+                color: Colors.blue,
               ),
-              SizedBox(
-                width: 300,
-                height: 300,
-                //Image Network widget is not const, so you cant use const in the parent widget
-                child: Image.network(
-                    'https://img.freepik.com/free-vector/people-putting-puzzle-pieces-together_52683-28610.jpg?size=626&ext=jpg'),
-              ),
-              Form(
-                key: _formRegisterKey,
-                child: Card(
-                  elevation: 4,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      //email register form
-                      TextFormField(
-                        //create the controller
-                        controller: _usernameController,
-                        focusNode: _usernameRegisterFocusNode,
-                        decoration: const InputDecoration(
-                          labelText: 'Username',
-                        ),
-                        validator: (value) =>
-                            Validator.validateName(name: value.toString()),
-                        //new validator rule, if the the string is not empty, it is equal to should not be null
+            ),
+            SizedBox(
+              width: 250,
+              height: 250,
+              //Image Network widget is not const, so you cant use const in the parent widget
+              child: Image.network(
+                  'https://img.freepik.com/free-vector/people-putting-puzzle-pieces-together_52683-28610.jpg?size=626&ext=jpg'),
+            ),
+            Form(
+              key: _formRegisterKey,
+              child: Card(
+                elevation: 4,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    //email register form
+                    TextFormField(
+                      //create the controller
+                      controller: _usernameController,
+                      focusNode: _usernameRegisterFocusNode,
+                      decoration: const InputDecoration(
+                        labelText: 'Username',
                       ),
-                      TextFormField(
-                        //create the controller
-                        controller: _emailController,
-                        focusNode: _emailFocusNode,
-                        decoration: const InputDecoration(
-                          labelText: 'Email',
-                        ),
-                        //new validator rule, if the the string is not empty, it is equal to should not be null
-                        validator: (value) =>
-                            Validator.validateEmail(email: value.toString()),
+                      validator: (value) =>
+                          Validator.validateName(name: value.toString()),
+                      //new validator rule, if the the string is not empty, it is equal to should not be null
+                    ),
+                    TextFormField(
+                      //create the controller
+                      controller: _emailController,
+                      focusNode: _emailFocusNode,
+                      decoration: const InputDecoration(
+                        labelText: 'Email',
                       ),
-                      const SizedBox(height: 24.0),
+                      //new validator rule, if the the string is not empty, it is equal to should not be null
+                      validator: (value) =>
+                          Validator.validateEmail(email: value.toString()),
+                    ),
+                    const SizedBox(height: 24.0),
 
-                      //password register form
-                      TextFormField(
-                        //create the controller
-                        controller: _passwordController,
-                        focusNode: _passwordRegisterFocusNode,
-                        decoration: const InputDecoration(
-                          labelText: 'Your Treasure Key',
-                        ),
-                        obscureText: true,
-                        validator: (value) => Validator.validatePassword(
-                            password: value.toString()),
+                    //password register form
+                    TextFormField(
+                      //create the controller
+                      controller: _passwordController,
+                      focusNode: _passwordRegisterFocusNode,
+                      decoration: const InputDecoration(
+                        labelText: 'Your Treasure Key',
                       ),
-                      const SizedBox(height: 32.0),
-                      _isProcessing
-                          ? CircularProgressIndicator()
-                          : Row(
-                              children: [
-                                Expanded(
-                                  child: ElevatedButton(
-                                    onPressed: () async {
+                      obscureText: true,
+                      validator: (value) => Validator.validatePassword(
+                          password: value.toString()),
+                    ),
+                    const SizedBox(height: 32.0),
+                    _isProcessing
+                        ? CircularProgressIndicator()
+                        : Row(
+                            children: [
+                              Expanded(
+                                child: ElevatedButton(
+                                  onPressed: () async {
+                                    setState(() {
+                                      _isProcessing = true;
+                                    });
+
+                                    if (_formRegisterKey.currentState!
+                                        .validate()) {
+                                      User? user = await SignWithEmail
+                                          .registerUsingEmailPassword(
+                                        name: _usernameController.text,
+                                        email: _emailController.text,
+                                        password: _passwordController.text,
+                                      );
+
                                       setState(() {
-                                        _isProcessing = true;
+                                        _isProcessing = false;
                                       });
 
-                                      if (_formRegisterKey.currentState!
-                                          .validate()) {
-                                        User? user = await SignWithEmail
-                                            .registerUsingEmailPassword(
-                                          name: _usernameController.text,
-                                          email: _emailController.text,
-                                          password: _passwordController.text,
-                                        );
-
-                                        setState(() {
-                                          _isProcessing = false;
-                                        });
-
-                                        if (user != null) {
-                                          Navigator.pushNamed(
-                                              context, route.loginPage);
-                                        }
+                                      if (user != null) {
+                                        Navigator.pushNamed(
+                                            context, route.loginPage);
                                       }
-                                    },
-                                    child: Text(
-                                      'Sign up',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
+                                    }
+                                  },
+                                  child: Text(
+                                    'Sign up',
+                                    style: TextStyle(color: Colors.white),
                                   ),
                                 ),
-                              ],
-                            )
-                    ],
-                  ),
+                              ),
+                            ],
+                          )
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
