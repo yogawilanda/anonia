@@ -52,7 +52,7 @@ class RegisterPageState extends State<RegisterPage> {
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           children: [
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 70),
             //Header of register page.
             const Text(
               'Let\'s Join Our Nice Community',
@@ -62,97 +62,96 @@ class RegisterPageState extends State<RegisterPage> {
               ),
             ),
             SizedBox(
-              width: 250,
-              height: 250,
+              width: 300,
+              height: 300,
               //Image Network widget is not const, so you cant use const in the parent widget
               child: Image.network(
                   'https://img.freepik.com/free-vector/people-putting-puzzle-pieces-together_52683-28610.jpg?size=626&ext=jpg'),
             ),
             Form(
               key: _formRegisterKey,
-              child: Card(
-                elevation: 4,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    //email register form
-                    TextFormField(
-                      //create the controller
-                      controller: _usernameController,
-                      focusNode: _usernameRegisterFocusNode,
-                      decoration: const InputDecoration(
-                        labelText: 'Username',
-                      ),
-                      validator: (value) =>
-                          Validator.validateName(name: value.toString()),
-                      //new validator rule, if the the string is not empty, it is equal to should not be null
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  //email register form
+                  TextFormField(
+                    //create the controller
+                    controller: _usernameController,
+                    focusNode: _usernameRegisterFocusNode,
+                    decoration: const InputDecoration(
+                      labelStyle: TextStyle(fontSize: 28),
+                      labelText: 'Username',
                     ),
-                    TextFormField(
-                      //create the controller
-                      controller: _emailController,
-                      focusNode: _emailFocusNode,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                      ),
-                      //new validator rule, if the the string is not empty, it is equal to should not be null
-                      validator: (value) =>
-                          Validator.validateEmail(email: value.toString()),
+                    validator: (value) =>
+                        Validator.validateName(name: value.toString()),
+                    //new validator rule, if the the string is not empty, it is equal to should not be null
+                  ),
+                  TextFormField(
+                    //create the controller
+                    controller: _emailController,
+                    focusNode: _emailFocusNode,
+                    decoration: const InputDecoration(
+                      labelStyle: TextStyle(fontSize: 28),
+                      labelText: 'Email',
                     ),
-                    const SizedBox(height: 24.0),
+                    //new validator rule, if the the string is not empty, it is equal to should not be null
+                    validator: (value) =>
+                        Validator.validateEmail(email: value.toString()),
+                  ),
+                  const SizedBox(height: 24.0),
 
-                    //password register form
-                    TextFormField(
-                      //create the controller
-                      controller: _passwordController,
-                      focusNode: _passwordRegisterFocusNode,
-                      decoration: const InputDecoration(
-                        labelText: 'Your Treasure Key',
-                      ),
-                      obscureText: true,
-                      validator: (value) => Validator.validatePassword(
-                          password: value.toString()),
+                  //password register form
+                  TextFormField(
+                    //create the controller
+                    controller: _passwordController,
+                    focusNode: _passwordRegisterFocusNode,
+                    decoration: const InputDecoration(
+                      labelText: 'Your Treasure Key',
+                      labelStyle: TextStyle(fontSize: 28),
                     ),
-                    const SizedBox(height: 32.0),
-                    _isProcessing
-                        ? CircularProgressIndicator()
-                        : Row(
-                            children: [
-                              Expanded(
-                                child: ElevatedButton(
-                                  onPressed: () async {
+                    obscureText: true,
+                    validator: (value) =>
+                        Validator.validatePassword(password: value.toString()),
+                  ),
+                  const SizedBox(height: 32.0),
+                  _isProcessing
+                      ? CircularProgressIndicator()
+                      : Row(
+                          children: [
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  if (_formRegisterKey.currentState!
+                                      .validate()) {
+                                    User? user = await SignWithEmail
+                                        .registerUsingEmailPassword(
+                                      name: _usernameController.text,
+                                      email: _emailController.text,
+                                      password: _passwordController.text,
+                                    );
+
                                     setState(() {
-                                      _isProcessing = true;
+                                      _isProcessing = false;
                                     });
 
-                                    if (_formRegisterKey.currentState!
-                                        .validate()) {
-                                      User? user = await SignWithEmail
-                                          .registerUsingEmailPassword(
-                                        name: _usernameController.text,
-                                        email: _emailController.text,
-                                        password: _passwordController.text,
-                                      );
-
-                                      setState(() {
-                                        _isProcessing = false;
-                                      });
-
-                                      if (user != null) {
-                                        Navigator.pushNamed(
-                                            context, route.loginPage);
-                                      }
+                                    if (user != null) {
+                                      Navigator.pushNamed(
+                                          context, route.loginPage);
+                                      // setState(() {
+                                      //   _isProcessing = true;
+                                      // });
                                     }
-                                  },
-                                  child: Text(
-                                    'Sign up',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
+                                  }
+                                },
+                                child: Text(
+                                  'Sign up',
+                                  style: TextStyle(color: Colors.white),
                                 ),
                               ),
-                            ],
-                          )
-                  ],
-                ),
+                            ),
+                          ],
+                        )
+                ],
               ),
             ),
           ],
