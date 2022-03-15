@@ -44,6 +44,7 @@ class LoginPageState extends State<LoginPage> {
     double mobileViewConstraint = 600;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           if (constraints.maxWidth > mobileViewConstraint) {
@@ -130,18 +131,21 @@ class MobileViewLogin extends StatelessWidget {
               ),
 
               //Title on Login Page
-              RichText(
-                text: const TextSpan(
-                  style: TextStyle(
-                    fontSize: 36,
-                    color: Colors.blue,
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: 'Anonia',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 30.0),
+                child: RichText(
+                  text: const TextSpan(
+                    style: TextStyle(
+                      fontSize: 36,
+                      color: Colors.blue,
                     ),
-                  ],
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'Anonia',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

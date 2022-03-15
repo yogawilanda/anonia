@@ -68,6 +68,8 @@ class RegisterPageState extends State<RegisterPage> {
               child: Image.network(
                   'https://img.freepik.com/free-vector/people-putting-puzzle-pieces-together_52683-28610.jpg?size=626&ext=jpg'),
             ),
+
+            //Forms for register
             Form(
               key: _formRegisterKey,
               child: Column(
@@ -79,35 +81,33 @@ class RegisterPageState extends State<RegisterPage> {
                     controller: _usernameController,
                     focusNode: _usernameRegisterFocusNode,
                     decoration: const InputDecoration(
-                      labelStyle: TextStyle(fontSize: 28),
                       labelText: 'Username',
                     ),
                     validator: (value) =>
                         Validator.validateName(name: value.toString()),
                     //new validator rule, if the the string is not empty, it is equal to should not be null
                   ),
+
+                  //Create a password to authenticate
                   TextFormField(
                     //create the controller
                     controller: _emailController,
                     focusNode: _emailFocusNode,
                     decoration: const InputDecoration(
-                      labelStyle: TextStyle(fontSize: 28),
                       labelText: 'Email',
                     ),
                     //new validator rule, if the the string is not empty, it is equal to should not be null
                     validator: (value) =>
                         Validator.validateEmail(email: value.toString()),
                   ),
-                  const SizedBox(height: 24.0),
 
-                  //password register form
+                  //password register actions
                   TextFormField(
                     //create the controller
                     controller: _passwordController,
                     focusNode: _passwordRegisterFocusNode,
                     decoration: const InputDecoration(
                       labelText: 'Your Treasure Key',
-                      labelStyle: TextStyle(fontSize: 28),
                     ),
                     obscureText: true,
                     validator: (value) =>
@@ -115,43 +115,45 @@ class RegisterPageState extends State<RegisterPage> {
                   ),
                   const SizedBox(height: 32.0),
                   _isProcessing
+
+                      //if form requirement doesn't meet its fullfillment, user will be asked to modify his/her data.
                       ? CircularProgressIndicator()
+
+                      //if form were correct, user will be directed to profile.
                       : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Expanded(
-                              child: ElevatedButton(
-                                onPressed: () async {
+                            ElevatedButton(
+                              onPressed: () async {
+                                if (_formRegisterKey.currentState!.validate()) {
+                                  User? user = await SignWithEmail
+                                      .registerUsingEmailPassword(
+                                    name: _usernameController.text,
+                                    email: _emailController.text,
+                                    password: _passwordController.text,
+                                  );
+
+                                  setState(() {
+                                    _isProcessing = false;
+                                  });
+
                                   if (_formRegisterKey.currentState!
                                       .validate()) {
-                                    User? user = await SignWithEmail
-                                        .registerUsingEmailPassword(
-                                      name: _usernameController.text,
-                                      email: _emailController.text,
-                                      password: _passwordController.text,
-                                    );
-
-                                    setState(() {
-                                      _isProcessing = false;
-                                    });
-
-                                    if (_formRegisterKey.currentState!
-                                        .validate()) {
-                                      Navigator.pushNamed(
-                                          context, route.loginPage);
-                                      // setState(() {
-                                      //   _isProcessing = true;
-                                      // });
-                                    }
+                                    Navigator.pushNamed(
+                                        context, route.loginPage);
+                                    // setState(() {
+                                    //   _isProcessing = true;
+                                    // });
                                   }
-                                },
-                                child: Text(
-                                  'Sign up',
-                                  style: TextStyle(color: Colors.white),
-                                ),
+                                }
+                              },
+                              child: Text(
+                                'Sign up',
+                                style: TextStyle(color: Colors.white),
                               ),
                             ),
                           ],
-                        )
+                        ),
                 ],
               ),
             ),
