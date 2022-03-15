@@ -2,7 +2,7 @@ import 'package:anonia/authenticator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 //import 'package:anonia/route/route.dart';
-import '../route/route.dart' as route;
+import '../../route/route.dart' as route;
 
 //ChatBubble goes here
 class ChatMessage extends StatelessWidget {
@@ -123,8 +123,6 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
         //TODO: Make the Circled avatar not overfilling the appbar
         actions: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -149,6 +147,7 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
       body: Container(
         child: Column(
           children: [
+            //chat bubble generates here
             Flexible(
               child: ListView.builder(
                 padding: const EdgeInsets.all(8.0),
@@ -158,6 +157,8 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
               ),
             ),
             const Divider(height: 1.0),
+
+            //text composer
             Container(
               decoration: BoxDecoration(color: Theme.of(context).cardColor),
               child: _buildTextComposer(),

@@ -1,10 +1,11 @@
 // import 'dart:js';
 
+import 'package:anonia/view/messaging/messaging_page_dev.dart';
 import 'package:anonia/view/profile/profile_page.dart';
 import 'package:anonia/view/user_login_success.dart';
 import 'package:anonia/view/register/register_page.dart';
 // import 'package:anonia/google_logged_in_widget.dart';
-import 'package:anonia/view/messaging_page.dart';
+import 'package:anonia/view/messaging/messaging_page.dart';
 import 'package:anonia/view/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:anonia/view/home_page.dart';
@@ -27,6 +28,7 @@ const String languageScreen = 'languagescreen';
 const String searchScreen = 'searchscreen';
 const String forgotPasswordScreen = 'forgotpasswordcreen';
 const String loginSuccess = 'loginsuccessscreen';
+const String messagingDevPage = 'messagingDevPage';
 
 Route<dynamic>? getRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -61,6 +63,9 @@ Route<dynamic>? getRoute(RouteSettings settings) {
 
     case loginSuccess:
       return MaterialPageRoute(builder: (context) => const UserLoginSuccess());
+
+    case messagingDevPage:
+      return MaterialPageRoute(builder: (context) => const ChatPageDev());
 
     default:
       throw ('this route is still on the hustle');

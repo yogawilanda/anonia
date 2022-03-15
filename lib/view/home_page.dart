@@ -1,6 +1,7 @@
 import 'package:anonia/route/google_sign_in.dart';
 import 'package:anonia/main.dart';
-import 'package:anonia/view/messaging_page.dart';
+import 'package:anonia/view/messaging/messaging_page.dart';
+import 'package:anonia/view/messaging/messaging_page_dev.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -137,7 +138,7 @@ class HomescreenState extends State<Homescreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, messagingPage);
+          Navigator.pushNamed(context, messagingDevPage);
         },
         child: const Icon(Icons.message),
         backgroundColor: Colors.blue,
