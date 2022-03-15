@@ -13,7 +13,7 @@ class ChatMessage extends StatelessWidget {
   }) : super(key: key);
   final String text;
   final AnimationController animationController;
-  final user = FirebaseAuth.instance.currentUser!;
+  // final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -27,34 +27,38 @@ class ChatMessage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: const EdgeInsets.only(right: 16.0),
-              // ignore: unrelated_type_equality_checks
-              child: user.photoURL ==
-                      const CircleAvatar(
-                          backgroundImage: AssetImage('assets/lisa.jpg'))
-                  ? const CircleAvatar(
-                      backgroundImage: AssetImage('assets/lisa.jpg'),
-                    )
-                  : CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          user.photoURL!), // <-Bubble circle avatar
-                    ),
-            ),
+                margin: const EdgeInsets.only(right: 16.0),
+                // ignore: unrelated_type_equality_checks
+                child: const CircleAvatar(
+                    backgroundImage: AssetImage('assets/lisa.jpg'))
+                // ? const CircleAvatar(
+                //     backgroundImage: AssetImage('assets/lisa.jpg'),
+                //   )
+
+                // user.photoURL ==
+                //         const CircleAvatar(
+                //             backgroundImage: AssetImage('assets/lisa.jpg')) ? const CircleAvatar(
+                //         backgroundImage: AssetImage('assets/lisa.jpg'),
+                //       )
+                //     : CircleAvatar(
+                //         backgroundImage: NetworkImage(
+                //             user.photoURL!), // <-Bubble circle avatar
+                //       ),
+                ),
             Expanded(
               // current username bubbles name
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // this children need to be wrapped into chat bubbles.
-                  if (user.displayName == "anonymous")
-                    const Text('Anonym')
-                  else
-                    Text(
-                      user.displayName!,
-                      style: const TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
+                  // if (user.displayName == "anonymous")
+                  const Text('Anonym')
+                  // else
+                  //   Text(user.displayName!,
+                  //     style: const TextStyle(
+                  //       fontSize: 18,
+                  //     ),
+                  ,
                   Container(
                     margin: const EdgeInsets.only(top: 5.0),
                     child: Text(
@@ -88,7 +92,7 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   final List<ChatMessage> _messages = [];
   final _textController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
-  final user = FirebaseAuth.instance.currentUser!;
+  // final user = FirebaseAuth.instance.currentUser!;
   bool _isComposing = false;
 
   void _handleSubmitted(String text) {
@@ -124,14 +128,17 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: user.photoURL == user.emailVerified
-                    ? CircleAvatar(
-                        child: Image.asset('assets/lisa.jpg'),
-                      )
-                    : CircleAvatar(
-                        radius: 18,
-                        backgroundImage: NetworkImage(user.photoURL!),
-                      ),
+                child: CircleAvatar(
+                  backgroundImage: AssetImage('assets/lisa.jpg'),
+                ),
+
+                //  user.photoURL == user.emailVerified? CircleAvatar(
+                //         child: Image.asset('assets/lisa.jpg'),
+                //       )
+                //     : CircleAvatar(
+                //         radius: 18,
+                //         backgroundImage: NetworkImage(user.photoURL!),
+                //       ),
               ),
             ],
           ),
