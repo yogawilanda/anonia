@@ -26,52 +26,27 @@ class ChatMessage extends StatelessWidget {
         alignment:
             true == isUserBubble ? Alignment.topLeft : Alignment.topRight,
         child: Container(
-          margin: EdgeInsets.all(8),
+          margin: const EdgeInsets.all(8),
           width: 300,
-          color: Colors.blue,
           child: ListTile(
-            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            leading: CircleAvatar(
-              backgroundImage: AssetImage('assets/lisa.jpg'),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            tileColor: Colors.blue,
+            leading: const CircleAvatar(
+              backgroundImage: const AssetImage('assets/lisa.jpg'),
             ),
-            title: Text('Anonym'),
+            title: const Text('Anonym'),
             subtitle: Text(
               text,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
               ),
             ),
           ),
         ),
       ),
-
-      // Container(
-      //   margin: const EdgeInsets.symmetric(vertical: 10.0),
-      //   child: Row(
-      //     crossAxisAlignment: CrossAxisAlignment.start,
-      //     children: [
-      //       Container(
-      //           margin: const EdgeInsets.only(right: 16.0),
-      //           child: const CircleAvatar(
-      //               backgroundImage: AssetImage('assets/lisa.jpg'))),
-      //       Expanded(
-      //         child: Column(
-      //           crossAxisAlignment: CrossAxisAlignment.start,
-      //           children: [
-      //             const Text('Anonym'),
-      //             Container(
-      //               margin: const EdgeInsets.only(top: 5.0),
-      //               child: Text(
-      //                 text,
-      //                 style: const TextStyle(color: Colors.black87),
-      //               ),
-      //             ),
-      //           ],
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
     );
   }
 }
@@ -131,6 +106,7 @@ class ChatPageState extends State<ChatPageDev> with TickerProviderStateMixin {
             ],
           ),
         ],
+        centerTitle: true,
         backgroundColor: Colors.blue,
         elevation: Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
       ),
