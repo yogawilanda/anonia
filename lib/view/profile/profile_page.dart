@@ -19,9 +19,23 @@ class _ProfilePageState extends State<ProfilePage> {
               const SizedBox(
                 height: 60,
               ),
-              const CircleAvatar(
-                radius: 100,
-                backgroundImage: AssetImage('assets/lisa.jpg'),
+              Stack(
+                alignment: AlignmentDirectional.bottomEnd,
+                children: [
+                  const CircleAvatar(
+                    radius: 100,
+                    backgroundImage: AssetImage('assets/lisa.jpg'),
+                  ),
+                  CircleAvatar(
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: FaIcon(
+                        FontAwesomeIcons.pencilAlt,
+                        size: 18,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 60,
@@ -38,13 +52,31 @@ class _ProfilePageState extends State<ProfilePage> {
                 //     borderRadius: BorderRadius.circular(30), color: Colors.blue),
                 // margin: const EdgeInsets.symmetric(horizontal: 24),
                 child: ButtonBar(
+                  alignment: MainAxisAlignment.center,
                   children: [
                     IconButton(
                       onPressed: () {},
-                      icon: FaIcon(FontAwesomeIcons.pencilAlt),
+                      icon: FaIcon(
+                        FontAwesomeIcons.pencilAlt,
+                        size: 12,
+                      ),
                     )
                   ],
                 ),
+              ),
+
+              const SizedBox(
+                height: 60,
+              ),
+              //Informations
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text('Age 26'),
+                  Text('Age 26'),
+                  Text('Age 26'),
+                  Text('Age 26'),
+                ],
               ),
             ],
           ),
