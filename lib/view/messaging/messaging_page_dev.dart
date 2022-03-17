@@ -162,34 +162,48 @@ class ChatPageState extends State<ChatPageDev> with TickerProviderStateMixin {
             Flexible(
               child: TextField(
                 controller: _textController,
-                textAlign: TextAlign.left,
                 onChanged: (text) {
                   setState(() {
                     _isComposing = text.isNotEmpty;
                   });
                 },
                 onSubmitted: _isComposing ? _handleSubmitted : null,
-                decoration: InputDecoration.collapsed(
-                  hintText: 'Send a message',
-                  filled: true,
-                  // todo: fix this border to be bigger than its text.
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(0),
-                    borderSide: const BorderSide(
-                      color: Colors.transparent,
-                      width: 1,
+                decoration: InputDecoration(
+                    //TOdo: work on how inputfield behave and look like.
                     ),
-                  ),
-                  //if the method above wont display as its will, back to the below way.
-                  // OutlineInputBorder(
-                  //   borderRadius: BorderRadius.circular(300),
-                  //   borderSide: const BorderSide(
-                  //     width: 10,
-                  //   ),
-                  // ),
-                ),
-                focusNode: _focusNode,
               ),
+
+              // TextField(
+              //   controller: _textController,
+              //   textAlign: TextAlign.left,
+              //   onChanged: (text) {
+              //     setState(() {
+              //       _isComposing = text.isNotEmpty;
+              //     });
+              //   },
+              //   onSubmitted: _isComposing ? _handleSubmitted : null,
+              //   decoration: InputDecoration.collapsed(
+              //     hintText: 'Send a message',
+              //     filled: true,
+              //     // todo: fix this border to be bigger than its text.
+              //     border: OutlineInputBorder(
+              //       borderRadius: BorderRadius.circular(12),
+              //       gapPadding: 14,
+              //       borderSide: const BorderSide(
+              //         color: Colors.transparent,
+              //         width: 1,
+              //       ),
+              //     ),
+              //     //if the method above wont display as its will, back to the below way.
+              //     // OutlineInputBorder(
+              //     //   borderRadius: BorderRadius.circular(300),
+              //     //   borderSide: const BorderSide(
+              //     //     width: 10,
+              //     //   ),
+              //     // ),
+              //   ),
+              //   focusNode: _focusNode,
+              // ),
             ),
 
             Container(
