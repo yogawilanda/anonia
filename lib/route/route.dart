@@ -1,7 +1,7 @@
 // import 'dart:js';
 
 import 'package:anonia/view/messaging/messaging_page_dev.dart';
-import 'package:anonia/view/profile/profile_page.dart';
+import 'package:anonia/view/profile/profile_page_user.dart';
 import 'package:anonia/view/user_login_success.dart';
 import 'package:anonia/view/register/register_page.dart';
 // import 'package:anonia/google_logged_in_widget.dart';
@@ -52,7 +52,7 @@ Route<dynamic>? getRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const LanguagesScreen());
 
     case profilePage:
-      return MaterialPageRoute(builder: ((context) => const ProfilePage()));
+      return MaterialPageRoute(builder: (context) => const ProfilePage());
 
     case forgotPasswordScreen:
       return MaterialPageRoute(
