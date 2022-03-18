@@ -1,8 +1,11 @@
+import 'dart:ui';
+
 import 'package:anonia/route/google_sign_in.dart';
 import 'package:anonia/main.dart';
 import 'package:anonia/view/messaging/messaging_page.dart';
 import 'package:anonia/view/messaging/messaging_page_dev.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../route/route.dart';
@@ -144,19 +147,36 @@ class HomescreenState extends State<Homescreen> {
         backgroundColor: Colors.blue,
       ),
       drawer: Drawer(
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
+            DrawerHeader(
+              curve: Curves.bounceIn,
+              decoration: const BoxDecoration(
                 color: Colors.blue,
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.elliptical(60, 60),
+                  bottomLeft: Radius.elliptical(60, 60),
+                ),
               ),
-              child: Text('Drawer Header'),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text('Lisa', textScaleFactor: 1.5),
+                  StreamBuilder<Object>(
+                      // stream: null,
+                      builder: (context, snapshot) {
+                    return CircleAvatar(
+                      maxRadius: 50,
+                      backgroundImage: AssetImage('assets/lisa.jpg'),
+                    );
+                  }),
+                ],
+              ),
             ),
             ListTile(
               title: const Text('Properties'),
-              onTap: () {
+              onLongPress: () {
                 // Update the state of the app.
                 // ...
               },
@@ -166,15 +186,6 @@ class HomescreenState extends State<Homescreen> {
               leading: const Icon(Icons.person),
               onTap: () {
                 Navigator.pushNamed(context, profilePage);
-              },
-            ),
-            ListTile(
-              title: const Text('Settings'),
-              leading: const Icon(Icons.settings),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-                Navigator.pushNamed(context, settingsScreen);
               },
             ),
             ListTile(
@@ -188,6 +199,18 @@ class HomescreenState extends State<Homescreen> {
                 await provider.logout();
                 Navigator.pushReplacementNamed(context, loginPage);
               },
+            ),
+            Expanded(
+              flex: 3,
+              child: ListTile(
+                title: const Text('Settings'),
+                leading: const Icon(Icons.settings),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                  Navigator.pushNamed(context, settingsScreen);
+                },
+              ),
             ),
           ],
         ),

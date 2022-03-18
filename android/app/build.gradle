@@ -48,6 +48,8 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        //a research to resolve deprecated google sign in API
+        multiDexEnabled true
 
     }
 
