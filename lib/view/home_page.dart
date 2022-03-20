@@ -177,8 +177,7 @@ class HomescreenState extends State<Homescreen> {
             ListTile(
               title: const Text('Properties'),
               onLongPress: () {
-                // Update the state of the app.
-                // ...
+                print('');
               },
             ),
             ListTile(
