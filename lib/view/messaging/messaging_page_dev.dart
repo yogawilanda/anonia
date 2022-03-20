@@ -101,6 +101,7 @@ class ChatPageState extends State<ChatPageDev> with TickerProviderStateMixin {
                 padding: EdgeInsets.all(8.0),
                 child: CircleAvatar(
                   backgroundImage: AssetImage('assets/lisa.jpg'),
+                  radius: 30,
                 ),
               ),
             ],
