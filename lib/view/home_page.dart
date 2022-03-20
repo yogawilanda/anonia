@@ -174,12 +174,16 @@ class HomescreenState extends State<Homescreen> {
                 ],
               ),
             ),
+
+            //Properties listTile.
             ListTile(
               title: const Text('Properties'),
               onLongPress: () {
                 print('');
               },
             ),
+
+            //Profile listTile.
             ListTile(
               title: const Text('Profile'),
               leading: const Icon(Icons.person),
@@ -187,6 +191,8 @@ class HomescreenState extends State<Homescreen> {
                 Navigator.pushNamed(context, profilePage);
               },
             ),
+
+            //Logout listTile
             ListTile(
               title: const Text('Logout'),
               leading: const Icon(Icons.logout),
@@ -199,6 +205,8 @@ class HomescreenState extends State<Homescreen> {
                 Navigator.pushReplacementNamed(context, loginPage);
               },
             ),
+
+            //Setting listTile
             Expanded(
               flex: 3,
               child: ListTile(
