@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 
 // import 'person_data.dart';
 
+//Todo: refactor this name.
 class Homescreen extends StatefulWidget {
   const Homescreen({Key? key}) : super(key: key);
 
@@ -188,6 +189,7 @@ class HomescreenState extends State<Homescreen> {
               title: const Text('Profile'),
               leading: const Icon(Icons.person),
               onTap: () {
+                //Pushing from this contect to settingScreen
                 Navigator.pushNamed(context, profilePage);
               },
             ),
@@ -198,6 +200,9 @@ class HomescreenState extends State<Homescreen> {
               leading: const Icon(Icons.logout),
               onTap: () async {
                 // Update the state of the app.
+
+                //Pushing from this contect to loginPage
+                //Todo: refactor this name.
                 Navigator.pushReplacementNamed(context, loginPage);
                 final provider =
                     Provider.of<GoogleSignInProvider>(context, listen: false);
@@ -213,8 +218,8 @@ class HomescreenState extends State<Homescreen> {
                 title: const Text('Settings'),
                 leading: const Icon(Icons.settings),
                 onTap: () {
-                  // Update the state of the app.
-                  // ...
+                  //Todo: refactor this name.
+                  //Pushing from this contect to settingScreen
                   Navigator.pushNamed(context, settingsScreen);
                 },
               ),

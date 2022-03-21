@@ -327,6 +327,7 @@ class FormLogin extends StatelessWidget {
               children: [
                 TextButton(
                   onPressed: () {
+                    //Todo: refactor this name.
                     Navigator.pushNamed(context, route.forgotPasswordScreen);
                   },
                   child: const Text('Forget your password?'),
@@ -339,6 +340,7 @@ class FormLogin extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: () {
+                  //Todo: refactor this name.
                   Navigator.pushNamed(context, route.homeScreenPage);
                 },
                 child: const Text('Login'),

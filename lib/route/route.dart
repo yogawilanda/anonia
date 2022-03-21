@@ -30,6 +30,7 @@ const String forgotPasswordScreen = 'forgotpasswordcreen';
 const String loginSuccess = 'loginsuccessscreen';
 const String messagingDevPage = 'messagingDevPage';
 
+//Todo: refactor this name into page.
 Route<dynamic>? getRoute(RouteSettings settings) {
   switch (settings.name) {
     case loginPage:
