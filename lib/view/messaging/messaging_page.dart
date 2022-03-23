@@ -1,4 +1,5 @@
 import 'package:anonia/authenticator.dart';
+import 'package:chat_bubbles/bubbles/bubble_normal.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 //import 'package:anonia/route/route.dart';
@@ -26,47 +27,33 @@ class ChatMessage extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-                margin: const EdgeInsets.only(right: 16.0),
-                // ignore: unrelated_type_equality_checks
-                child: const CircleAvatar(
-                    backgroundImage: AssetImage('assets/lisa.jpg'))
-                // ? const CircleAvatar(
-                //     backgroundImage: AssetImage('assets/lisa.jpg'),
-                //   )
-
-                // user.photoURL ==
-                //         const CircleAvatar(
-                //             backgroundImage: AssetImage('assets/lisa.jpg')) ? const CircleAvatar(
-                //         backgroundImage: AssetImage('assets/lisa.jpg'),
-                //       )
-                //     : CircleAvatar(
-                //         backgroundImage: NetworkImage(
-                //             user.photoURL!), // <-Bubble circle avatar
-                //       ),
-                ),
             Expanded(
               // current username bubbles name
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // this children need to be wrapped into chat bubbles.
-                  // if (user.displayName == "anonymous")
-                  const Text('Anonym')
-                  // else
-                  //   Text(user.displayName!,
-                  //     style: const TextStyle(
-                  //       fontSize: 18,
-                  //     ),
-                  ,
-                  Container(
-                    margin: const EdgeInsets.only(top: 5.0),
-                    child: Text(
-                      text,
-                      style: const TextStyle(color: Colors.black87),
+              child: Container(
+                margin: EdgeInsets.all(8),
+                // padding: EdgeInsets.symmetric(vertical: 9),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: const Text('Anonym'),
                     ),
-                  ),
-                ],
+                    BubbleNormal(
+                      tail: true,
+                      bubbleRadius: 20,
+                      seen: true,
+                      text: text,
+                      delivered: true,
+                      sent: true,
+                      isSender: true,
+                      textStyle: TextStyle(
+                        color: Colors.white,
+                      ),
+                      color: Colors.blue,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -203,12 +190,13 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
                   });
                 },
                 onSubmitted: _isComposing ? _handleSubmitted : null,
-                decoration: InputDecoration.collapsed(
+                decoration: InputDecoration(
                   hintText: 'Send a message',
                   filled: true,
                   // todo: fix this border to be bigger than its text.
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(0),
+                    borderRadius: BorderRadius.circular(30),
+                    gapPadding: 2,
                     borderSide: const BorderSide(
                       color: Colors.transparent,
                       width: 1,
