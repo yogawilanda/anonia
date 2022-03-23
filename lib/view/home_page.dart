@@ -4,6 +4,7 @@ import 'package:anonia/route/google_sign_in.dart';
 import 'package:anonia/main.dart';
 import 'package:anonia/view/messaging/messaging_page.dart';
 import 'package:anonia/view/messaging/messaging_page_dev.dart';
+import 'package:anonia/view/profile/profile_page_visitor.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
@@ -133,7 +134,7 @@ class HomescreenState extends State<Homescreen> {
                   Navigator.pushNamed(context, messagingPage);
                 },
                 onLongPress: () {
-                  Navigator.pushNamed(context, loginPage);
+                  Navigator.pushNamed(context, visitorProfilePage);
                 },
               ),
             ),

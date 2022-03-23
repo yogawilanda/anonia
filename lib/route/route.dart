@@ -2,6 +2,7 @@
 
 import 'package:anonia/view/messaging/messaging_page_dev.dart';
 import 'package:anonia/view/profile/profile_page_user.dart';
+import 'package:anonia/view/profile/profile_page_visitor.dart';
 import 'package:anonia/view/user_login_success.dart';
 import 'package:anonia/view/register/register_page.dart';
 // import 'package:anonia/google_logged_in_widget.dart';
@@ -29,6 +30,7 @@ const String searchScreen = 'searchscreen';
 const String forgotPasswordScreen = 'forgotpasswordcreen';
 const String loginSuccess = 'loginsuccessscreen';
 const String messagingDevPage = 'messagingDevPage';
+const String visitorProfilePage = 'visitorProfilePage';
 
 //Todo: refactor this name into page.
 Route<dynamic>? getRoute(RouteSettings settings) {
@@ -42,6 +44,10 @@ Route<dynamic>? getRoute(RouteSettings settings) {
 
     case registerPage:
       return MaterialPageRoute(builder: (context) => const RegisterPage());
+
+    case visitorProfilePage:
+      return MaterialPageRoute(
+          builder: (context) => const ProfilePageVisitor());
 
     case messagingPage:
       return MaterialPageRoute(builder: (context) => const ChatPage());
