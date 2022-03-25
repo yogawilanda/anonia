@@ -1,9 +1,83 @@
-import 'package:anonia/authenticator.dart';
 import 'package:chat_bubbles/bubbles/bubble_normal.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:chat_bubbles/chat_bubbles.dart';
+import '';
+
 import 'package:flutter/material.dart';
-//import 'package:anonia/route/route.dart';
-import '../../route/route.dart' as route;
+
+import 'package:anonia/route/route.dart' as route;
+
+Future<int> main() async {
+//  DISPLAY
+  Jiffy([2021, 1, 19])
+      .format('MMM do yyyy, h:mm:ss a'); // January 1st 2021, 12:00:00 AM
+  Jiffy().format('EEEE'); // Tuesday
+  Jiffy().format('MMM do yy'); // Mar 2nd 21
+  Jiffy().format('yyyy [escaped] yyyy'); // 2021 escaped 2021
+  Jiffy().format(); // 2021-03-02T15:18:29.922343
+
+// Not passing a string pattern for format method will return an ISO Date format
+  Jiffy().format(); // 2021-03-02T15:18:29.922343
+
+// Using lists
+  Jiffy([2019, 10, 19]).yMMMMd; // January 19, 2021
+
+// Using maps
+  Jiffy({'year': 2019, 'month': 10, 'day': 19, 'hour': 19})
+      .yMMMMEEEEdjm; // Monday, October 19, 2020 7:14 PM
+
+  // 'From Now' implementation
+  Jiffy('2007-1-29').fromNow(); // 14 years ago
+  Jiffy([2022, 10, 29]).fromNow(); // in a year
+  Jiffy(DateTime(2050, 10, 29)).fromNow(); // in 30 years
+
+  Jiffy().startOf(Units.HOUR).fromNow(); // 9 minutes ago
+
+//  'From X' implementation
+  var jiffy2 = Jiffy('2007-1-28');
+  var jiffy3 = Jiffy('2017-1-29', 'yyyy-MM-dd');
+
+  jiffy2.from(jiffy3); // a day ago
+
+  jiffy2.from([2017, 1, 30]); // 2 days ago
+
+//  Displaying the 'Difference' between two date times
+//  By default, 'diff' method, get the difference in milliseconds
+  var jiffy4 = Jiffy('2007-1-28', 'yyyy-MM-dd');
+  var jiffy5 = Jiffy('2017-1-29', 'yyyy-MM-dd');
+  jiffy4.diff(jiffy5); // 86400000
+
+  // You can also get 'diff' in different units of time
+  Jiffy([2007, 1, 28]).diff([2017, 1, 29], Units.DAY); // -3654
+
+//  RELATIVE TIME
+  Jiffy('2011-10-31').fromNow(); // 8 years ago
+  Jiffy(DateTime(2012, 6, 20)).fromNow(); // 7 years ago
+
+  Jiffy().startOf(Units.DAY).fromNow(); // 19 hours ago
+
+  Jiffy().endOf(Units.DAY).fromNow(); // in 5 hours
+
+  Jiffy().startOf(Units.HOUR).fromNow(); // 9 minutes ago
+
+//  MANIPULATING DATES
+  Jiffy().add(duration: Duration(days: 1)).yMMMMd; // October 20, 2019
+
+  Jiffy().subtract(days: 1).yMMMMd; // October 18, 2019
+
+// LOCALES
+// The locale method always return a future
+// To get locale (The default locale is English)
+  await Jiffy.locale(); // en
+//  To set locale
+  await Jiffy.locale('fr');
+  Jiffy().yMMMMEEEEdjm; // samedi 19 octobre 2019 19:25
+  await Jiffy.locale('ar');
+  Jiffy().yMMMMEEEEdjm; // السبت، ١٩ أكتوبر ٢٠١٩ ٧:٢٧ م
+  await Jiffy.locale('zh_cn');
+  Jiffy().yMMMMEEEEdjm; // 2019年10月19日星期六 下午7:28
+
+  return 0;
+}
 
 //ChatBubble goes here
 class ChatMessage extends StatelessWidget {
@@ -18,43 +92,62 @@ class ChatMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final DateTime now = DateTime.now();
+    DateTime inDetails = DateTime.now().subtract(const Duration(minutes: 1));
+
     return SizeTransition(
       sizeFactor:
           CurvedAnimation(parent: animationController, curve: Curves.easeOut),
       axisAlignment: 0.0,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(
           children: [
-            Expanded(
-              // current username bubbles name
-              child: Container(
-                margin: EdgeInsets.all(8),
-                // padding: EdgeInsets.symmetric(vertical: 9),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: const Text('Anonym'),
-                    ),
-                    BubbleNormal(
-                      tail: true,
-                      bubbleRadius: 20,
-                      seen: true,
-                      text: text,
-                      delivered: true,
-                      sent: true,
-                      isSender: true,
-                      textStyle: TextStyle(
-                        color: Colors.white,
-                      ),
-                      color: Colors.blue,
-                    ),
-                  ],
-                ),
+            Center(
+              child: DateChip(
+                date: DateTime.now(),
               ),
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  // current username bubbles name
+                  child: Container(
+                    margin: EdgeInsets.all(8),
+                    // padding: EdgeInsets.symmetric(vertical: 9),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const Text('Anonym'),
+
+                        //Text Container goes here
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(''),
+                            Flexible(
+                              child: BubbleNormal(
+                                tail: true,
+                                bubbleRadius: 20,
+                                seen: true,
+                                text: text,
+                                delivered: true,
+                                sent: true,
+                                isSender: true,
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                ),
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -110,9 +203,9 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
         //TODO: Make the Circled avatar not overfilling the appbar
         actions: <Widget>[
           Row(
-            children: [
+            children: const <Widget>[
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: CircleAvatar(
                   backgroundImage: AssetImage('assets/lisa.jpg'),
                 ),
@@ -202,13 +295,6 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
                       width: 1,
                     ),
                   ),
-                  //if the method above wont display as its will, back to the below way.
-                  // OutlineInputBorder(
-                  //   borderRadius: BorderRadius.circular(300),
-                  //   borderSide: const BorderSide(
-                  //     width: 10,
-                  //   ),
-                  // ),
                 ),
                 focusNode: _focusNode,
               ),

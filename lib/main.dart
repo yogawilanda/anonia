@@ -1,4 +1,6 @@
+import 'package:anonia/view/messaging/messaging_page.dart';
 import 'package:flutter/material.dart';
+
 import 'package:responsive_framework/responsive_framework.dart';
 
 import 'route/route.dart' as route;
@@ -47,7 +49,8 @@ class AnoniaAppState extends State<AnoniaApp> with ChangeNotifier {
           color: const Color(0xFFF5F5F5),
         ),
       ),
-      initialRoute: '/',
+      // initialRoute: '/',
+      home: ChatPage(),
       onGenerateRoute: route.getRoute,
     );
   }

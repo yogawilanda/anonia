@@ -25,6 +25,7 @@ dependencies:
   settings_ui: ^2.0.1
   responsive_framework: ^0.1.7
   chat_bubbles: ^1.2.0
+  jiffy: ^5.0.0
 
 flutter_native_splash:
   color: "#ffffff"
