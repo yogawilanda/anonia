@@ -21,7 +21,9 @@ class ChatMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     final DateTime now = DateTime.now();
     DateTime inDetails = DateTime.now().subtract(const Duration(minutes: 1));
-    Jiffy jiffyhourly = Jiffy();
+    String jiffyhourly = Jiffy().EEEE.toString();
+
+    bool isRecentlySent = true;
 
     return SizeTransition(
       sizeFactor:
@@ -33,7 +35,7 @@ class ChatMessage extends StatelessWidget {
           children: [
             Center(
               child: DateChip(
-                date: DateTime.now(),
+                date: now,
               ),
             ),
             Row(
@@ -53,7 +55,7 @@ class ChatMessage extends StatelessWidget {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Text(jiffyhourly.EEEE.toString()),
+                            Text(inDetails.toString()),
                             Flexible(
                               child: BubbleNormal(
                                 tail: true,
