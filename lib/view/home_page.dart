@@ -89,17 +89,14 @@ class HomescreenState extends State<Homescreen> {
     //in html those command will work as equal as a responsive website//
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.blue),
         title: const Text(
           'Anonia',
           style: TextStyle(
             fontSize: 24,
-            color: Colors.blue,
           ),
         ),
         centerTitle: true,
         elevation: 1,
-        backgroundColor: Colors.white,
         actions: [
           IconButton(
             onPressed: () {
@@ -107,14 +104,12 @@ class HomescreenState extends State<Homescreen> {
             },
             icon: const Icon(
               Icons.search,
-              color: Colors.blue,
               size: 28,
             ),
           ),
         ],
       ),
       //Contents.
-      backgroundColor: Colors.white,
       body: ListView.builder(
         // physics: BouncingScrollPhysics(),
         itemCount: personData.length,

@@ -30,10 +30,34 @@ class AnoniaAppState extends State<AnoniaApp> with ChangeNotifier {
   @override
   Widget build(BuildContext context) {
     const widget = Widget;
+    const Color secondDark = Color.fromARGB(221, 39, 39, 39);
+    const Color complementary = Color.fromARGB(221, 216, 213, 213);
+    const Color mainDark = Color.fromARGB(221, 26, 26, 30);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+
+      theme: ThemeData(
+        scaffoldBackgroundColor: const Color.fromARGB(255, 37, 36, 36),
+        primaryTextTheme: const TextTheme(
+          button: TextStyle(color: Colors.white),
+        ),
+        appBarTheme: const AppBarTheme(
+          color: mainDark,
+          actionsIconTheme: IconThemeData(
+            color: complementary,
+          ),
+          titleTextStyle: TextStyle(
+            color: complementary,
+          ),
+          iconTheme: IconThemeData(
+            color: mainDark,
+          ),
+        ),
+        cardTheme: const CardTheme(
+          color: secondDark,
+        ),
+      ),
       title: title,
       builder: (context, widget) => ResponsiveWrapper.builder(
         widget,
@@ -49,9 +73,11 @@ class AnoniaAppState extends State<AnoniaApp> with ChangeNotifier {
           color: const Color(0xFFF5F5F5),
         ),
       ),
-      // initialRoute: '/',
-      home: ChatPage(),
+      initialRoute: '/',
+      // home: ChatPage(),
       onGenerateRoute: route.getRoute,
     );
   }
 }
+
+class ColorData {}
