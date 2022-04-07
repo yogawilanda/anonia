@@ -30,34 +30,11 @@ class AnoniaAppState extends State<AnoniaApp> with ChangeNotifier {
   @override
   Widget build(BuildContext context) {
     const widget = Widget;
-    const Color secondDark = Color.fromARGB(221, 39, 39, 39);
-    const Color complementary = Color.fromARGB(221, 216, 213, 213);
-    const Color mainDark = Color.fromARGB(221, 26, 26, 30);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 37, 36, 36),
-        primaryTextTheme: const TextTheme(
-          button: TextStyle(color: Colors.white),
-        ),
-        appBarTheme: const AppBarTheme(
-          color: mainDark,
-          actionsIconTheme: IconThemeData(
-            color: complementary,
-          ),
-          titleTextStyle: TextStyle(
-            color: complementary,
-          ),
-          iconTheme: IconThemeData(
-            color: mainDark,
-          ),
-        ),
-        cardTheme: const CardTheme(
-          color: secondDark,
-        ),
-      ),
+      theme: ThemeData.dark(),
       title: title,
       builder: (context, widget) => ResponsiveWrapper.builder(
         widget,
@@ -77,6 +54,48 @@ class AnoniaAppState extends State<AnoniaApp> with ChangeNotifier {
       // home: ChatPage(),
       onGenerateRoute: route.getRoute,
     );
+  }
+
+  themeManagement() {
+    const Color secondDark = Color.fromARGB(221, 39, 39, 39);
+    const Color complementary = Color.fromARGB(221, 216, 213, 213);
+    const Color mainDark = Color.fromARGB(221, 26, 26, 30);
+    return ThemeData(
+        scaffoldBackgroundColor: const Color.fromARGB(255, 37, 36, 36),
+        primaryTextTheme: const TextTheme(
+          button: TextStyle(color: Colors.white),
+        ),
+        appBarTheme: const AppBarTheme(
+          color: mainDark,
+          actionsIconTheme: IconThemeData(
+            color: complementary,
+          ),
+          titleTextStyle: TextStyle(
+            color: complementary,
+          ),
+          iconTheme: IconThemeData(
+            color: mainDark,
+          ),
+        ),
+        cardTheme: const CardTheme(
+          color: secondDark,
+          shadowColor: mainDark,
+        ),
+        textTheme: const TextTheme(
+          bodyText1: TextStyle(
+            color: complementary,
+          ),
+          caption: TextStyle(
+            color: complementary,
+          ),
+        ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: complementary,
+        ),
+        buttonTheme: ButtonThemeData(
+          buttonColor: complementary,
+        ),
+        iconTheme: IconTheme.of(context));
   }
 }
 

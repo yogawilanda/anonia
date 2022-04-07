@@ -1,22 +1,17 @@
-import 'dart:ui';
-
 import 'package:anonia/route/google_sign_in.dart';
-import 'package:anonia/main.dart';
-import 'package:anonia/view/messaging/messaging_page.dart';
-import 'package:anonia/view/messaging/messaging_page_dev.dart';
-import 'package:anonia/view/profile/profile_page_visitor.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/animation.dart';
+
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import '../route/route.dart';
-import '../widget/show_dialog.dart';
-import 'package:anonia/model/dummy_list.dart';
+
+import '../../model/chat_user_model.dart';
+
+import '../../route/route.dart';
+
 import 'package:provider/provider.dart';
 
 // import 'person_data.dart';
 
-//Todo: refactor this name.
 class Homescreen extends StatefulWidget {
   const Homescreen({Key? key}) : super(key: key);
 
@@ -25,62 +20,8 @@ class Homescreen extends StatefulWidget {
 }
 
 class HomescreenState extends State<Homescreen> {
-  //place the arrays here.
   //positional parameter will create array based on your order, not in a sequence.
-  final List<Dummy> personData = [
-    Dummy(
-        personName: "Lisa",
-        imageUrl: "assets/lisa.jpg",
-        textMessage: "Yo! You Up Mate?",
-        timeStamp: "sekarang"),
-    Dummy(
-        personName: "Abah Hamed",
-        imageUrl: "assets/abah-hamed.jpg",
-        textMessage: "Sehat kan antum?",
-        timeStamp: "22.03"),
-    Dummy(
-        personName: "Brian USA",
-        imageUrl: "assets/rich-brian-1.jpg",
-        textMessage: "Eh kemarin project lo lancar bro?",
-        timeStamp: "kemarin"),
-    Dummy(
-        personName: "Osas",
-        imageUrl: "assets/Osas.jpg",
-        textMessage:
-            "Tanggal 25 tolong ambil filenya sekaligus deliv ke saya ya",
-        timeStamp: "kemarin"),
-    Dummy(
-        personName: "Demian Google Dev",
-        imageUrl: "assets/Demian.jpg",
-        textMessage: "Kapan main lagi ke kantor?",
-        timeStamp: "kemarin"),
-    Dummy(
-        personName: "Lisa",
-        imageUrl: "assets/lisa.jpg",
-        textMessage: "Yo! You Up Mate?",
-        timeStamp: "sekarang"),
-    Dummy(
-        personName: "Abah Hamed",
-        imageUrl: "assets/abah-hamed.jpg",
-        textMessage: "Sehat kan antum?",
-        timeStamp: "22.03"),
-    Dummy(
-        personName: "Brian USA",
-        imageUrl: "assets/rich-brian-1.jpg",
-        textMessage: "Eh kemarin project lo lancar bro?",
-        timeStamp: "kemarin"),
-    Dummy(
-        personName: "Osas",
-        imageUrl: "assets/Osas.jpg",
-        textMessage:
-            "Tanggal 25 tolong ambil filenya sekaligus deliv ke saya ya",
-        timeStamp: "kemarin"),
-    Dummy(
-        personName: "Demian Google Dev",
-        imageUrl: "assets/Demian.jpg",
-        textMessage: "Kapan main lagi ke kantor?",
-        timeStamp: "kemarin"),
-  ];
+  final chatModel = ChatList().chatModel;
 
   final user = FirebaseAuth.instance.currentUser;
 
@@ -112,7 +53,7 @@ class HomescreenState extends State<Homescreen> {
       //Contents.
       body: ListView.builder(
         // physics: BouncingScrollPhysics(),
-        itemCount: personData.length,
+        itemCount: chatModel.length,
         itemBuilder: (context, index) {
           return Card(
             elevation: 2,
@@ -120,11 +61,11 @@ class HomescreenState extends State<Homescreen> {
               padding: const EdgeInsets.all(14.0),
               child: ListTile(
                 leading: CircleAvatar(
-                  backgroundImage: AssetImage(personData[index].imageUrl),
+                  backgroundImage: AssetImage(chatModel[index].imageUrl),
                 ),
-                title: Text(personData[index].personName),
-                subtitle: Text(personData[index].textMessage),
-                trailing: Text(personData[index].timeStamp),
+                title: Text(chatModel[index].personName),
+                subtitle: Text(chatModel[index].textMessage),
+                trailing: Text(chatModel[index].timeStamp),
                 onTap: () {
                   Navigator.pushNamed(context, messagingPage);
                 },
@@ -141,7 +82,7 @@ class HomescreenState extends State<Homescreen> {
           Navigator.pushNamed(context, messagingDevPage);
         },
         child: const Icon(Icons.message),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.grey.shade200,
       ),
       drawer: Drawer(
         child: Column(

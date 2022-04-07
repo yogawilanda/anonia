@@ -117,7 +117,7 @@ class RegisterPageState extends State<RegisterPage> {
                   _isProcessing
 
                       //if form requirement doesn't meet its fullfillment, user will be asked to modify his/her data.
-                      ? CircularProgressIndicator()
+                      ? const CircularProgressIndicator()
 
                       //if form were correct, user will be directed to profile.
                       : Row(
@@ -147,7 +147,7 @@ class RegisterPageState extends State<RegisterPage> {
                                   }
                                 }
                               },
-                              child: Text(
+                              child: const Text(
                                 'Sign up',
                                 style: TextStyle(color: Colors.white),
                               ),
