@@ -15,6 +15,13 @@ class _ProfilePageState extends State<ProfilePage> {
         //todo:wrap this into draggable widget
         body: Stack(
       children: [
+        Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: NetworkImage(
+                      'https://i.pinimg.com/originals/ec/38/22/ec382251c6bb0d1ce7f174fd536c0870.jpg'),
+                  fit: BoxFit.fitWidth)),
+        ),
         ScrollableProfile(),
       ],
     ));
@@ -29,16 +36,20 @@ class ScrollableProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
+      expand: true,
       initialChildSize: 0.25,
-      maxChildSize: 0.6,
+      maxChildSize: 0.5,
       minChildSize: 0.1,
       snap: true,
       builder: (BuildContext context, ScrollController scrollController) {
         return Container(
           decoration: BoxDecoration(
-              color: Colors.blue[100],
-              borderRadius: BorderRadiusDirectional.only(
-                  topStart: Radius.circular(90), topEnd: Radius.circular(60))),
+            color: Color.fromARGB(72, 27, 28, 29),
+            borderRadius: BorderRadiusDirectional.only(
+              topStart: Radius.circular(90),
+              topEnd: Radius.circular(90),
+            ),
+          ),
           child: ListView.builder(
             controller: scrollController,
             itemCount: 1,
@@ -47,37 +58,36 @@ class ScrollableProfile extends StatelessWidget {
                 child: Center(
                   child: Column(
                     children: [
-                      const SizedBox(
-                        height: 90,
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 12),
+                        child: const Text(
+                          'Lisa "Blackpink" Manoban',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87),
+                        ),
                       ),
-                      Stack(
-                        alignment: AlignmentDirectional.bottomEnd,
-                        children: [
-                          const CircleAvatar(
-                            radius: 100,
-                            backgroundImage: AssetImage('assets/lisa.jpg'),
-                          ),
-                          CircleAvatar(
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: const FaIcon(
-                                FontAwesomeIcons.pencilAlt,
-                                size: 18,
+                      Container(
+                        margin: const EdgeInsets.symmetric(vertical: 30),
+                        child: Stack(
+                          alignment: AlignmentDirectional.bottomEnd,
+                          children: [
+                            const CircleAvatar(
+                              radius: 100,
+                              backgroundImage: AssetImage('assets/lisa.jpg'),
+                            ),
+                            CircleAvatar(
+                              child: IconButton(
+                                onPressed: () {},
+                                icon: const FaIcon(
+                                  FontAwesomeIcons.pencilAlt,
+                                  size: 18,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      const Text(
-                        'This is your name',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        height: 30,
+                          ],
+                        ),
                       ),
 
                       //Tweak Buttons

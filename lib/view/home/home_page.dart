@@ -22,8 +22,7 @@ class Homescreen extends StatefulWidget {
 }
 
 class HomescreenState extends State<Homescreen> {
-  //positional parameter will create array based on your order, not in a sequence.
-  final chatModel = ChatList().chatModel;
+  // final chatModel = ChatList().chatModel;
 
   final user = FirebaseAuth.instance.currentUser;
 
@@ -34,12 +33,13 @@ class HomescreenState extends State<Homescreen> {
       appBar: const AppBarHomePage(),
 
       //Contents.
-      body: HomePageBodyView(chatModel: chatModel),
+      body: HomePageBodyView(),
 
       //.
       floatingActionButton: FloatingActionButton(
+        isExtended: true,
         onPressed: () {
-          Navigator.pushNamed(context, messagingDevPage);
+          Navigator.pushNamed(context, messagingPage);
         },
         child: const Icon(Icons.message),
         backgroundColor: Colors.grey.shade200,
@@ -85,6 +85,47 @@ class AppBarHomePage extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class HomePageBodyView extends StatelessWidget {
+  HomePageBodyView({
+    Key? key,
+    // required this.chatModel,
+  }) : super(key: key);
+
+  final chatModel = ChatList().chatModel;
+
+  // final List<Dummy> chatModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      // physics: BouncingScrollPhysics(),
+      itemCount: chatModel.length,
+      itemBuilder: (context, index) {
+        return Card(
+          elevation: 2,
+          child: Padding(
+            padding: const EdgeInsets.all(14.0),
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundImage: AssetImage(chatModel[index].imageUrl),
+              ),
+              title: Text(chatModel[index].personName),
+              subtitle: Text(chatModel[index].textMessage),
+              trailing: Text(chatModel[index].timeStamp),
+              onTap: () {
+                Navigator.pushNamed(context, messagingPage);
+              },
+              onLongPress: () {
+                Navigator.pushNamed(context, visitorProfilePage);
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -175,45 +216,6 @@ class DrawerHomePageView extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class HomePageBodyView extends StatelessWidget {
-  const HomePageBodyView({
-    Key? key,
-    required this.chatModel,
-  }) : super(key: key);
-
-  final List<Dummy> chatModel;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      // physics: BouncingScrollPhysics(),
-      itemCount: chatModel.length,
-      itemBuilder: (context, index) {
-        return Card(
-          elevation: 2,
-          child: Padding(
-            padding: const EdgeInsets.all(14.0),
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundImage: AssetImage(chatModel[index].imageUrl),
-              ),
-              title: Text(chatModel[index].personName),
-              subtitle: Text(chatModel[index].textMessage),
-              trailing: Text(chatModel[index].timeStamp),
-              onTap: () {
-                Navigator.pushNamed(context, messagingPage);
-              },
-              onLongPress: () {
-                Navigator.pushNamed(context, visitorProfilePage);
-              },
-            ),
-          ),
-        );
-      },
     );
   }
 }

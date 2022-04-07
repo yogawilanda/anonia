@@ -90,10 +90,12 @@ class AnoniaAppState extends State<AnoniaApp> with ChangeNotifier {
           ),
         ),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: complementary,
+          backgroundColor: mainDark,
+          focusColor: mainDark,
+          foregroundColor: secondDark,
         ),
         buttonTheme: ButtonThemeData(
-          buttonColor: complementary,
+          buttonColor: mainDark,
         ),
         iconTheme: IconTheme.of(context));
   }
