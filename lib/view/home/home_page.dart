@@ -139,12 +139,13 @@ class DrawerHomePageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           DrawerHeader(
-            curve: Curves.bounceIn,
+            margin: EdgeInsets.only(top: 10),
             decoration: const BoxDecoration(
-              color: Colors.blue,
+              // color: Colors.blue,
               borderRadius: BorderRadius.only(
                 bottomRight: Radius.elliptical(60, 60),
                 bottomLeft: Radius.elliptical(60, 60),
@@ -153,15 +154,23 @@ class DrawerHomePageView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, profilePage);
+                  },
+                  child: Container(
+                    child: StreamBuilder<Object>(
+                      // stream: null,
+                      builder: (context, snapshot) {
+                        return CircleAvatar(
+                          maxRadius: 50,
+                          backgroundImage: AssetImage('assets/lisa.jpg'),
+                        );
+                      },
+                    ),
+                  ),
+                ),
                 Text('Lisa', textScaleFactor: 1.5),
-                StreamBuilder<Object>(
-                    // stream: null,
-                    builder: (context, snapshot) {
-                  return CircleAvatar(
-                    maxRadius: 50,
-                    backgroundImage: AssetImage('assets/lisa.jpg'),
-                  );
-                }),
               ],
             ),
           ),
@@ -169,6 +178,7 @@ class DrawerHomePageView extends StatelessWidget {
           //Properties listTile.
           ListTile(
             title: const Text('Properties'),
+            enabled: false,
             onLongPress: () {
               print('');
             },
@@ -203,7 +213,6 @@ class DrawerHomePageView extends StatelessWidget {
 
           //Setting listTile
           Expanded(
-            flex: 3,
             child: ListTile(
               title: const Text('Settings'),
               leading: const Icon(Icons.settings),

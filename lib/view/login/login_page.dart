@@ -126,6 +126,7 @@ class QuickLogin extends StatelessWidget {
                   final provider =
                       Provider.of<GoogleSignInProvider>(context, listen: false);
                   provider.googleLogin();
+                  print('button pressed');
                 },
                 icon: FaIcon(
                   FontAwesomeIcons.google,

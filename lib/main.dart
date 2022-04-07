@@ -1,4 +1,3 @@
-import 'package:anonia/view/messaging/messaging_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:responsive_framework/responsive_framework.dart';
@@ -89,16 +88,14 @@ class AnoniaAppState extends State<AnoniaApp> with ChangeNotifier {
             color: complementary,
           ),
         ),
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: mainDark,
           focusColor: mainDark,
           foregroundColor: secondDark,
         ),
-        buttonTheme: ButtonThemeData(
+        buttonTheme: const ButtonThemeData(
           buttonColor: mainDark,
         ),
         iconTheme: IconTheme.of(context));
   }
 }
-
-class ColorData {}
