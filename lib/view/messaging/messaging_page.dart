@@ -1,4 +1,7 @@
 import 'package:chat_bubbles/chat_bubbles.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 import 'package:jiffy/jiffy.dart';
@@ -20,25 +23,10 @@ class ChatMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DateTime now = DateTime.now();
-    DateTime inDetails = DateTime.now().subtract(const Duration(minutes: 1));
-    String jiffyhourly = Jiffy().Hms.toString();
     DateTime newDate = DateTime.now();
     var nowLocal = DateTime.now();
     (DateFormat('HH:mm:ss').format(nowLocal));
-    DateFormat('hh:mm a').format(DateTime.now());
-
-    String formatedTime(TimeOfDay selectedTime) {
-      DateTime tempDate = DateFormat.Hms().parse(selectedTime.hour.toString() +
-          ":" +
-          selectedTime.minute.toString() +
-          ":" +
-          '0' +
-          ":" +
-          '0');
-      var dateFormat = DateFormat("h:mm a");
-      return (dateFormat.format(tempDate));
-    }
+    var timesent = DateFormat('hh:mm a').format(DateTime.now());
 
     // bool isRecentlySent = true;
 
@@ -57,35 +45,29 @@ class ChatMessage extends StatelessWidget {
                 Expanded(
                   // current username bubbles name
                   child: Container(
-                    //TODO: find how to align sender and receiver
-                    margin: EdgeInsets.all(8),
-                    // padding: EdgeInsets.symmetric(vertical: 9),
+                    padding: EdgeInsets.symmetric(vertical: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         const Text('Anonym'),
 
                         //Text Container goes here
-                        Row(
-                          // crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(DateFormat('hh:mm a')
-                                .format(DateTime.now())
-                                .toString()),
-                            BubbleNormal(
-                              tail: true,
-                              bubbleRadius: 20,
-                              seen: true,
-                              text: text,
-                              delivered: true,
-                              sent: true,
-                              isSender: true,
-                              textStyle: TextStyle(
-                                color: Colors.white,
-                              ),
-                              color: Colors.blue,
-                            ),
-                          ],
+                        BubbleNormal(
+                          tail: true,
+                          bubbleRadius: 60,
+                          seen: true,
+                          text: text,
+                          delivered: true,
+                          sent: true,
+                          isSender: true,
+                          textStyle: TextStyle(
+                            color: Colors.white,
+                          ),
+                          color: Colors.blue,
+                        ),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Text(timesent),
                         ),
                       ],
                     ),
@@ -209,81 +191,94 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildTextComposer() {
+  _buildTextComposer() {
     return IconTheme(
       data: IconThemeData(color: Theme.of(context).colorScheme.secondary),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
         child: Row(
           children: [
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 0),
-              child: IconButton(
-                icon: const Icon(Icons.add),
-                onPressed: _isComposing
-                    ? () => _handleSubmitted(_textController.text)
-                    : null,
-              ),
-            ),
+            attachFile(),
+            emoticonButton(),
             // text composer/text editor.
             Flexible(
-              child: TextField(
-                controller: _textController,
-                textAlign: TextAlign.left,
-                onChanged: (text) {
-                  setState(() {
-                    _isComposing = text.isNotEmpty;
-                  });
-                },
-                onSubmitted: _isComposing ? _handleSubmitted : null,
-                decoration: InputDecoration(
-                  hintText: 'Send a message',
-                  filled: true,
-                  // todo: fix this border to be bigger than its text.
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    gapPadding: 2,
-                    borderSide: const BorderSide(
-                      color: Colors.transparent,
-                      width: 1,
+              child: Container(
+                height: 70,
+                padding: EdgeInsets.all(2),
+                child: TextField(
+                  controller: _textController,
+                  textAlign: TextAlign.left,
+                  onChanged: (text) {
+                    setState(() {
+                      _isComposing = text.isNotEmpty;
+                    });
+                  },
+                  onSubmitted: _isComposing ? _handleSubmitted : null,
+                  decoration: InputDecoration(
+                    hintText: 'Send a message',
+                    filled: true,
+                    // todo: fix this border to be bigger than its text.
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      gapPadding: 10,
+                      borderSide: const BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
                     ),
                   ),
+                  focusNode: _focusNode,
                 ),
-                focusNode: _focusNode,
               ),
             ),
 
-            Container(
-              // emoticon button
-              margin: const EdgeInsets.symmetric(horizontal: 0.1),
-              child: IconButton(
-                icon: const Icon(Icons.emoji_emotions_rounded),
-                onPressed: _isComposing
-                    ? () => _handleSubmitted(_textController.text)
-                    : null,
-              ),
-            ),
-            Container(
-              // send icon button
-              margin: const EdgeInsets.symmetric(horizontal: 2),
-              child: IconButton(
-                icon: const Icon(Icons.send),
-                onPressed: _isComposing
-                    ? () => _handleSubmitted(_textController.text)
-                    : null,
-              ),
-            ),
+            sendButton(),
           ],
         ),
       ),
     );
   }
 
-  // @override
-  // void dispose() {
-  //   for (var message in _messages) {
-  //     message.animationController.dispose();
-  //   }
-  //   super.dispose();
-  // }
+  attachFile() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 0),
+      child: IconButton(
+        icon: const Icon(Icons.add),
+        onPressed:
+            _isComposing ? () => _handleSubmitted(_textController.text) : null,
+      ),
+    );
+  }
+
+  emoticonButton() {
+    return Container(
+      // emoticon button
+      margin: const EdgeInsets.symmetric(horizontal: 0.1),
+      child: IconButton(
+        icon: const Icon(Icons.emoji_emotions_rounded),
+        color: Colors.white,
+        splashColor: Colors.black,
+        onPressed: () => EmojiPickerBuilder,
+      ),
+    );
+  }
+
+  sendButton() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 2),
+      child: IconButton(
+        icon: const Icon(Icons.send),
+        onPressed:
+            _isComposing ? () => _handleSubmitted(_textController.text) : null,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    for (var message in _messages) {
+      message.animationController.dispose();
+    }
+    super.dispose();
+  }
 }
