@@ -50,6 +50,7 @@ class HomescreenState extends State<Homescreen> {
           ),
         ],
       ),
+
       //Contents.
       body: ListView.builder(
         // physics: BouncingScrollPhysics(),
@@ -77,6 +78,8 @@ class HomescreenState extends State<Homescreen> {
           );
         },
       ),
+
+      //.
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, messagingDevPage);
@@ -84,6 +87,8 @@ class HomescreenState extends State<Homescreen> {
         child: const Icon(Icons.message),
         backgroundColor: Colors.grey.shade200,
       ),
+
+      //.
       drawer: Drawer(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

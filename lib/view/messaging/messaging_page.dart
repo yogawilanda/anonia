@@ -1,5 +1,6 @@
-import 'package:chat_bubbles/bubbles/bubble_normal.dart';
 import 'package:chat_bubbles/chat_bubbles.dart';
+import 'package:intl/intl.dart';
+
 import 'package:jiffy/jiffy.dart';
 
 import 'package:flutter/material.dart';
@@ -8,7 +9,7 @@ import 'package:anonia/route/route.dart' as route;
 
 //ChatBubble goes here
 class ChatMessage extends StatelessWidget {
-  ChatMessage({
+  const ChatMessage({
     required this.text,
     required this.animationController,
     Key? key,
@@ -21,9 +22,25 @@ class ChatMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     final DateTime now = DateTime.now();
     DateTime inDetails = DateTime.now().subtract(const Duration(minutes: 1));
-    String jiffyhourly = Jiffy().EEEE.toString();
+    String jiffyhourly = Jiffy().Hms.toString();
+    DateTime newDate = DateTime.now();
+    var nowLocal = DateTime.now();
+    (DateFormat('HH:mm:ss').format(nowLocal));
+    DateFormat('hh:mm a').format(DateTime.now());
 
-    bool isRecentlySent = true;
+    String formatedTime(TimeOfDay selectedTime) {
+      DateTime tempDate = DateFormat.Hms().parse(selectedTime.hour.toString() +
+          ":" +
+          selectedTime.minute.toString() +
+          ":" +
+          '0' +
+          ":" +
+          '0');
+      var dateFormat = DateFormat("h:mm a");
+      return (dateFormat.format(tempDate));
+    }
+
+    // bool isRecentlySent = true;
 
     return SizeTransition(
       sizeFactor:
@@ -33,17 +50,14 @@ class ChatMessage extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 10.0),
         child: Column(
           children: [
-            Center(
-              child: DateChip(
-                date: now,
-              ),
-            ),
+            DateStamp(now: newDate),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.start,test
               children: [
                 Expanded(
                   // current username bubbles name
                   child: Container(
+                    //TODO: find how to align sender and receiver
                     margin: EdgeInsets.all(8),
                     // padding: EdgeInsets.symmetric(vertical: 9),
                     child: Column(
@@ -53,23 +67,23 @@ class ChatMessage extends StatelessWidget {
 
                         //Text Container goes here
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          // crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Text(inDetails.toString()),
-                            Flexible(
-                              child: BubbleNormal(
-                                tail: true,
-                                bubbleRadius: 20,
-                                seen: true,
-                                text: text,
-                                delivered: true,
-                                sent: true,
-                                isSender: true,
-                                textStyle: TextStyle(
-                                  color: Colors.white,
-                                ),
-                                color: Colors.blue,
+                            Text(DateFormat('hh:mm a')
+                                .format(DateTime.now())
+                                .toString()),
+                            BubbleNormal(
+                              tail: true,
+                              bubbleRadius: 20,
+                              seen: true,
+                              text: text,
+                              delivered: true,
+                              sent: true,
+                              isSender: true,
+                              textStyle: TextStyle(
+                                color: Colors.white,
                               ),
+                              color: Colors.blue,
                             ),
                           ],
                         ),
@@ -81,6 +95,24 @@ class ChatMessage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class DateStamp extends StatelessWidget {
+  const DateStamp({
+    Key? key,
+    required this.now,
+  }) : super(key: key);
+
+  final DateTime now;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: DateChip(
+        date: now,
       ),
     );
   }
@@ -102,7 +134,6 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   final List<ChatMessage> _messages = [];
   final _textController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
-  // final user = FirebaseAuth.instance.currentUser!;
   bool _isComposing = false;
 
   void _handleSubmitted(String text) {
@@ -130,6 +161,7 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
       appBar: AppBar(
         titleSpacing: 8,
         title: const Text('Someone\'s name'),
+        centerTitle: true,
         //TODO: Make the Circled avatar not overfilling the appbar
         actions: <Widget>[
           Row(
@@ -139,19 +171,10 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
                 child: CircleAvatar(
                   backgroundImage: AssetImage('assets/lisa.jpg'),
                 ),
-
-                //  user.photoURL == user.emailVerified? CircleAvatar(
-                //         child: Image.asset('assets/lisa.jpg'),
-                //       )
-                //     : CircleAvatar(
-                //         radius: 18,
-                //         backgroundImage: NetworkImage(user.photoURL!),
-                //       ),
               ),
             ],
           ),
         ],
-        backgroundColor: Colors.blue,
         elevation: Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
       ),
       body: Container(
@@ -256,11 +279,11 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
     );
   }
 
-  @override
-  void dispose() {
-    for (var message in _messages) {
-      message.animationController.dispose();
-    }
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   for (var message in _messages) {
+  //     message.animationController.dispose();
+  //   }
+  //   super.dispose();
+  // }
 }
