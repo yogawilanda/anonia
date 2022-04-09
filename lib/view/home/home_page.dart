@@ -1,6 +1,6 @@
 import 'package:anonia/model/dummy_list.dart';
 
-import 'package:anonia/route/google_sign_in.dart';
+import 'package:anonia/authentication/google_sign_in.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 

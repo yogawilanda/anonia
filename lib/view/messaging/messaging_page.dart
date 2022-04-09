@@ -23,10 +23,7 @@ class ChatMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateTime newDate = DateTime.now();
-    var nowLocal = DateTime.now();
-    (DateFormat('HH:mm:ss').format(nowLocal));
-    var timesent = DateFormat('hh:mm a').format(DateTime.now());
+    
 
     // bool isRecentlySent = true;
 
@@ -38,7 +35,6 @@ class ChatMessage extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 10.0),
         child: Column(
           children: [
-            DateStamp(now: newDate),
             Row(
               // crossAxisAlignment: CrossAxisAlignment.start,test
               children: [
@@ -65,10 +61,7 @@ class ChatMessage extends StatelessWidget {
                           ),
                           color: Colors.blue,
                         ),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: Text(timesent),
-                        ),
+                        
                       ],
                     ),
                   ),
@@ -83,20 +76,24 @@ class ChatMessage extends StatelessWidget {
 }
 
 class DateStamp extends StatelessWidget {
-  const DateStamp({
+  DateStamp({
     Key? key,
     required this.now,
   }) : super(key: key);
 
   final DateTime now;
 
+ DateTime newDate = DateTime.now();
+    var nowLocal = DateTime.now();
+    (DateFormat('HH:mm:ss').format(nowLocal));
+    var timesent = DateFormat('hh:mm a').format(DateTime.now());
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: DateChip(
-        date: now,
-      ),
-    );
+    return Align(
+                          alignment: Alignment.bottomRight,
+                          child: Text(timesent),
+                        );
   }
 }
 
@@ -125,6 +122,7 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
     });
     var message = ChatMessage(
       text: text,
+      
       animationController: AnimationController(
         duration: const Duration(milliseconds: 300),
         vsync: this,
@@ -274,11 +272,11 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
     );
   }
 
-  @override
-  void dispose() {
-    for (var message in _messages) {
-      message.animationController.dispose();
-    }
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   for (var message in _messages) {
+  //     message.animationController.dispose();
+  //   }
+  //   super.dispose();
+  // }
 }

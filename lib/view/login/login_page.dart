@@ -1,4 +1,4 @@
-import 'package:anonia/route/google_sign_in.dart';
+import 'package:anonia/authentication/google_sign_in.dart';
 import 'package:anonia/view/login/desktop_login.dart';
 import 'package:anonia/view/login/mobile_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
