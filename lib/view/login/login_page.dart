@@ -1,6 +1,7 @@
 import 'package:anonia/authentication/google_sign_in.dart';
 import 'package:anonia/view/login/desktop_login.dart';
 import 'package:anonia/view/login/mobile_login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import '../../route/route.dart' as route;
@@ -122,12 +123,20 @@ class QuickLogin extends StatelessWidget {
               ),
               //Google Login
               IconButton(
-                onPressed: () {
-                  final provider =
-                      Provider.of<GoogleSignInProvider>(context, listen: false);
-                  provider.googleLogin();
-                  print('button pressed');
+                // onPressed: () {
+                //   final provider =
+                //       Provider.of<GoogleSignInProvider>(context, listen: false);
+                //   provider.googleLogin();
+                //   print('button pressed');
+                // },
+
+                onPressed: () async {
+                  final provider = Provider.of(context, listen: false);
+                  provider.then((User user) {
+                    Navigator.of(context).pushNamed(route.homeScreenPage);
+                  }).catchError((e) => print(e));
                 },
+
                 icon: FaIcon(
                   FontAwesomeIcons.google,
                   color: Colors.blue,

@@ -1,99 +1,127 @@
 import 'package:chat_bubbles/chat_bubbles.dart';
+
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
-import 'package:jiffy/jiffy.dart';
-
 import 'package:flutter/material.dart';
-
-import 'package:anonia/route/route.dart' as route;
 
 //ChatBubble goes here
 class ChatMessage extends StatelessWidget {
   const ChatMessage({
+    required this.dateSent,
     required this.text,
     required this.animationController,
+    required this.x,
+    // required this.waktu,
     Key? key,
   }) : super(key: key);
   final String text;
   final AnimationController animationController;
+  final DateTime x;
+  final DateTime dateSent;
+
   // final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
-    
-
+    var timesent = DateFormat('hh:mm a').format(x);
     // bool isRecentlySent = true;
 
     return SizeTransition(
       sizeFactor:
           CurvedAnimation(parent: animationController, curve: Curves.easeOut),
       axisAlignment: 0.0,
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10.0),
-        child: Column(
-          children: [
-            Row(
-              // crossAxisAlignment: CrossAxisAlignment.start,test
-              children: [
-                Expanded(
-                  // current username bubbles name
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        const Text('Anonym'),
-
-                        //Text Container goes here
-                        BubbleNormal(
-                          tail: true,
-                          bubbleRadius: 60,
-                          seen: true,
-                          text: text,
-                          delivered: true,
-                          sent: true,
-                          isSender: true,
-                          textStyle: TextStyle(
-                            color: Colors.white,
-                          ),
-                          color: Colors.blue,
+      child: Column(
+        children: [
+          DateChip(date: x),
+          Row(
+            // crossAxisAlignment: CrossAxisAlignment.start,test
+            children: [
+              Expanded(
+                // current username bubbles name
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      //Daily
+                      Container(
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        child: const Text(
+                          'Anonym',
+                          style: TextStyle(fontSize: 14),
                         ),
-                        
-                      ],
-                    ),
+                      ),
+
+                      //Text Container goes here
+                      BubbleNormal(
+                        tail: true,
+                        bubbleRadius: 120,
+                        seen: true,
+                        text: text,
+                        delivered: true,
+                        sent: true,
+                        isSender: true,
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                        color: Colors.blue,
+                      ),
+
+                      //TimeStamp
+                      Container(
+                          margin: EdgeInsets.symmetric(horizontal: 20),
+                          child: DateStamp(waktu: x)),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
 }
 
 class DateStamp extends StatelessWidget {
-  DateStamp({
+  const DateStamp({
+    required this.waktu,
     Key? key,
-    required this.now,
   }) : super(key: key);
 
-  final DateTime now;
-
- DateTime newDate = DateTime.now();
-    var nowLocal = DateTime.now();
-    (DateFormat('HH:mm:ss').format(nowLocal));
-    var timesent = DateFormat('hh:mm a').format(DateTime.now());
+  final DateTime waktu;
 
   @override
   Widget build(BuildContext context) {
+    // var  nowLocal = DateTime.now();
+    // (DateFormat('HH:mm:ss').format(nowLocal));
+    var timesent = DateFormat('hh:mm a').format(waktu);
+
     return Align(
-                          alignment: Alignment.bottomRight,
-                          child: Text(timesent),
-                        );
+      alignment: Alignment.bottomRight,
+      child: Text(timesent.toString()),
+    );
+  }
+}
+
+class DateSent extends StatelessWidget {
+  const DateSent({
+    required this.dalamHariIni,
+    Key? key,
+  }) : super(key: key);
+
+  final DateTime dalamHariIni;
+
+  @override
+  Widget build(BuildContext context) {
+    var nowLocal = DateTime.now();
+    // (DateFormat('HH:mm:ss').format(nowLocal));
+
+    return DateChip(date: nowLocal);
   }
 }
 
@@ -121,8 +149,9 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
       _isComposing = false;
     });
     var message = ChatMessage(
+      dateSent: DateTime.now(),
       text: text,
-      
+      x: DateTime.now(),
       animationController: AnimationController(
         duration: const Duration(milliseconds: 300),
         vsync: this,
@@ -272,11 +301,11 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
     );
   }
 
-  // @override
-  // void dispose() {
-  //   for (var message in _messages) {
-  //     message.animationController.dispose();
-  //   }
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    for (var message in _messages) {
+      message.animationController.dispose();
+    }
+    super.dispose();
+  }
 }

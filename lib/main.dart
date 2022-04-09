@@ -49,9 +49,9 @@ class AnoniaAppState extends State<AnoniaApp> with ChangeNotifier {
           color: const Color(0xFFF5F5F5),
         ),
       ),
-      initialRoute: '/',
       // home: ChatPage(),
       onGenerateRoute: route.getRoute,
+      initialRoute: '/',
     );
   }
 
