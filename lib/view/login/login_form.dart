@@ -68,7 +68,8 @@ class FormLogin extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   //Todo: refactor this name.
-                  Navigator.pushNamed(context, route.homeScreenPage);
+                  Navigator.pushNamed(context, route.homeScreenPage,
+                      arguments: route.homeScreenPage);
                 },
                 child: const Text('Login'),
               ),

@@ -13,14 +13,14 @@ class MobileViewLogin extends StatelessWidget {
       child: Column(
         children: [
           //spacer
-          const SizedBox(height: 40.0),
+          // const SizedBox(height: 40.0),
           Column(
             children: [
               //Image Hero
               Container(
-                margin: const EdgeInsets.only(top: 15),
-                width: 300,
-                height: 300,
+                margin: const EdgeInsets.only(top: 60),
+                width: 150,
+                height: 150,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
@@ -71,7 +71,6 @@ class MobileViewLogin extends StatelessWidget {
 
           //Register Actions
           Expanded(
-            flex: 2,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

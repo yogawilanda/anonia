@@ -1,7 +1,12 @@
+import 'package:anonia/view/login/login_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:responsive_framework/responsive_framework.dart';
 
+import 'authentication/google_sign_in.dart';
+import 'authentication/appGate.dart';
 import 'route/route.dart' as route;
 
 import 'package:firebase_core/firebase_core.dart';
@@ -16,6 +21,14 @@ void main() async {
   runApp(const AnoniaApp());
 }
 
+class Authenticator {
+  static Future<FirebaseApp> initializeFirebase() async {
+    FirebaseApp firebaseApp = await Firebase.initializeApp();
+
+    return firebaseApp;
+  }
+}
+
 class AnoniaApp extends StatefulWidget {
   const AnoniaApp({Key? key}) : super(key: key);
 
@@ -28,31 +41,48 @@ class AnoniaAppState extends State<AnoniaApp> with ChangeNotifier {
 
   @override
   Widget build(BuildContext context) {
-    const widget = Widget;
+    // const widget = Widget;
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
+    return ChangeNotifierProvider(
+      create: (context) => GoogleSignInProvider(),
+      builder: (context, widget) => MaterialApp(
+        debugShowCheckedModeBanner: false,
 
-      theme: ThemeData.dark(),
-      title: title,
-      builder: (context, widget) => ResponsiveWrapper.builder(
-        widget,
-        maxWidth: MediaQuery.of(context).size.width,
-        minWidth: 480,
-        defaultScale: true,
-        breakpoints: [
-          const ResponsiveBreakpoint.resize(480, name: MOBILE),
-          const ResponsiveBreakpoint.autoScale(1366, name: TABLET),
-          const ResponsiveBreakpoint.resize(1366, name: DESKTOP),
-        ],
-        background: Container(
-          color: const Color(0xFFF5F5F5),
-        ),
+        theme: ThemeData.dark(),
+
+        onGenerateRoute: route.getRoute,
+        // initialRoute: '/',
+        home: const AppGate(),
+        // home: LoginPage(),
       ),
       // home: ChatPage(),
-      onGenerateRoute: route.getRoute,
-      initialRoute: '/',
     );
+
+    // return MaterialApp(
+    //   debugShowCheckedModeBanner: false,
+
+    //   theme: ThemeData.dark(),
+    //   title: title,
+    //   builder: (context, widget) =>
+    //
+    // ResponsiveWrapper.builder(
+    //     widget,
+    //     maxWidth: MediaQuery.of(context).size.width,
+    //     minWidth: 480,
+    //     defaultScale: true,
+    //     breakpoints: [
+    //       const ResponsiveBreakpoint.resize(480, name: MOBILE),
+    //       const ResponsiveBreakpoint.autoScale(1366, name: TABLET),
+    //       const ResponsiveBreakpoint.resize(1366, name: DESKTOP),
+    //     ],
+    //     background: Container(
+    //       color: const Color(0xFFF5F5F5),
+    //     ),
+    //   ),
+    //   // home: ChatPage(),
+    //   onGenerateRoute: route.getRoute,
+    //   initialRoute: '/',
+    // );
   }
 
   themeManagement() {

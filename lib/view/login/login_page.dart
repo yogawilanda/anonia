@@ -94,7 +94,7 @@ class QuickLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 50),
+      margin: const EdgeInsets.only(top: 30),
       padding: const EdgeInsets.symmetric(vertical: 30),
       child: Column(
         children: [
@@ -103,9 +103,9 @@ class QuickLogin extends StatelessWidget {
             style: TextStyle(
                 fontSize: 16, fontWeight: FontWeight.w500, color: Colors.blue),
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          // const SizedBox(
+          //   height: 10,
+          // ),
           ButtonBar(
             alignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -123,20 +123,12 @@ class QuickLogin extends StatelessWidget {
               ),
               //Google Login
               IconButton(
-                // onPressed: () {
-                //   final provider =
-                //       Provider.of<GoogleSignInProvider>(context, listen: false);
-                //   provider.googleLogin();
-                //   print('button pressed');
-                // },
-
                 onPressed: () async {
-                  final provider = Provider.of(context, listen: false);
-                  provider.then((User user) {
-                    Navigator.of(context).pushNamed(route.homeScreenPage);
-                  }).catchError((e) => print(e));
+                  final provider =
+                      Provider.of<GoogleSignInProvider>(context, listen: false);
+                  provider.googleLogin();
+                  // Navigator.pushNamed(context, route.homeScreenPage);
                 },
-
                 icon: FaIcon(
                   FontAwesomeIcons.google,
                   color: Colors.blue,
