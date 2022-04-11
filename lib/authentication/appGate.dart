@@ -1,6 +1,9 @@
 import 'package:anonia/view/user_login_success.dart';
+
 import 'package:anonia/view/login/login_page.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 
 //if this method fail, use the main.dart method again.

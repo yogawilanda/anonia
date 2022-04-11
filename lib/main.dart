@@ -1,6 +1,7 @@
 import 'package:anonia/view/login/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import 'package:responsive_framework/responsive_framework.dart';
@@ -49,10 +50,20 @@ class AnoniaAppState extends State<AnoniaApp> with ChangeNotifier {
         debugShowCheckedModeBanner: false,
 
         theme: ThemeData.dark(),
-
         onGenerateRoute: route.getRoute,
-        // initialRoute: '/',
-        home: const AppGate(),
+        initialRoute: '/',
+        // home: const AppGate(),
+        builder: (context, widget) => ResponsiveWrapper.builder(
+          widget,
+          breakpoints: [
+            const ResponsiveBreakpoint.resize(480, name: MOBILE),
+            const ResponsiveBreakpoint.autoScale(1366, name: TABLET),
+            const ResponsiveBreakpoint.resize(1366, name: DESKTOP),
+          ],
+          background: const AppGate(),
+
+          // child: const AppGate(),
+        ),
         // home: LoginPage(),
       ),
       // home: ChatPage(),

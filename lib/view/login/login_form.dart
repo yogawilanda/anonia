@@ -29,25 +29,29 @@ class FormLogin extends StatelessWidget {
         child: Column(
           children: [
             //Textfield is a box that can be filled with user input keyboard
-            TextField(
-              controller: _usernameController,
-              decoration: const InputDecoration(
-                labelText: 'Enter Your Persona ID',
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 5),
+              child: TextField(
+                controller: _usernameController,
+                decoration: const InputDecoration(
+                  labelText: 'Enter Your Persona ID',
+                ),
               ),
             ),
-
-            //Manual Spacer
-            const SizedBox(height: 12.0),
 
             //Passwords Field
-            TextField(
-              controller: _passwordController,
-              focusNode: _passwordFocusNode,
-              decoration: const InputDecoration(
-                labelText: 'Your Treasure Key',
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 5),
+              child: TextField(
+                controller: _passwordController,
+                focusNode: _passwordFocusNode,
+                decoration: const InputDecoration(
+                  labelText: 'Your Treasure Key',
+                ),
+                obscureText: true,
               ),
-              obscureText: true,
             ),
+
             //ForgotPasswordButton
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
