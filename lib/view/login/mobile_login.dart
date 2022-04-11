@@ -18,24 +18,19 @@ class MobileViewLogin extends StatelessWidget {
             children: [
               //Image Hero
               Container(
-                margin: const EdgeInsets.only(top: 60),
-                width: 150,
-                height: 150,
+                margin: const EdgeInsets.only(top: 60, bottom: 40),
+                width: 200,
+                height: 200,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                    image: AssetImage('assets/anonia-logo.png'),
+                    image: const AssetImage('assets/anonia-logo.png'),
                     opacity: 0.6,
                     colorFilter: ColorFilter.mode(
                         Colors.grey.shade600, BlendMode.overlay),
                   ),
                   // borderRadius: BorderRadius.circular(30),
                 ),
-              ),
-
-              //Simple Spacer
-              const SizedBox(
-                height: 20.0,
               ),
 
               //Title on Login Page
@@ -74,7 +69,7 @@ class MobileViewLogin extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Don\'t have an account yet?'),
+                const Text('Don\'t have an account yet?'),
                 TextButton(
                   onPressed: () {
                     Navigator.pushNamed(context, route.registerPage);

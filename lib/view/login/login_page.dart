@@ -1,10 +1,15 @@
 import 'package:anonia/authentication/google_sign_in.dart';
+
 import 'package:anonia/view/login/desktop_login.dart';
+
 import 'package:anonia/view/login/mobile_login.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:flutter/material.dart';
+
 import '../../route/route.dart' as route;
+
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -18,9 +23,8 @@ class LoginPageState extends State<LoginPage> {
   //TODONE: create controller variables in here
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _usernameFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
-  final _loginAnonymousKey = GlobalKey();
+
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
   @override
@@ -67,7 +71,7 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 
-  String passwordValidator(String value) {
+  passwordValidator(String value) {
     if (value.isEmpty) {
       return "*Masukan Password kamu dahulu";
     } else if (value.length < 6) {
@@ -76,7 +80,7 @@ class LoginPageState extends State<LoginPage> {
     return 'Password benar';
   }
 
-  String userIdValidator(String value) {
+  userIdValidator(String value) {
     if (value.isEmpty) {
       return "*Masukan Password kamu dahulu";
     } else if (value.length < 6) {
@@ -116,7 +120,7 @@ class QuickLogin extends StatelessWidget {
                       Provider.of<GoogleSignInProvider>(context, listen: false);
                   provider.googleLogin();
                 },
-                icon: FaIcon(
+                icon: const FaIcon(
                   FontAwesomeIcons.mask,
                   color: Colors.blue,
                 ),
@@ -129,7 +133,7 @@ class QuickLogin extends StatelessWidget {
                   provider.googleLogin();
                   // Navigator.pushNamed(context, route.homeScreenPage);
                 },
-                icon: FaIcon(
+                icon: const FaIcon(
                   FontAwesomeIcons.google,
                   color: Colors.blue,
                 ),
@@ -142,7 +146,7 @@ class QuickLogin extends StatelessWidget {
                       Provider.of<GoogleSignInProvider>(context, listen: false);
                   provider.googleLogin();
                 },
-                icon: FaIcon(
+                icon: const FaIcon(
                   FontAwesomeIcons.facebook,
                   color: Colors.blue,
                 ),
@@ -154,7 +158,7 @@ class QuickLogin extends StatelessWidget {
                       Provider.of<GoogleSignInProvider>(context, listen: false);
                   provider.googleLogin();
                 },
-                icon: FaIcon(
+                icon: const FaIcon(
                   FontAwesomeIcons.twitter,
                   color: Colors.blue,
                 ),
@@ -167,7 +171,7 @@ class QuickLogin extends StatelessWidget {
                       Provider.of<GoogleSignInProvider>(context, listen: false);
                   provider.googleLogin();
                 },
-                icon: FaIcon(
+                icon: const FaIcon(
                   FontAwesomeIcons.phone,
                   color: Colors.blue,
                 ),

@@ -22,7 +22,7 @@ class FormLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 4),
+      margin: const EdgeInsets.symmetric(horizontal: 4),
       child: Form(
         autovalidateMode: AutovalidateMode.always,
         key: formkey,

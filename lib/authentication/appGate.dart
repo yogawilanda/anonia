@@ -20,7 +20,7 @@ class AppGate extends StatelessWidget {
             } else if (snapshot.hasError) {
               return const Center(child: Text('Something went wrong!'));
             } else {
-              return LoginPage();
+              return const LoginPage();
             }
           },
         ),

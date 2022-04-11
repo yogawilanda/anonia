@@ -16,7 +16,7 @@ class _ProfilePageState extends State<ProfilePage> {
         body: Stack(
       children: [
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               image: DecorationImage(
                   image: NetworkImage(
                       'https://i.pinimg.com/originals/ec/38/22/ec382251c6bb0d1ce7f174fd536c0870.jpg'),
@@ -24,12 +24,12 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         SafeArea(
           child: Container(
-            // alignment: Alignment.topLeft,
+            margin: const EdgeInsets.all(0),
             child: ButtonBar(
               alignment: MainAxisAlignment.end,
               children: [
                 Container(
-                  margin: EdgeInsets.only(right: 15, top: 15),
+                  margin: const EdgeInsets.only(right: 15, top: 15),
                   height: 60,
                   width: 60,
                   decoration: BoxDecoration(
@@ -51,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
         ),
-        ScrollableProfile(),
+        const ScrollableProfile(),
       ],
     ));
   }
@@ -79,7 +79,11 @@ class ScrollableProfile extends StatelessWidget {
                   left: 225,
                   top: 5,
                   child: Container(
-                    child: FaIcon(
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                    ),
+                    child: const FaIcon(
                       FontAwesomeIcons.angleUp,
                       color: Colors.black,
                     ),
@@ -98,12 +102,14 @@ class ScrollableProfile extends StatelessWidget {
                     itemCount: 1,
                     itemBuilder: (BuildContext context, int i) {
                       return Container(
+                        color: Colors.transparent,
                         child: Center(
                           child: Stack(
                             children: [
                               Center(
                                 child: Container(
-                                  margin: EdgeInsets.symmetric(vertical: 12),
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 12),
                                   child: const Text(
                                     'Lisa "Blackpink" Manoban',
                                     style: TextStyle(
@@ -114,7 +120,8 @@ class ScrollableProfile extends StatelessWidget {
                                 ),
                               ),
                               Container(
-                                margin: EdgeInsets.symmetric(vertical: 30),
+                                margin:
+                                    const EdgeInsets.symmetric(vertical: 30),
                                 child: Center(
                                   child: Container(
                                     margin: const EdgeInsets.symmetric(
@@ -180,6 +187,7 @@ void profileDescDraggable(BuildContext context) {
           itemCount: 1,
           itemBuilder: (BuildContext context, int i) {
             return Container(
+              margin: const EdgeInsets.all(0),
               child: Center(
                 child: Column(
                   children: [
@@ -218,6 +226,7 @@ void profileDescDraggable(BuildContext context) {
 
                     //Tweak Buttons
                     Container(
+                      color: Colors.transparent,
                       // decoration: BoxDecoration(
                       //     borderRadius: BorderRadius.circular(30), color: Colors.blue),
                       // margin: const EdgeInsets.symmetric(horizontal: 24),
@@ -265,11 +274,6 @@ void profileDescDraggable(BuildContext context) {
                         ],
                       ),
                     ),
-
-                    const SizedBox(
-                      height: 60,
-                    ),
-                    //Informations
                   ],
                 ),
               ),
