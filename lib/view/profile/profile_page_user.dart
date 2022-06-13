@@ -12,12 +12,33 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          // backgroundColor: Colors.transparent,
+          title: Text('Profile'),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.settings),
+            ),
+          ],
+        ),
         //todo:wrap this into draggable widget
         body: Stack(
-      children: [
-        ScrollableProfile(),
-      ],
-    ));
+          children: [
+            Center(
+                child: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(
+                        'https://w0.peakpx.com/wallpaper/260/402/HD-wallpaper-lisa-asian-band-beautiful-beauty-black-hair-blackpink-portrait-pretty-singer.jpg',
+                      ),
+                      fit: BoxFit.fitHeight)),
+            )),
+            ScrollableProfile(),
+          ],
+        ));
   }
 }
 
@@ -36,7 +57,7 @@ class ScrollableProfile extends StatelessWidget {
       builder: (BuildContext context, ScrollController scrollController) {
         return Container(
           decoration: BoxDecoration(
-              color: Colors.blue[100],
+              color: Colors.black87,
               borderRadius: BorderRadiusDirectional.only(
                   topStart: Radius.circular(90), topEnd: Radius.circular(60))),
           child: ListView.builder(
@@ -72,7 +93,7 @@ class ScrollableProfile extends StatelessWidget {
                         height: 30,
                       ),
                       const Text(
-                        'This is your name',
+                        'Lisa',
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),

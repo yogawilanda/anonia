@@ -31,7 +31,8 @@ class AnoniaAppState extends State<AnoniaApp> with ChangeNotifier {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+      theme:
+          ThemeData(brightness: Brightness.dark, primaryColorDark: Colors.cyan),
       title: title,
       builder: (context, widget) => ResponsiveWrapper.builder(
         widget,

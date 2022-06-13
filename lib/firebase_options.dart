@@ -4,16 +4,6 @@ import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
-/// Default [FirebaseOptions] for use with your Firebase apps.
-///
-/// Example:
-/// ```dart
-/// import 'firebase_options.dart';
-/// // ...
-/// await Firebase.initializeApp(
-///   options: DefaultFirebaseOptions.currentPlatform,
-/// );
-/// ```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
@@ -60,7 +50,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '45132570652',
     projectId: 'anonia-project',
     storageBucket: 'anonia-project.appspot.com',
-    iosClientId: '45132570652-hleu952nd6nvlgmf2c36909gq2vaf4fa.apps.googleusercontent.com',
+    iosClientId:
+        '45132570652-hleu952nd6nvlgmf2c36909gq2vaf4fa.apps.googleusercontent.com',
     iosBundleId: 'com.anonia.app',
   );
 }

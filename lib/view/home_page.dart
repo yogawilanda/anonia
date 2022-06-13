@@ -94,12 +94,12 @@ class HomescreenState extends State<Homescreen> {
           'Anonia',
           style: TextStyle(
             fontSize: 24,
-            color: Colors.blue,
+            // color: Colors.blue,
           ),
         ),
         centerTitle: true,
         elevation: 1,
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
         actions: [
           IconButton(
             onPressed: () {
@@ -114,7 +114,7 @@ class HomescreenState extends State<Homescreen> {
         ],
       ),
       //Contents.
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       body: ListView.builder(
         // physics: BouncingScrollPhysics(),
         itemCount: personData.length,
@@ -146,16 +146,15 @@ class HomescreenState extends State<Homescreen> {
           Navigator.pushNamed(context, messagingDevPage);
         },
         child: const Icon(Icons.message),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.white,
       ),
       drawer: Drawer(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             DrawerHeader(
-              curve: Curves.bounceIn,
+              // curve: Curves.bounceIn,
               decoration: const BoxDecoration(
-                color: Colors.blue,
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.elliptical(60, 60),
                   bottomLeft: Radius.elliptical(60, 60),

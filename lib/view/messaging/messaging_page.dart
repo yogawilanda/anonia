@@ -116,19 +116,10 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
                 child: CircleAvatar(
                   backgroundImage: AssetImage('assets/lisa.jpg'),
                 ),
-
-                //  user.photoURL == user.emailVerified? CircleAvatar(
-                //         child: Image.asset('assets/lisa.jpg'),
-                //       )
-                //     : CircleAvatar(
-                //         radius: 18,
-                //         backgroundImage: NetworkImage(user.photoURL!),
-                //       ),
               ),
             ],
           ),
         ],
-        backgroundColor: Colors.blue,
         elevation: Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
       ),
       body: Container(
@@ -167,7 +158,8 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
     return IconTheme(
       data: IconThemeData(color: Theme.of(context).colorScheme.secondary),
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
+        margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+        height: 70,
         child: Row(
           children: [
             Container(
@@ -192,16 +184,18 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
                 onSubmitted: _isComposing ? _handleSubmitted : null,
                 decoration: InputDecoration(
                   hintText: 'Send a message',
-                  filled: true,
+                  // filled: true,
                   // todo: fix this border to be bigger than its text.
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    gapPadding: 2,
+                    borderRadius: BorderRadius.circular(15),
+                    gapPadding: 0,
                     borderSide: const BorderSide(
                       color: Colors.transparent,
-                      width: 1,
+                      width: 15,
                     ),
                   ),
+                  isDense: true,
+                  hintStyle: TextStyle(letterSpacing: 1),
                   //if the method above wont display as its will, back to the below way.
                   // OutlineInputBorder(
                   //   borderRadius: BorderRadius.circular(300),
