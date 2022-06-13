@@ -1,65 +1,125 @@
-import 'package:anonia/authenticator.dart';
-import 'package:chat_bubbles/bubbles/bubble_normal.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:chat_bubbles/chat_bubbles.dart';
+
+import 'package:intl/intl.dart';
+
 import 'package:flutter/material.dart';
-//import 'package:anonia/route/route.dart';
-import '../../route/route.dart' as route;
 
 //ChatBubble goes here
 class ChatMessage extends StatelessWidget {
-  ChatMessage({
+  const ChatMessage({
+    required this.dateSent,
     required this.text,
     required this.animationController,
+    required this.x,
+    // required this.waktu,
     Key? key,
   }) : super(key: key);
   final String text;
   final AnimationController animationController;
+  final DateTime x;
+  final DateTime dateSent;
+
   // final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
+    var timesent = DateFormat('hh:mm a').format(x);
+    // bool isRecentlySent = true;
+
     return SizeTransition(
       sizeFactor:
           CurvedAnimation(parent: animationController, curve: Curves.easeOut),
       axisAlignment: 0.0,
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              // current username bubbles name
-              child: Container(
-                margin: EdgeInsets.all(8),
-                // padding: EdgeInsets.symmetric(vertical: 9),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: const Text('Anonym'),
-                    ),
-                    BubbleNormal(
-                      tail: true,
-                      bubbleRadius: 20,
-                      seen: true,
-                      text: text,
-                      delivered: true,
-                      sent: true,
-                      isSender: true,
-                      textStyle: TextStyle(
-                        color: Colors.white,
+      child: Column(
+        children: [
+          DateChip(date: x),
+          Row(
+            // crossAxisAlignment: CrossAxisAlignment.start,test
+            children: [
+              Expanded(
+                // current username bubbles name
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      //Daily
+                      Container(
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        child: const Text(
+                          'Anonym',
+                          style: TextStyle(fontSize: 14),
+                        ),
                       ),
-                      color: Colors.blue,
-                    ),
-                  ],
+
+                      //Text Container goes here
+                      BubbleNormal(
+                        tail: true,
+                        bubbleRadius: 120,
+                        seen: true,
+                        text: text,
+                        delivered: true,
+                        sent: true,
+                        isSender: true,
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                        color: Colors.blue,
+                      ),
+
+                      //TimeStamp
+                      Container(
+                          margin: EdgeInsets.symmetric(horizontal: 20),
+                          child: DateStamp(waktu: x)),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
+  }
+}
+
+class DateStamp extends StatelessWidget {
+  const DateStamp({
+    required this.waktu,
+    Key? key,
+  }) : super(key: key);
+
+  final DateTime waktu;
+
+  @override
+  Widget build(BuildContext context) {
+    // var  nowLocal = DateTime.now();
+    // (DateFormat('HH:mm:ss').format(nowLocal));
+    var timesent = DateFormat('hh:mm a').format(waktu);
+
+    return Align(
+      alignment: Alignment.bottomRight,
+      child: Text(timesent.toString()),
+    );
+  }
+}
+
+class DateSent extends StatelessWidget {
+  const DateSent({
+    required this.dalamHariIni,
+    Key? key,
+  }) : super(key: key);
+
+  final DateTime dalamHariIni;
+
+  @override
+  Widget build(BuildContext context) {
+    var nowLocal = DateTime.now();
+    // (DateFormat('HH:mm:ss').format(nowLocal));
+
+    return DateChip(date: nowLocal);
   }
 }
 
@@ -79,7 +139,6 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   final List<ChatMessage> _messages = [];
   final _textController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
-  // final user = FirebaseAuth.instance.currentUser!;
   bool _isComposing = false;
 
   void _handleSubmitted(String text) {
@@ -88,7 +147,9 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
       _isComposing = false;
     });
     var message = ChatMessage(
+      dateSent: DateTime.now(),
       text: text,
+      x: DateTime.now(),
       animationController: AnimationController(
         duration: const Duration(milliseconds: 300),
         vsync: this,
@@ -107,12 +168,13 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
       appBar: AppBar(
         titleSpacing: 8,
         title: const Text('Someone\'s name'),
+        centerTitle: true,
         //TODO: Make the Circled avatar not overfilling the appbar
         actions: <Widget>[
           Row(
-            children: [
+            children: const <Widget>[
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: CircleAvatar(
                   backgroundImage: AssetImage('assets/lisa.jpg'),
                 ),
@@ -154,7 +216,7 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildTextComposer() {
+  _buildTextComposer() {
     return IconTheme(
       data: IconThemeData(color: Theme.of(context).colorScheme.secondary),
       child: Container(
@@ -162,74 +224,78 @@ class ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
         height: 70,
         child: Row(
           children: [
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 0),
-              child: IconButton(
-                icon: const Icon(Icons.add),
-                onPressed: _isComposing
-                    ? () => _handleSubmitted(_textController.text)
-                    : null,
-              ),
-            ),
+            attachFile(),
+            emoticonButton(),
             // text composer/text editor.
             Flexible(
-              child: TextField(
-                controller: _textController,
-                textAlign: TextAlign.left,
-                onChanged: (text) {
-                  setState(() {
-                    _isComposing = text.isNotEmpty;
-                  });
-                },
-                onSubmitted: _isComposing ? _handleSubmitted : null,
-                decoration: InputDecoration(
-                  hintText: 'Send a message',
-                  // filled: true,
-                  // todo: fix this border to be bigger than its text.
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    gapPadding: 0,
-                    borderSide: const BorderSide(
-                      color: Colors.transparent,
-                      width: 15,
+              child: Container(
+                height: 70,
+                padding: EdgeInsets.all(2),
+                child: TextField(
+                  controller: _textController,
+                  textAlign: TextAlign.left,
+                  onChanged: (text) {
+                    setState(() {
+                      _isComposing = text.isNotEmpty;
+                    });
+                  },
+                  onSubmitted: _isComposing ? _handleSubmitted : null,
+                  decoration: InputDecoration(
+                    hintText: 'Send a message',
+                    filled: true,
+                    // todo: fix this border to be bigger than its text.
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      gapPadding: 10,
+                      borderSide: const BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
                     ),
                   ),
-                  isDense: true,
-                  hintStyle: TextStyle(letterSpacing: 1),
-                  //if the method above wont display as its will, back to the below way.
-                  // OutlineInputBorder(
-                  //   borderRadius: BorderRadius.circular(300),
-                  //   borderSide: const BorderSide(
-                  //     width: 10,
-                  //   ),
-                  // ),
+                  focusNode: _focusNode,
                 ),
-                focusNode: _focusNode,
               ),
             ),
 
-            Container(
-              // emoticon button
-              margin: const EdgeInsets.symmetric(horizontal: 0.1),
-              child: IconButton(
-                icon: const Icon(Icons.emoji_emotions_rounded),
-                onPressed: _isComposing
-                    ? () => _handleSubmitted(_textController.text)
-                    : null,
-              ),
-            ),
-            Container(
-              // send icon button
-              margin: const EdgeInsets.symmetric(horizontal: 2),
-              child: IconButton(
-                icon: const Icon(Icons.send),
-                onPressed: _isComposing
-                    ? () => _handleSubmitted(_textController.text)
-                    : null,
-              ),
-            ),
+            sendButton(),
           ],
         ),
+      ),
+    );
+  }
+
+  attachFile() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 0),
+      child: IconButton(
+        icon: const Icon(Icons.add),
+        onPressed:
+            _isComposing ? () => _handleSubmitted(_textController.text) : null,
+      ),
+    );
+  }
+
+  emoticonButton() {
+    return Container(
+      // emoticon button
+      margin: const EdgeInsets.symmetric(horizontal: 0.1),
+      child: IconButton(
+        icon: const Icon(Icons.emoji_emotions_rounded),
+        color: Colors.white,
+        splashColor: Colors.black,
+        onPressed: () => Container(),
+      ),
+    );
+  }
+
+  sendButton() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 2),
+      child: IconButton(
+        icon: const Icon(Icons.send),
+        onPressed:
+            _isComposing ? () => _handleSubmitted(_textController.text) : null,
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:anonia/authentication/authenticator.dart';
 import 'package:anonia/route/google_sign_in.dart';
 import 'package:anonia/main.dart';
 import 'package:anonia/view/messaging/messaging_page.dart';

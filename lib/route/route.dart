@@ -9,7 +9,7 @@ import 'package:anonia/view/register/register_page.dart';
 import 'package:anonia/view/messaging/messaging_page.dart';
 import 'package:anonia/view/login/login_page.dart';
 import 'package:flutter/material.dart';
-import 'package:anonia/view/home_page.dart';
+import 'package:anonia/view/home/home_page.dart';
 // import '../messaging.dart';
 import 'package:anonia/view/language_page.dart';
 import 'package:anonia/view/settings_page.dart';

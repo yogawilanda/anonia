@@ -1,27 +1,16 @@
+// import 'dart:js';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:anonia/route/route.dart';
 
 class GoogleSignInProvider extends ChangeNotifier {
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  final googleSignIn = GoogleSignIn(signInOption: SignInOption.standard);
+  final googleSignIn = GoogleSignIn();
 
-//Holds fields describing a signed in user's identity, following [GoogleSignInUserData].
-//[id] is guaranteed to be non-null.
   GoogleSignInAccount? _user;
 
   GoogleSignInAccount get user => _user!;
-
-  Future<User> signInAnonymously() async {
-    User user = (await firebaseAuth.signInAnonymously()) as User;
-    print("Signed in ${user.uid}");
-    return user;
-  }
-
-  void signOut() {
-    firebaseAuth.signOut();
-    print('Signed Out!');
-  }
 
   Future googleLogin() async {
     try {
@@ -38,18 +27,59 @@ class GoogleSignInProvider extends ChangeNotifier {
 
       await FirebaseAuth.instance.signInWithCredential(credential);
     } catch (e) {
-      'error';
+      // print(e.toString());
+    }
+    notifyListeners();
+    // Navigator.pushNamed(context, homeScreenPage);
+  }
+
+  Future twitterLogin() async {
+    // try {
+    //   final googleUser = await googleSignIn.signIn();
+    //   if (googleUser == null) return;
+    //   _user = googleUser;
+
+    //   final googleAuth = await googleUser.authentication;
+
+    //   final credential = GoogleAuthProvider.credential(
+    //     accessToken: googleAuth.accessToken,
+    //     idToken: googleAuth.idToken,
+    //   );
+
+    //   await FirebaseAuth.instance.signInWithCredential(credential);
+    // } catch (e) {
+    //   // print(e.toString());
+    // }
+    // notifyListeners();
+  }
+
+  Future phoneNumberLogin() async {
+    try {
+      final googleUser = await googleSignIn.signIn();
+      if (googleUser == null) return;
+      _user = googleUser;
+
+      final googleAuth = await googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await FirebaseAuth.instance.signInWithCredential(credential);
+    } catch (e) {
+      // print(e.toString());
     }
     notifyListeners();
   }
 
   Future logout() async {
     await googleSignIn.disconnect();
-    Route;
+    FirebaseAuth.instance.signOut();
   }
 }
 
-class SignWithEmail extends ChangeNotifier {
+class GoogleSignWithEmail extends ChangeNotifier {
   final userWithEmailAndPassWord = UserCredential;
   final displayName = String;
   static Future<User?> registerUsingEmailPassword({

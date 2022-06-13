@@ -1,8 +1,9 @@
-import 'package:anonia/authenticator.dart';
+import 'package:anonia/authentication/authenticator.dart';
+import 'package:anonia/authentication/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../../route/route.dart' as route;
-import '../../model/validator.dart';
+import '../../authentication/validator.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -13,33 +14,33 @@ class RegisterPage extends StatefulWidget {
 
 class RegisterPageState extends State<RegisterPage> {
   //TODONE: create controller variables in here
-  final _formRegisterKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _emailFocusNode = FocusNode();
-  final _usernameRegisterFocusNode = FocusNode();
-  final _passwordRegisterFocusNode = FocusNode();
+  final formRegisterKey = GlobalKey<FormState>();
+  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final emailFocusNode = FocusNode();
+  final usernameRegisterFocusNode = FocusNode();
+  final passwordRegisterFocusNode = FocusNode();
   final email = String;
-  bool _isProcessing = false;
+  bool isProcessing = false;
 
   @override
   void initState() {
     super.initState();
-    _emailController.addListener(() {
+    emailController.addListener(() {
       setState(() {
         //
       });
     });
-    _passwordController.addListener(() {
+    passwordController.addListener(() {
       setState(() {
         //
       });
     });
-    _emailFocusNode.addListener(() {
+    emailFocusNode.addListener(() {
       setState(() {});
     });
-    _passwordRegisterFocusNode.addListener(() {
+    passwordRegisterFocusNode.addListener(() {
       setState(() {});
     });
   }
@@ -71,15 +72,15 @@ class RegisterPageState extends State<RegisterPage> {
 
             //Forms for register
             Form(
-              key: _formRegisterKey,
+              key: formRegisterKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   //email register form
                   TextFormField(
                     //create the controller
-                    controller: _usernameController,
-                    focusNode: _usernameRegisterFocusNode,
+                    controller: usernameController,
+                    focusNode: usernameRegisterFocusNode,
                     decoration: const InputDecoration(
                       labelText: 'Username',
                     ),
@@ -91,8 +92,8 @@ class RegisterPageState extends State<RegisterPage> {
                   //Create a password to authenticate
                   TextFormField(
                     //create the controller
-                    controller: _emailController,
-                    focusNode: _emailFocusNode,
+                    controller: emailController,
+                    focusNode: emailFocusNode,
                     decoration: const InputDecoration(
                       labelText: 'Email',
                     ),
@@ -104,8 +105,8 @@ class RegisterPageState extends State<RegisterPage> {
                   //password register actions
                   TextFormField(
                     //create the controller
-                    controller: _passwordController,
-                    focusNode: _passwordRegisterFocusNode,
+                    controller: passwordController,
+                    focusNode: passwordRegisterFocusNode,
                     decoration: const InputDecoration(
                       labelText: 'Your Treasure Key',
                     ),
@@ -114,10 +115,10 @@ class RegisterPageState extends State<RegisterPage> {
                         Validator.validatePassword(password: value.toString()),
                   ),
                   const SizedBox(height: 32.0),
-                  _isProcessing
+                  isProcessing
 
                       //if form requirement doesn't meet its fullfillment, user will be asked to modify his/her data.
-                      ? CircularProgressIndicator()
+                      ? const CircularProgressIndicator()
 
                       //if form were correct, user will be directed to profile.
                       : Row(
@@ -125,29 +126,29 @@ class RegisterPageState extends State<RegisterPage> {
                           children: [
                             ElevatedButton(
                               onPressed: () async {
-                                if (_formRegisterKey.currentState!.validate()) {
-                                  User? user = await SignWithEmail
+                                if (formRegisterKey.currentState!.validate()) {
+                                  User? user = await GoogleSignWithEmail
                                       .registerUsingEmailPassword(
-                                    name: _usernameController.text,
-                                    email: _emailController.text,
-                                    password: _passwordController.text,
+                                    name: usernameController.text,
+                                    email: emailController.text,
+                                    password: passwordController.text,
                                   );
 
                                   setState(() {
-                                    _isProcessing = false;
+                                    isProcessing = false;
                                   });
 
-                                  if (_formRegisterKey.currentState!
+                                  if (formRegisterKey.currentState!
                                       .validate()) {
                                     Navigator.pushNamed(
                                         context, route.loginPage);
                                     // setState(() {
-                                    //   _isProcessing = true;
+                                    //   isProcessing = true;
                                     // });
                                   }
                                 }
                               },
-                              child: Text(
+                              child: const Text(
                                 'Sign up',
                                 style: TextStyle(color: Colors.white),
                               ),

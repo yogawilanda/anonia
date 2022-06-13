@@ -1,7 +1,7 @@
 import 'package:anonia/model/dummy_list.dart';
-import 'package:anonia/route/route.dart';
-import 'package:anonia/widget/show_dialog.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:anonia/route/route.dart';
+// import 'package:anonia/widget/show_dialog.dart';
+// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // ignore import 'route/route.dart' as route;
 
@@ -90,17 +90,21 @@ class SearchScreenState extends State<SearchScreen> {
         ),
         body: Container(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            // mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //search circle avatar
             children: [
               SizedBox(
-                height: 80,
+                height: 110,
                 child: ListView.builder(
                     itemCount: 10,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) =>
                         circleAvatarScroller(context)),
               ),
-              Flexible(
+
+              //
+              Expanded(
                 child: ListView.builder(
                   itemCount: personData.length,
                   scrollDirection: Axis.vertical,
@@ -117,68 +121,31 @@ class SearchScreenState extends State<SearchScreen> {
               ),
             ],
           ),
-
-          // CustomScrollView(
-          //   slivers: [
-          //     SliverToBoxAdapter(
-          //       child: SizedBox(
-          //         height: 300,
-          //         child: circleAvatarScroller(context),
-          //       ),
-          //     ),
-          //   ],
-          // )
-
-          // circleAvatarScroller(context),
         ));
   }
 
-  Expanded circleAvatarScroller(BuildContext context) {
-    return Expanded(
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        // decoration: const BoxDecoration(
-        //     color: Colors.white,
-        //     boxShadow: [
-        //       BoxShadow(
-        //         blurRadius: 3,
-        //         color: Colors.amber,
-        //         offset: Offset(0, 1),
-        //       ),
-        //     ],
-        //     borderRadius: BorderRadius.only(
-        //       bottomLeft: Radius.circular(12),
-        //       bottomRight: Radius.circular(12),
-        //       topLeft: Radius.circular(0),
-        //       topRight: Radius.circular(0),
-        //     )),
-        child: Column(
-          children: [
-            Divider(
-              height: 8,
-              thickness: 2,
-              color: Colors.grey[200],
+  circleAvatarScroller(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        children: [
+          // this containers will load its circle avatar
+          Container(
+            height: 75,
+            margin: EdgeInsets.symmetric(vertical: 6),
+            child: ListView.builder(
+              itemBuilder: (context, index) => const AvatarFormat(),
+              scrollDirection: Axis.horizontal,
+              itemCount: 16,
+              // padding: EdgeInsets.symmetric(horizontal: 10),
+              shrinkWrap: true,
             ),
-            // this containers will load its circle avatar
-            Container(
-              child: ListView.separated(
-                itemBuilder: (context, index) => const AvatarFormat(),
-                scrollDirection: Axis.horizontal,
-                itemCount: 16,
-                shrinkWrap: true,
-                separatorBuilder: (BuildContext context, int index) {
-                  return const SizedBox(
-                    width: 10,
-                  );
-                },
-              ),
-              height: 72,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
+            // decoration: const BoxDecoration(),
+          ),
+          Divider(
+            thickness: 2,
+          ),
+        ],
       ),
     );
   }
