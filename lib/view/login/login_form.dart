@@ -21,6 +21,8 @@ class FormLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    //Todo: Change this to sizedbox(if there is no width bugs) and padding 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 4),
       child: Form(
@@ -40,6 +42,8 @@ class FormLogin extends StatelessWidget {
             ),
 
             //Passwords Field
+            
+            //Todo: Change this to sizedbox(if there is no width bugs) and padding 
             Container(
               margin: const EdgeInsets.symmetric(vertical: 5),
               child: TextField(
