@@ -52,13 +52,13 @@ class AnoniaAppState extends State<AnoniaApp> with ChangeNotifier {
         theme: ThemeData.dark(),
         onGenerateRoute: route.getRoute,
         initialRoute: '/',
-        // home: const AppGate(),
+        // home: const AppGate(), // C
         builder: (context, widget) => ResponsiveWrapper.builder(
           widget,
           breakpoints: [
-            const ResponsiveBreakpoint.resize(480, name: MOBILE),
-            const ResponsiveBreakpoint.autoScale(1366, name: TABLET),
-            const ResponsiveBreakpoint.resize(1366, name: DESKTOP),
+            const ResponsiveBreakpoint.resize(480, name: MOBILE), // Change this to 512 and refactor to a variable names
+            const ResponsiveBreakpoint.autoScale(1366, name: TABLET), // 
+            const ResponsiveBreakpoint.resize(1366, name: DESKTOP), //
           ],
           background: const AppGate(),
 
